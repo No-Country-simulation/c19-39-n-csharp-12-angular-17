@@ -1,0 +1,133 @@
+# Compiled source files
+*.dll
+*.exe
+*.so
+*.dylib
+*.pyc
+*.pyo
+
+# Packages
+*.nupkg
+*.snupkg
+
+# Installer output
+*.msi
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+
+# Visual Studio temporary files
+.vscode/
+.vs/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/*.code-workspace
+.vscode/extensions.json
+
+# Rider temporary files
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono auto generated files
+mono_crash.*
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# DotNet local db
+*.mdf
+*.ldf
+
+# Azure
+.localhistory
+
+# JetBrains Rider
+.idea/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code directories
+.vscode/
+
+# Node modules
+node_modules/
+
+# .NET directories
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# msbuild all of the intermediate build folders
+**/obj/**/
+**/bin/**/
+
+# NuGet packages
+packages/
+**/packages/*
+
+# Windows crash logs
+*.stackdump
+
+# Yarn Integrity file
+.yarn-integrity
+
+# JetBrains Rider
+.idea/
+
+# Local History
+.localhistory/
+
+# Windows specific files
+*.bat
+*.cmd
+
+# macOS specific files
+*.DS_Store
+
+# Linux specific files
+*~
+
+# Log files
+*.log
+
+# Markdown release notes
+*.[Pp]arquet
+
+# NuGet dependency cache
+.nuget/
+
+# Rider plugin folder
+.idea/
+
+# Coverage files
+*.coverage
+*.coveragexml
+
+# Stylecop
+StyleCopCache.cache
+
+# dotCover
+*.dcov
+
+# Resharper
+_ReSharper*
+*_ReSharper.Caches
+
+# Workspaces in VS Code
+*.code-workspace
