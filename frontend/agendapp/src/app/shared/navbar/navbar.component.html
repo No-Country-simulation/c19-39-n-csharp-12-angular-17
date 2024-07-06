@@ -1,0 +1,42 @@
+<!-- El header se mostrará según la ruta en la que está -->
+
+@if(section){
+<section>
+  <nav
+    class="navbar navbar-expand-lg d-flex justify-content-start align-items-center py-4 pt-5"
+    [ngClass]="{
+      'navbar-registro-usuario': section === 'registro_usuarios',
+      'navbar-registro-medico': section === 'registro_medicos',
+      'navbar-login-usuario': section === 'login_usuarios',
+      'navbar-login-medico': section === 'login_medicos'
+    }"
+  >
+    <a routerLink="">
+      <img
+        class="ms-4"
+        src="../../../assets/img/caret_back.png"
+        alt="icono_regresar"
+      />
+    </a>
+    @if(section === 'registro_usuarios'){
+    <h2 class="ms-5">Nueva Cuenta</h2>
+    } @else if(section === 'registro_medicos'){
+    <h2 class="ms-5">Nueva Cuenta</h2>
+    }@else if(section === 'login_usuarios'){
+    <h2 class="ms-5">Inicio de Sesión</h2>
+    }@else if(section === 'login_medicos'){
+    <h2 class="ms-5">Inicio de Sesión</h2>
+    }
+  </nav>
+
+  @if (section === 'login_usuarios') {
+  <div class="container fraseBienvenida">
+    <h3>Bienvenido De Vuelta!</h3>
+  </div>
+  }@else if(section === 'login_medicos'){
+  <div class="container fraseBienvenida">
+    <h3>Bienvenido Dr/Dra!</h3>
+  </div>
+  }
+</section>
+}

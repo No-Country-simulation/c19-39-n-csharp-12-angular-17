@@ -1,0 +1,17 @@
+img{
+    width: inherit;
+    position: absolute;
+    z-index: -100;
+}
+
+.btn{
+    font-weight: 500;
+}
+
+.btn:last-child{
+    background-color: aliceblue;    
+}
+
+.btn:hover{
+    background-color: blueviolet;
+}
