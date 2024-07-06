@@ -1,7 +1,7 @@
 {
-  "categoriasmedicas": [
-    { "idCategoria": 1, "nombre": "Cardiología" },
-    { "idCategoria": 2, "nombre": "Dermatología" }
+  "especialidad": [
+    { "idEspecialidad": 1, "nombre": "Cardiología" },
+    { "idEspecialidad": 2, "nombre": "Dermatología" }
   ],
   "citas": [
     {

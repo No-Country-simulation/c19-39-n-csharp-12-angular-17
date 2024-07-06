@@ -1,17 +1,209 @@
 @if(vistaHeader){
-    <app-navbar></app-navbar>
-}
+<app-navbar></app-navbar>
+} @if(role === 'registro_usuarios'){
+<div
+  class="container d-flex flex-column justify-content-center align-items-center mt-2"
+>
+  <form #form="ngForm" (ngSubmit)="verDatos(form)">
+    <div class="card bg-transparent border-0">
+      <div class="card-body m-0 p-0">
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="nombre"
+            placeholder="Nombre"
+            required
+            [(ngModel)]="user.nombre"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="apellido"
+            placeholder="Apellido"
+            required
+            [(ngModel)]="user.apellido"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+            [(ngModel)]="user.email"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="telefono"
+            placeholder="Telefono"
+            required
+            [(ngModel)]="user.telefono"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="dni"
+            placeholder="Dni"
+            required
+            [(ngModel)]="user.dni"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="password"
+            name="contrasenia"
+            placeholder="Contraseña"
+            required
+            [(ngModel)]="user.contrasenia"
+          />
+        </div>
+        <div
+          class="container d-flex flex-column justify-content-center align-items-center"
+        >
+          <div class="d-flex flex-row mt-3">
+            <input
+              class="btn btn-primary btn-lg rounded-pill mb-3"
+              type="submit"
+              value="Registrarme"
+            />
+          </div>
+          <div class="d-flex flex-row">
+            <a
+              class="mb-3 pe-5"
+              (click)="irHacia('registro_medicos')"
+              routerLink="/registro_medicos"
+              >Soy Médico</a
+            >
+            <a class="mb-3" routerLink="/login_usuarios">Ya estoy registrado</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
-@if(role === 'registro_usuarios'){
-    <p>soy form usuarios</p>
-
-    <a (click)="irHacia('registro_medicos')" routerLink="/registro_medicos">Soy Médico</a>
-    <!-- mostrar formulario para pacientes -->
-}
-@else if(role == 'registro_medicos'){
-    <p>soy form medico</p>
-    <!-- mostrar formulario para medicos -->
-}
-@else {
-    <input type="hidden">
+<!-- mostrar formulario para medicos -->
+} @else if(role == 'registro_medicos'){
+<div
+  class="container d-flex flex-column justify-content-center align-items-center mt-2"
+>
+  <form #form="ngForm" (ngSubmit)="verDatos(form)">
+    <div class="card bg-transparent border-0">
+      <div class="card-body m-0 p-0">
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="nombre"
+            placeholder="Nombre"
+            required
+            [(ngModel)]="user.nombre"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="apellido"
+            placeholder="Apellido"
+            required
+            [(ngModel)]="user.apellido"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+            [(ngModel)]="user.email"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="telefono"
+            placeholder="Telefono"
+            required
+            [(ngModel)]="user.telefono"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="dni"
+            placeholder="Dni"
+            required
+            [(ngModel)]="user.dni"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="password"
+            name="contrasenia"
+            placeholder="Contraseña"
+            required
+            [(ngModel)]="user.contrasenia"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="licenciaMedica"
+            placeholder="Licencia Medica n°"
+            required
+            [(ngModel)]="medico.licenciaMedica"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <select
+            class="form-select"
+            aria-label="Elija su especialidad"
+            name="especialidad"
+            required
+            [(ngModel)]="medico.especialidad"
+          >
+            @for(esp of especialidades; track esp.idEspecialidad){
+            <option selected [id]="esp.idEspecialidad" [value]="esp.nombre">
+              {{ esp.nombre }}
+            </option>
+            }
+          </select>
+        </div>
+        <div
+          class="container d-flex flex-column justify-content-center align-items-center"
+        >
+          <div class="d-flex flex-row mt-3">
+            <input
+              class="btn btn-primary btn-lg rounded-pill mb-3"
+              type="submit"
+              value="Registrarme"
+            />
+          </div>
+          <div class="d-flex flex-row">
+            <a class="mb-3" routerLink="/login_usuarios">Ya estoy registrado</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- mostrar formulario para medicos -->
+} @else {
+<p>Error</p>
 }
