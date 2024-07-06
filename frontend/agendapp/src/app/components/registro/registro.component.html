@@ -1,0 +1,17 @@
+@if(vistaHeader){
+    <app-navbar></app-navbar>
+}
+
+@if(role === 'registro_usuarios'){
+    <p>soy form usuarios</p>
+
+    <a (click)="irHacia('registro_medicos')" routerLink="/registro_medicos">Soy Médico</a>
+    <!-- mostrar formulario para pacientes -->
+}
+@else if(role == 'registro_medicos'){
+    <p>soy form medico</p>
+    <!-- mostrar formulario para medicos -->
+}
+@else {
+    <input type="hidden">
+}

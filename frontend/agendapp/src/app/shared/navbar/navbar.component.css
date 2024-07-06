@@ -1,0 +1,19 @@
+.navbar-registro-usuario {
+  background-color: #d2ebfa;
+}
+
+.navbar-registro-medico {
+  background-color: #d2ebfa;
+}
+
+.navbar-login-usuario {
+  background-color: #d2ebfa;
+}
+
+.navbar-login-medico {
+  background-color: #d2ebfa;
+}
+
+h2{
+    font-weight: bold;
+}
