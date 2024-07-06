@@ -1,0 +1,6 @@
+@AgendApp_HostAddress = http://localhost:5169
+
+GET {{AgendApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
