@@ -1,17 +1,138 @@
 @if(vistaHeader){
-    <app-navbar></app-navbar>
-}
+<app-navbar></app-navbar>
+} @if(role === 'login_usuarios'){
+<div
+  class="container d-flex flex-column justify-content-center align-items-center mt-2"
+>
+  <form #form="ngForm" (ngSubmit)="verDatos(form)">
+    <div class="card bg-transparent border-0">
+      <div class="card-body m-0 p-0">
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+            [(ngModel)]="user.email"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="password"
+            name="contrasenia"
+            placeholder="Contraseña"
+            required
+            [(ngModel)]="user.contrasenia"
+          />
+        </div>
+        <!-- Checkbox para validar sesion -->
+        <div class="d-flex flex-row justify-content-between align-items-center mx-3">
+          <label class="form-check-label" for="flexCheckDefault">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            Recordame
+          </label>
+          <a href="#">Olvidé mi contraseña</a>
+        </div>
+        <div
+          class="container d-flex flex-column justify-content-center align-items-center"
+        >
+          <div
+            class="d-flex flex-column justify-content-center align-items-center mt-3"
+          >
+            <input
+              class="btn btn-primary btn-lg rounded-pill mb-3 mt-4"
+              type="submit"
+              value="Iniciar Sesión"
+            />
+            <a (click)="irHacia('login_medicos')" routerLink="/login_medicos"
+              >Soy Médico</a
+            >
+          </div>
+          <div class="d-flex flex-column">
+            <a
+              class="link-underline-light mt-3"
+              (click)="irHacia('registro_usuarios')"
+              routerLink="/registro_usuarios"
+              >¿No tenés una cuenta? <span>Registrate</span></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
-@if(role === 'login_usuarios'){
-    <p>soy form usuarios</p>
+} @else if(role == 'login_medicos'){
+<div
+  class="container d-flex flex-column justify-content-center align-items-center mt-2"
+>
+  <form #form="ngForm" (ngSubmit)="verDatos(form)">
+    <div class="card bg-transparent border-0">
+      <div class="card-body m-0 p-0">
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+            [(ngModel)]="user.email"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="password"
+            name="contrasenia"
+            placeholder="Contraseña"
+            required
+            [(ngModel)]="user.contrasenia"
+          />
+        </div>
+        <!-- Checkbox para validar sesion -->
+        <div class="d-flex flex-row justify-content-between align-items-center mx-3">
+          <label class="form-check-label" for="flexCheckDefault">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            Recordame
+          </label>
+          <a href="#">Olvidé mi contraseña</a>
+        </div>
+        <div
+          class="container d-flex flex-column justify-content-center align-items-center"
+        >
+          <div class="d-flex flex-row mt-3">
+            <input
+              class="btn btn-primary btn-lg rounded-pill mb-3 mt-4"
+              type="submit"
+              value="Iniciar Sesión"
+            />
+          </div>
+          <div class="d-flex flex-column">
+            <a
+              class="link-underline-light mt-3"
+              (click)="irHacia('registro_usuarios')"
+              routerLink="/registro_usuarios"
+              >¿No tenés una cuenta? <span>Registrate</span></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
-    <a (click)="irHacia('login_medicos')" routerLink="/login_medicos">Soy Médico</a>
-    <!-- mostrar formulario para pacientes -->
-}
-@else if(role == 'login_medicos'){
-    <p>soy form medico</p>
-    <!-- mostrar formulario para medicos -->
-}
-@else {
-    <input type="hidden">
+} @else {
+<p>Error</p>
 }
