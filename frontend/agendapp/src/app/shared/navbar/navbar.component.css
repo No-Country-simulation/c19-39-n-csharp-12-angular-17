@@ -17,3 +17,11 @@
 h2{
     font-weight: bold;
 }
+
+.fraseBienvenida>h3{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  font-weight: bold;
+}
