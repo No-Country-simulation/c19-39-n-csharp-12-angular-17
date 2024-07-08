@@ -20,6 +20,8 @@ builder.Services.AddDbContext<AgendappDbContext>(option =>
 
 //services references
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IRegisterService, RegisterService>();
 
 var app = builder.Build();
 
