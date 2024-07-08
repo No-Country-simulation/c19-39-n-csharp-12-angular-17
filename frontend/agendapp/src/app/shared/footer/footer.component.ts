@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css'
+  styleUrl: './footer.component.css',
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
+  section: string = ''; //registro_medicos o registro_pacientes
 
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.section = this.route.snapshot.routeConfig?.path || '';
+  }
 }
