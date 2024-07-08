@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { ModuloUsuarioComponent } from './components/modulo-usuario/modulo-usuario.component';
 
 export const routes: Routes = [
   //Bienvenida
@@ -34,11 +35,19 @@ export const routes: Routes = [
     title: 'Registro Usuarios',
     component: RegistroComponent,
   },
+  //No borrar********
+  {
+    path: 'home_usuario',
+    title: 'Home Usuario',
+    component: ModuloUsuarioComponent,
+  },
+  //No borrar********
+  
   //Home Pacientes
-//   {
-//     path: '**',
-//     // redirectTo: 'auth/login',  /*Cuando esté el login, interceptors, guards*/
-//     redirectTo: '',
-//     pathMatch: 'full',
-//   },
+  //   {
+  //     path: '**',
+  //     // redirectTo: 'auth/login',  /*Cuando esté el login, interceptors, guards*/
+  //     redirectTo: '',
+  //     pathMatch: 'full',
+  //   },
 ];
