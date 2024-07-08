@@ -34,11 +34,16 @@ export const routes: Routes = [
     title: 'Registro Usuarios',
     component: RegistroComponent,
   },
-  //Home Pacientes
-//   {
-//     path: '**',
-//     // redirectTo: 'auth/login',  /*Cuando esté el login, interceptors, guards*/
-//     redirectTo: '',
-//     pathMatch: 'full',
-//   },
+  //Home Medico
+  // {},
+  //Home Usuario
+  // {},
+  //Home Admin
+  // {},
+  {
+    path: '**',
+    // redirectTo: 'auth/login',  /*Cuando esté el login, interceptors, guards*/
+    redirectTo: '',
+    pathMatch: 'full',
+  },
 ];
