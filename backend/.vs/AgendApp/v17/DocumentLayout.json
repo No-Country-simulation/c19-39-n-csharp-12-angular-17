@@ -1,12 +1,79 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Shane\\Desktop\\.net-projects\\cita-medica-dotnet-angular-17\\backend\\AgendApp\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\ronald87\\Desktop\\agendapp - noCountry\\backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8A1B5B06-A1BF-4C80-BEB6-AA5A3592BC3B}|AgendApp.csproj|c:\\users\\ronald87\\desktop\\agendapp - nocountry\\backend\\services\\registerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A1B5B06-A1BF-4C80-BEB6-AA5A3592BC3B}|AgendApp.csproj|solutionrelative:services\\registerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A1B5B06-A1BF-4C80-BEB6-AA5A3592BC3B}|AgendApp.csproj|c:\\users\\ronald87\\desktop\\agendapp - nocountry\\backend\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A1B5B06-A1BF-4C80-BEB6-AA5A3592BC3B}|AgendApp.csproj|solutionrelative:controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8A1B5B06-A1BF-4C80-BEB6-AA5A3592BC3B}|AgendApp.csproj|c:\\users\\ronald87\\desktop\\agendapp - nocountry\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8A1B5B06-A1BF-4C80-BEB6-AA5A3592BC3B}|AgendApp.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RegisterService.cs",
+              "DocumentMoniker": "C:\\Users\\ronald87\\Desktop\\agendapp - noCountry\\backend\\Services\\RegisterService.cs",
+              "RelativeDocumentMoniker": "Services\\RegisterService.cs",
+              "ToolTip": "C:\\Users\\ronald87\\Desktop\\agendapp - noCountry\\backend\\Services\\RegisterService.cs",
+              "RelativeToolTip": "Services\\RegisterService.cs",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAAAFQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-08T03:13:10.487Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ronald87\\Desktop\\agendapp - noCountry\\backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\ronald87\\Desktop\\agendapp - noCountry\\backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAABcAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-08T03:10:28.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "registerController.cs",
+              "DocumentMoniker": "C:\\Users\\ronald87\\Desktop\\agendapp - noCountry\\backend\\Controllers\\registerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\registerController.cs",
+              "ToolTip": "C:\\Users\\ronald87\\Desktop\\agendapp - noCountry\\backend\\Controllers\\registerController.cs",
+              "RelativeToolTip": "Controllers\\registerController.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAQwBcAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-08T02:48:50.241Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
