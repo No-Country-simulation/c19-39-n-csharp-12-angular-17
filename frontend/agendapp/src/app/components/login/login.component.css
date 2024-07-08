@@ -16,9 +16,10 @@ input::placeholder{
 }
 
 a{
-    color: #101113;    
+    color: #101113;   
 }
 
 span{
     font-weight: bold;
+    text-decoration: underline;
 }

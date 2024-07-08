@@ -35,15 +35,16 @@ export const routes: Routes = [
     title: 'Registro Usuarios',
     component: RegistroComponent,
   },
-  //No borrar********
+  //Home Usuario
   {
     path: 'home_usuario',
     title: 'Home Usuario',
     component: ModuloUsuarioComponent,
   },
-  //No borrar********
-  
-  //Home Pacientes
+  //Home Medico
+  // {},
+  //Home Admin
+  // {},
   //   {
   //     path: '**',
   //     // redirectTo: 'auth/login',  /*Cuando esté el login, interceptors, guards*/
