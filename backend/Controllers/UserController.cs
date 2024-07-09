@@ -21,10 +21,20 @@ namespace AgendApp.Controllers
         [Route("usuarios")]
         public async Task<IActionResult> GetUsers() {
 
-            var resp = _userService.GetUsers();
+            var resp = _userService.getUsers();
 
             return Ok(resp);
 
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("roles")]
+        public async Task<IActionResult> getRoles()
+        {
+            var result = _userService.getRoles();
+
+            return Ok(result);
         }
 
     }

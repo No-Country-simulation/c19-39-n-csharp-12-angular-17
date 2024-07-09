@@ -2,33 +2,35 @@
 
 namespace AgendApp.Services
 {
-    public interface IUserService
+    public interface IMedService
     {
-        Object getUsers();
-        Object getRoles();
+        Object getCategories();
+        Object getSchedules();
     }
-    public class UserService : IUserService
+    public class MedService : IMedService
     {
-        private AgendappDbContext _Db;
-
-        public UserService(AgendappDbContext context)
+        private AgendappDbContext _db;
+        public MedService(AgendappDbContext context)
         {
-            _Db = context;
+            this._db = context;
         }
-   
-        public Object getUsers()
+
+        public Object getCategories()
         {
             try
             {
-                List<Usuario> users = _Db.Usuarios.ToList();
+
+                List<Categoriasmedica> categories = _db.Categoriasmedicas.ToList<Categoriasmedica>();
+
                 return new
                 {
                     status = 200,
                     success = true,
-                    data = users
+                    data = categories
                 };
 
-            } catch (Exception ex) {
+            }catch(Exception ex)
+            {
                 return new
                 {
                     status = 500,
@@ -36,22 +38,20 @@ namespace AgendApp.Services
                     message = ex.Message
                 };
             }
-
         }
 
-        public Object getRoles()
+        public Object getSchedules()
         {
             try
             {
-                List<Role> roles = _Db.Roles.ToList<Role>();
+                List<Horario> schedules = _db.Horarios.ToList<Horario>();
 
                 return new
                 {
                     status = 200,
                     success = true,
-                    data = roles
+                    data = schedules
                 };
-
             }
             catch (Exception ex)
             {
@@ -59,7 +59,7 @@ namespace AgendApp.Services
                 {
                     status = 500,
                     success = false,
-                    messaeg = ex.Message
+                    message = ex.Message
                 };
             }
         }
