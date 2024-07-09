@@ -7,11 +7,11 @@ namespace AgendApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class userController : ControllerBase
+    public class UserController : ControllerBase
     {
         private IUserService _userService;
 
-        public userController(IUserService userService)
+        public UserController(IUserService userService)
         {
             this._userService = userService;
         }
