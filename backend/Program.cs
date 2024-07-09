@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 //DB Connection
 builder.Services.AddDbContext<AgendappDbContext>(option =>
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("localRonald"));
+    option.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection"));
 });
 
 //services references
