@@ -12,10 +12,10 @@ import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 export class NavbarComponent implements OnInit {
   section: string = ''; //registro_medicos o registro_pacientes
 
-  constructor(private route: ActivatedRoute) {  
-  }
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
     this.section = this.route.snapshot.routeConfig?.path || '';
   }
+
 }

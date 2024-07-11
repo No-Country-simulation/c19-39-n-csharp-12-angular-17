@@ -1,6 +1,6 @@
 @if(vistaHeader){
 <app-navbar></app-navbar>
-} @if(role === 'login_usuarios'){
+} @if(section === 'login_usuarios'){
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >
@@ -14,7 +14,7 @@
             name="email"
             placeholder="Email"
             required
-            [(ngModel)]="user.email"
+            ngModel
           />
         </div>
         <div class="wrapper mb-2">
@@ -24,11 +24,13 @@
             name="contrasenia"
             placeholder="Contraseña"
             required
-            [(ngModel)]="user.contrasenia"
+            ngModel
           />
         </div>
         <!-- Checkbox para validar sesion -->
-        <div class="d-flex flex-row justify-content-between align-items-center mx-3">
+        <div
+          class="d-flex flex-row justify-content-between align-items-center mx-3"
+        >
           <label class="form-check-label" for="flexCheckDefault">
             <input
               class="form-check-input"
@@ -51,15 +53,12 @@
               type="submit"
               value="Iniciar Sesión"
             />
-            <a (click)="irHacia('login_medicos')" routerLink="/login_medicos"
-              >Soy Médico</a
-            >
+            <a [routerLink]="['/login_medicos']">Soy Médico</a>
           </div>
           <div class="d-flex flex-column">
             <a
               class="link-underline-light mt-3"
-              (click)="irHacia('registro_usuarios')"
-              routerLink="/registro_usuarios"
+              [routerLink]="['/registro_usuarios']"
               >¿No tenés una cuenta? <span>Registrate</span></a
             >
           </div>
@@ -69,7 +68,7 @@
   </form>
 </div>
 
-} @else if(role == 'login_medicos'){
+} @else if(section == 'login_medicos'){
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >
@@ -83,7 +82,7 @@
             name="email"
             placeholder="Email"
             required
-            [(ngModel)]="user.email"
+            ngModel
           />
         </div>
         <div class="wrapper mb-2">
@@ -93,11 +92,13 @@
             name="contrasenia"
             placeholder="Contraseña"
             required
-            [(ngModel)]="user.contrasenia"
+            ngModel
           />
         </div>
         <!-- Checkbox para validar sesion -->
-        <div class="d-flex flex-row justify-content-between align-items-center mx-3">
+        <div
+          class="d-flex flex-row justify-content-between align-items-center mx-3"
+        >
           <label class="form-check-label" for="flexCheckDefault">
             <input
               class="form-check-input"
@@ -122,8 +123,7 @@
           <div class="d-flex flex-column">
             <a
               class="link-underline-light mt-3"
-              (click)="irHacia('registro_usuarios')"
-              routerLink="/registro_usuarios"
+              [routerLink]="['/registro_usuarios']"
               >¿No tenés una cuenta? <span>Registrate</span></a
             >
           </div>
@@ -132,7 +132,4 @@
     </div>
   </form>
 </div>
-
-} @else {
-<p>Error</p>
 }
