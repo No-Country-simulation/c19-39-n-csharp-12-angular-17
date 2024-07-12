@@ -8,11 +8,11 @@ namespace AgendApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class registerController : ControllerBase
+    public class RegisterController : ControllerBase
     {
         private IRegisterService _registerService;
 
-        public registerController(IRegisterService registerService)
+        public RegisterController(IRegisterService registerService)
         {
             this._registerService = registerService;
         }
