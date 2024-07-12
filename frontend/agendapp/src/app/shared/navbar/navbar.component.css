@@ -18,6 +18,10 @@ h2{
     font-weight: bold;
 }
 
+.caret{
+    width: 1.2rem;
+}
+
 .fraseBienvenida>h3{
   display: flex;
   justify-content: center;

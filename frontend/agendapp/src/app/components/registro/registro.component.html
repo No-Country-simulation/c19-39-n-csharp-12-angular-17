@@ -72,19 +72,19 @@
         >
           <div class="d-flex flex-row mt-3">
             <input
-              class="btn btn-primary btn-lg rounded-pill mb-3 px-5"
               type="submit"
+              title="Registro Usuarios"
+              class="btn btn-primary btn-lg rounded-pill mb-3 mt-4"
               value="Registrarme"
             />
           </div>
           <div class="d-flex flex-row">
-            <a
-              class="mb-3 pe-5"
-              (click)="irHacia('registro_medicos')"
-              routerLink="/registro_medicos"
+            <a class="mb-3 pe-5" [routerLink]="['/registro_medicos']"
               >Soy Médico</a
             >
-            <a class="mb-3" routerLink="/login_usuarios">Ya estoy registrado</a>
+            <a class="mb-3" [routerLink]="['/login_usuarios']"
+              >Ya estoy registrado</a
+            >
           </div>
         </div>
       </div>
@@ -178,8 +178,13 @@
             required
             [(ngModel)]="medico.especialidad"
           >
-            @for(esp of especialidades; track esp.idEspecialidad){
-            <option selected [id]="esp.idEspecialidad" [value]="esp.nombre">
+            @for(esp of especialidades; track esp.idCategoria){
+            <option
+              class="option-menu"
+              selected
+              [id]="esp.idCategoria"
+              [value]="esp.nombre"
+            >
               {{ esp.nombre }}
             </option>
             }
@@ -196,7 +201,9 @@
             />
           </div>
           <div class="d-flex flex-row">
-            <a class="mb-3" routerLink="/login_usuarios">Ya estoy registrado</a>
+            <a class="mb-3" [routerLink]="['/login_usuarios']"
+              >Ya estoy registrado</a
+            >
           </div>
         </div>
       </div>
@@ -204,6 +211,4 @@
   </form>
 </div>
 <!-- mostrar formulario para medicos -->
-} @else {
-<p>Error</p>
 }

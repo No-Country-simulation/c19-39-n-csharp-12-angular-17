@@ -12,11 +12,14 @@ export interface Cita {
 }
 
 export interface Especialidad {
-  idEspecialidad: number;
+  idCategoria: number;
   nombre: string;
+  imgSrc: string;
+  medicos: [];
 }
 
 export interface Horario {
   idHorario: number;
   rango: string;
+  medicos: [];
 }

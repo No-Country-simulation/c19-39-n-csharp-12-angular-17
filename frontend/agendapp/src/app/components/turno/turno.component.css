@@ -1,0 +1,46 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0px;
+}
+
+.card {
+  width: 20rem;
+  padding: 1rem;
+  border-radius: 26px;
+  margin-bottom: 5rem;
+}
+
+.container-fluid {
+  background-color: #d2ebfa;
+}
+
+.caret {
+  width: 1.2rem;
+}
+
+h3 {
+  font-weight: 700;
+}
+
+textarea.form-control {
+  padding: 9px;
+  height: 7rem;
+  resize: none;
+}
+
+.form-label {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.option-menu {
+  font-size: 0.8em;
+}

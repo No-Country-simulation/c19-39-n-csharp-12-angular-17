@@ -1,7 +1,95 @@
 {
+  "roles": [
+    {
+      "idRol": 1,
+      "nombre": "usuario",
+      "usuarios": []
+    },
+    {
+      "idRol": 2,
+      "nombre": "medico",
+      "usuarios": []
+    },
+    {
+      "idRol": 3,
+      "nombre": "admin",
+      "usuarios": []
+    }
+  ],
   "especialidad": [
     { "idEspecialidad": 1, "nombre": "Cardiología" },
     { "idEspecialidad": 2, "nombre": "Dermatología" }
+  ],
+  "categorias": [
+    {
+      "idCategoria": 1,
+      "nombre": "Cardiología",
+      "medicos": []
+    },
+    {
+      "idCategoria": 2,
+      "nombre": "Dermatología",
+      "medicos": [
+        {
+          "idUsuario": 555,
+          "nombre": "Julian",
+          "apellido": "Perez",
+          "email": "jupe2@example.com",
+          "categoria": "Dermatología",
+          "horario": "13:00 - 17:00"
+        },
+        {
+          "idUsuario": 557,
+          "nombre": "María",
+          "apellido": "Gómez",
+          "email": "mariag@example.com",
+          "categoria": "Dermatología",
+          "horario": "09:00 - 12:00"
+        },
+
+        {
+          "idUsuario": 456,
+          "nombre": "Carlos",
+          "apellido": "Rodríguez",
+          "email": "carlosr@example.com",
+          "categoria": "Dermatología",
+          "horario": "14:00 - 18:00"
+        },
+
+        {
+          "idUsuario": 781,
+          "nombre": "Laura",
+          "apellido": "Martínez",
+          "email": "lauram@example.com",
+          "categoria": "Dermatología",
+          "horario": "10:00 - 13:00"
+        },
+
+        {
+          "idUsuario": 123,
+          "nombre": "Santiago",
+          "apellido": "Fernández",
+          "email": "santif@example.com",
+          "categoria": "Dermatología",
+          "horario": "11:00 - 14:00"
+        }
+      ]
+    },
+    {
+      "idCategoria": 3,
+      "nombre": "Ginecología",
+      "medicos": []
+    },
+    {
+      "idCategoria": 4,
+      "nombre": "Neurología",
+      "medicos": []
+    },
+    {
+      "idCategoria": 5,
+      "nombre": "Obstetricia",
+      "medicos": []
+    }
   ],
   "citas": [
     {
@@ -25,15 +113,37 @@
     { "idConsulta": 1, "idCita": 1, "diagnostico": "Angina de pecho" },
     { "idConsulta": 2, "idCita": 2, "diagnostico": "Dermatitis" }
   ],
-  "horarios": [
-    { "idHorario": 1, "rango": "08:00 - 12:00" },
-    { "idHorario": 2, "rango": "13:00 - 17:00" }
+  "horarios": [  
+    {
+      "idHorario": 1,
+      "rango": "08:00-12:00",
+      "medicos": []
+    },
+    {
+      "idHorario": 2,
+      "rango": "14:00-16:00",
+      "medicos": []
+    },
+    {
+      "idHorario": 3,
+      "rango": "16:00-18:00",
+      "medicos": []
+    },
+    {
+      "idHorario": 4,
+      "rango": "18:00-20:00",
+      "medicos": []
+    },
+    {
+      "idHorario": 5,
+      "rango": "20:00-22:00",
+      "medicos": []
+    }
   ],
   "medicos": [
     { "idUsuario": 2, "idCategoria": 1, "idHorario": 1 },
     { "idUsuario": 3, "idCategoria": 2, "idHorario": 2 }
   ],
-
   "usuarios": [
     {
       "idUsuario": 1,
@@ -60,14 +170,14 @@
         "idRol": 2,
         "nombre": "Medico"
       },
-        "categoria": {
-            "idCategoria": 1,
-            "nombre": "Cardiología"
-        },
-        "horario": {
-            "idHorario": 1,
-            "rango": "08:00 - 12:00"
-        }
+      "categoria": {
+        "idCategoria": 1,
+        "nombre": "Cardiología"
+      },
+      "horario": {
+        "idHorario": 1,
+        "rango": "08:00 - 12:00"
+      }
     },
     {
       "idUsuario": 3,
@@ -81,14 +191,14 @@
         "idRol": 2,
         "nombre": "Medico"
       },
-        "categoria": {
-            "idCategoria": 2,
-            "nombre": "Dermatología"
-        },
-        "horario": {
-            "idHorario": 2,
-            "rango": "13:00 - 17:00"
-        }
+      "categoria": {
+        "idCategoria": 2,
+        "nombre": "Dermatología"
+      },
+      "horario": {
+        "idHorario": 2,
+        "rango": "13:00 - 17:00"
+      }
     },
     {
       "idUsuario": 4,
@@ -102,15 +212,15 @@
         "idRol": 3,
         "nombre": "Paciente"
       },
-        "citas": [
-            {
-                "idCita": 1,
-                "fecha": "2024-07-05",
-                "hora": "10:00",
-                "idMedico": 1,
-                "motivoConsulta": "Dolor de pecho"
-            }
-        ]
+      "citas": [
+        {
+          "idCita": 1,
+          "fecha": "2024-07-05",
+          "hora": "10:00",
+          "idMedico": 1,
+          "motivoConsulta": "Dolor de pecho"
+        }
+      ]
     },
     {
       "idUsuario": 5,
@@ -124,15 +234,15 @@
         "idRol": 3,
         "nombre": "Paciente"
       },
-        "citas": [
-            {
-                "idCita": 2,
-                "fecha": "2024-07-06",
-                "hora": "11:00",
-                "idMedico": 2,
-                "motivoConsulta": "Revisión de piel"
-            }
-        ]
+      "citas": [
+        {
+          "idCita": 2,
+          "fecha": "2024-07-06",
+          "hora": "11:00",
+          "idMedico": 2,
+          "motivoConsulta": "Revisión de piel"
+        }
+      ]
     }
   ]
 }

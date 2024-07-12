@@ -1,20 +1,27 @@
-.card{
-    width: 23rem;
+form {
+  padding: 2rem 0px;
+}
+.card {
+  width: 23rem;
 }
 
-.wrapper{
-    width: 100%;
-    padding: 0.5rem 1rem;
+.wrapper {
+  width: 100%;
+  padding: 0.5rem 1rem;
 }
 
-input.form-control{
-    padding: 9px;
+input.form-control {
+  padding: 9px;
 }
 
-input::placeholder{
-    color: #c4bfbf;
+input::placeholder {
+  color: #c4bfbf;
 }
 
-a{
-    color: #101113;
+a {
+  color: #101113;
+}
+
+.option-menu {
+  font-size: 1em;
 }

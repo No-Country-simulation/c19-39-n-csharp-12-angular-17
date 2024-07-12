@@ -1,0 +1,113 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 2rem 0px;
+}
+
+a.cta {
+  width: 13rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  padding: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.7px;
+  text-shadow: 1px 1px 20px #333;
+  border-radius: 20px;
+  background: linear-gradient(177deg, #09a2c8, #0788a8);
+  box-shadow: 1px 5px 4px #05657d, -1px -5px 0px #0bc9f9;
+}
+
+div.carousel-item {
+  width: 100%;
+  height: 14rem;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 26px;
+  padding: 0.5rem;
+}
+
+.fraseBienvenida > h2 {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-weight: bold;
+  background-color: #f5f5f5;
+  margin-top: 1rem;
+}
+
+.titulos > h2 {
+  font-weight: 900;
+}
+
+.container-button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.container-button-group a.btn {
+  width: 5rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(51, 51, 51, 0.247);
+  border-radius: 11px;
+  background-color: rgba(51, 51, 51, 0.13);
+}
+
+.container-button-group a.btn:hover {
+  background-color: rgba(51, 51, 51, 0.376);
+}
+
+.icono_expecialidad {
+  width: 85px;
+}
+
+.doctor {
+  width: 70px;
+}
+
+.card {
+  border-radius: 18px;
+}
+
+.card:hover {
+  background-color: #3332;
+}
+
+.card-touch {
+  z-index: 1;
+  width: 18rem;
+  height: 7rem;
+}
+
+h5 {
+  font-weight: 900;
+}
+
+small {
+  font-weight: 700;
+}
+
+
+div.container-fluid {
+  padding: 0.1rem 0.5rem;
+}
+
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 26px;
+  padding: 0.5rem;
+}
+
