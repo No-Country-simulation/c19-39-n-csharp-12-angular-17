@@ -4,7 +4,8 @@ namespace AgendApp.Services
 {
     public interface IUserService
     {
-        Object GetUsers();
+        Object getUsers();
+        Object getRoles();
     }
     public class UserService : IUserService
     {
@@ -15,7 +16,7 @@ namespace AgendApp.Services
             _Db = context;
         }
    
-        public Object GetUsers()
+        public Object getUsers()
         {
             try
             {
@@ -36,6 +37,31 @@ namespace AgendApp.Services
                 };
             }
 
+        }
+
+        public Object getRoles()
+        {
+            try
+            {
+                List<Role> roles = _Db.Roles.ToList<Role>();
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = roles
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    messaeg = ex.Message
+                };
+            }
         }
     }
 }

@@ -7,11 +7,11 @@ namespace AgendApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class userController : ControllerBase
+    public class UserController : ControllerBase
     {
         private IUserService _userService;
 
-        public userController(IUserService userService)
+        public UserController(IUserService userService)
         {
             this._userService = userService;
         }
@@ -21,10 +21,20 @@ namespace AgendApp.Controllers
         [Route("usuarios")]
         public async Task<IActionResult> GetUsers() {
 
-            var resp = _userService.GetUsers();
+            var resp = _userService.getUsers();
 
             return Ok(resp);
 
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("roles")]
+        public async Task<IActionResult> getRoles()
+        {
+            var result = _userService.getRoles();
+
+            return Ok(result);
         }
 
     }

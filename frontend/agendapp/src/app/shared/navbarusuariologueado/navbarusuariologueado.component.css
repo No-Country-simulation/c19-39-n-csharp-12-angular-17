@@ -1,0 +1,22 @@
+.navbar {
+  background-color: #d2ebfa;
+}
+
+.logo {
+  width: 70px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 26px;
+  padding: 0.5rem;
+}
+
+.nombreUsuario,
+.nav-link {
+  font-size: 1em;
+  font-weight: 600;
+  padding-top: 1.2rem;
+}

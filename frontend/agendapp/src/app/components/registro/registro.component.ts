@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Usuario } from '../../interfaces/usuario';
 import { Medico } from '../../interfaces/medico';
 import { ApiProviderService } from '../../services/api-provider.service';
-import { Especialidad } from '../../interfaces/api';
+// import { Especialidad } from '../../interfaces/api';
+// import { RegistroService } from '../../services/registro.service';
 
 @Component({
   selector: 'app-registro',
@@ -20,7 +21,7 @@ export class RegistroComponent implements OnInit {
   //Modelos de datos (hardcodeados para pruebas)
   usuario: Usuario = {} as Usuario;
   medico: Medico = {} as Medico;
-  especialidades: Especialidad[] = [];
+  especialidades: any[] = [];
 
   user: any = {
     nombre: '',
@@ -28,26 +29,24 @@ export class RegistroComponent implements OnInit {
     email: '',
     telefono: '',
     contrasenia: '',
-    dni: ''
+    dni: '',
   };
 
   constructor(
     private route: ActivatedRoute,
-    private apiServiceProvider: ApiProviderService
-  ) {
+    private apiServiceProvider: ApiProviderService,
+    private router: Router
+  ) // private registroService: RegistroService
+  {
     this.role = this.route.snapshot.routeConfig?.path || '';
   }
 
   ngOnInit(): void {
     console.log(this.role);
     this.rellenarDatosFalsos(this.role);
-    this.obtenerEspecialidad();
+    this.getEspecialidades();
   }
 
-  irHacia(role: string) {
-    this.role = role;
-    window.location; //recarga la página para cambiar la url, el componente es el mismo y el render es condicional.
-  }
 
   verDatos(form: NgForm) {
     if (form.valid) {
@@ -55,13 +54,14 @@ export class RegistroComponent implements OnInit {
       confirm(
         `Nombre: ${datos.nombre} \nApellido: ${datos.apellido} \nEmail: ${datos.email} \nContraseña: ${datos.contrasenia} \nLicencia: ${datos.licenciaMedica} \nEspecialidad: ${datos.especialidad}`
       );
-      form.reset();
+      this.enviarRegistro(form);
     } else {
       alert('Por favor, completa todos los campos.');
     }
   }
 
-  obtenerEspecialidad() {
+  //servicio de especialidades DB
+  getEspecialidades() {
     this.apiServiceProvider.getEspecialidades().subscribe((data: any) => {
       this.especialidades = data;
       console.log(this.especialidades);
@@ -95,24 +95,38 @@ export class RegistroComponent implements OnInit {
     //objeto usuario/paciente
     if (form.valid && this.role === 'registro_usuarios') {
       const usuario = {
-        ...this.usuario,
+        nombre: form.value.nombre,
+        apellido: form.value.apellido,
+        email: form.value.email,
+        telefono: form.value.telefono,
+        dni: form.value.dni,
+        contrasenia: form.value.contrasenia,
         rol: { idRol: 3 },
+        id: 1
       };
-      this.guardarDatosLocalStorage(usuario);
+      console.log(usuario);
+      localStorage.setItem('usuario', JSON.stringify(usuario));
+      this.router.navigate(['/login_usuarios']);
+      form.reset();
     } else if (form.valid && this.role === 'registro_medicos') {
       //objeto medico
       const medico = {
-        ...this.medico,
+        nombre: form.value.nombre,
+        apellido: form.value.apellido,
+        email: form.value.email,
+        telefono: form.value.telefono,
+        dni: form.value.dni,
+        contrasenia: form.value.contrasenia,
+        licenciaMedica: form.value.licenciaMedica,
+        especialidad: form.value.especialidad,
         rol: { idRol: 2 },
+        id: 2
       };
-      this.guardarDatosLocalStorage(medico);
-    }else{
+      localStorage.setItem('medico', JSON.stringify(medico));
+      this.router.navigate(['/login_medicos']);
+      form.reset();
+    } else {
       alert('Por favor, completa todos los campos.');
     }
-  }
-
-  //Enviar datos al localsotrage
-  guardarDatosLocalStorage(usuario: any) {
-    this.apiServiceProvider.guardarUsuario(usuario);
   }
 }

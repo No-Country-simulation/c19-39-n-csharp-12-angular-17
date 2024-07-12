@@ -17,8 +17,6 @@ namespace AgendApp.Requests
         [Required]
         public string password { get; set; }
         [Required]
-        public int idMedico { get; set; }
-        [Required]
         public int idCategoria { get; set; }
         [Required]
         public int idHorario { get; set; }

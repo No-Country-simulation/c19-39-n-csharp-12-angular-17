@@ -1,0 +1,89 @@
+<section id="nav_usuario">
+  <!-- Header de usuario -->
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+  <div class="container-fluid d-flex flex-row">
+    <a [routerLink]="['/especialidades']">
+      <img
+        class="ms-4 caret"
+        src="../../../assets/img/caret_back.png"
+        alt="icono_regresar"
+      />
+    </a>
+    <h3 class="ms-5 pb-1">Agendá Tu Turno</h3>
+  </div>
+</section>
+
+<div class="main">
+  <!-- datepicker -->
+
+  <form class="form" #form="ngForm" (ngSubmit)="crearTurno(form)">
+    <div class="card bg-transparent">
+      <!-- input hidden con id medico seleccionado -->
+      <input type="hidden" [value]="medID" />
+
+      <!-- input fecha del turno -->
+      <div class="wrapper mb-2">
+        <label for="turno" class="form-label">Fecha de turno:</label>
+
+        <input
+          class="form-control"
+          title="turno"
+          type="date"
+          id="turno"
+          name="turno"
+          [min]="fecha"
+          [max]="fechaTope"
+          required
+          ngModel
+        />
+      </div>
+      <!-- input select con horarios disponibles de el medico seleccionado -->
+      <div class="wrapper mb-2">
+        <label for="rango" class="form-label">Horario:</label>
+        <select
+          class="form-select hour-menu"
+          aria-label="Elija el horario"
+          name="rango"
+          required
+          ngModel
+        >
+          @for(hora of horarios; track hora.idHorario){
+          <option
+            class="option-menu"
+            selected
+            [id]="hora.idHorario"
+            [value]="hora.rango"
+          >
+            {{ hora.rango }}
+          </option>
+          }
+        </select>
+      </div>
+      <!-- input motivo de la consulta -->
+      <div class="wrapper mb-2">
+        <label for="motivo"></label>
+        <textarea
+          class="form-control"
+          title="motivoConsulta"
+          [minlength]="12"
+          [maxlength]="100"
+          name="motivo"
+          id="motivo"
+          required=""
+          ngModel
+        >
+        </textarea>
+      </div>
+      <input
+        class="btn btn-primary btn-lg rounded-pill my-3 px-5"
+        type="submit"
+        value="Confirmar turno"
+      />
+    </div>
+  </form>
+</div>
+
+<!-- Footer generico -->
+<section id="nav-footer">
+  <app-footer class="fixed-bottom"></app-footer>
+</section>

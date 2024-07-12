@@ -1,0 +1,106 @@
+<section id="nav_usuario">
+  <!-- Header de usuario -->
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+  <div class="container-fluid d-flex flex-row">
+    <a [routerLink]="['/mis_turnos']">
+      <img
+        class="ms-4 caret"
+        src="../../../assets/img/caret_back.png"
+        alt="icono_regresar"
+      />
+    </a>
+    <h3 class="ms-5 pb-1">Turno Detalle</h3>
+  </div>
+</section>
+
+<div class="main">
+  @if(turno){
+  <div class="card">
+    <div class="card-body">
+      <!-- Detalles del turno -->
+      <div class="wrapper">
+        @if(usuario){
+        <p class="me-2 fw-bold">Paciente</p>
+        <p>{{ usuario.nombre }}&#8194;{{usuario.apellido}}</p>
+        }
+      </div>
+      <div class="wrapper">
+        <p class="card-text fw-bold me-2">ID Cita:</p>
+        <p>{{turno.idCita}}</p>
+      </div>
+      <div class="wrapper">
+        <p class="card-text fw-bold me-2">Especialista:</p>
+        <p>{{ turno.idMedico }}</p>
+      </div>
+      <div class="wrapper">
+        <p class="card-text fw-bold me-2">Fecha:</p>
+        <p>{{ turno.fecha }}</p>
+      </div>
+      <div class="wrapper">
+        <p class="card-text fw-bold me-2">Hora:</p>
+        <p>{{ turno.hora }}</p>
+      </div>
+      <div class="d-flex flex-row text-wrap justify-content-start align-items-start">
+        <p class="card-text fw-bold me-2">Motivo de consulta:</p>
+        <p>{{ turno.motivo }}</p>
+      </div>
+      <div class="wrapper">
+        @if(turno?.descripcion){
+        <p class="card-text fw-bold me-2">Descripcion:</p>
+        }@else{
+        <p></p>     
+        }
+      </div>         
+    </div>
+  </div>
+  }
+
+
+  <div class="bg-warning politica text-center">
+    <small>Política de pre-cancelación de turnos<br/>Si desea cancelar su turno, debe hacerlo con 24hs de anticipación. </small>
+  </div>
+</div>
+
+<!-- Footer generico -->
+<section id="nav-footer">
+  <nav class="navbar navbar-expand-lg d-flex py-3 fixed-bottom">
+    <ul class="d-flex flex-row justify-content-around align-items-center">
+      <li>
+        <a [routerLink]="['/home_usuario']" class="border">
+          <img
+            src="../../../assets/img/home.svg"
+            alt=""
+            class="border m-0 p-0"
+          />
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/mis_turnos']" class="border">
+          <img
+            src="../../../assets/img/calendar.svg"
+            alt=""
+            class="border m-0 p-0"
+          />
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/especialidades']" class="border">
+          <img
+            src="../../../assets/img/specialties.svg"
+            alt=""
+            class="border m-0 p-0"
+          />
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/']" class="border">
+          <img
+            src="../../../assets/img/logout.svg"
+            alt="icono_salir"
+            title="Salir"
+          />
+        </a>
+      </li>
+    </ul>
+  </nav>
+</section>

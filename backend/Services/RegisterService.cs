@@ -31,6 +31,8 @@ namespace AgendApp.Services
                 };
 
                 var addUser = _db.Usuarios.Add(newUser);
+                _db.SaveChanges();
+
                 var registeredUser = addUser.Entity;
                
 

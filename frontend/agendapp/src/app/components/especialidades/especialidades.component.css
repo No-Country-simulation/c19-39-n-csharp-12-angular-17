@@ -1,0 +1,61 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0px;
+}
+
+.container-fluid {
+  background-color: #d2ebfa;
+}
+
+.caret {
+  width: 1.2rem;
+}
+
+h3 {
+  font-weight: 700;
+}
+
+.icono_especialidad {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 26px;
+  padding: 0.3rem;
+}
+
+.icono_expecialidad {
+  width: 85px;
+}
+.container-button-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0px;
+}
+
+.container-button-group a.btn:hover {
+  background-color: rgba(51, 51, 51, 0.376);
+}
+
+.container-button-group a.btn {
+  width: 6rem;
+  height: 5.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(51, 51, 51, 0.247);
+  border-radius: 11px;
+  background-color: rgba(51, 51, 51, 0.13);
+}
+
+.btn-container{
+  padding-bottom: 5rem;
+}
+

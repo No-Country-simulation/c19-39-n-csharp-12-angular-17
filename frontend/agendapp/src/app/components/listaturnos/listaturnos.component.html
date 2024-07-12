@@ -1,0 +1,76 @@
+<section id="nav_usuario">
+  <!-- Header de usuario -->
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+  <div class="container-fluid d-flex flex-row">
+    <a [routerLink]="['/home_usuario']">
+      <img
+        class="ms-4 caret"
+        src="../../../assets/img/caret_back.png"
+        alt="icono_regresar"
+      />
+    </a>
+    @if(section === 'mis_turnos'){
+    <h3 class="ms-5 pb-1">Mis Turnos</h3>
+    }
+  </div>
+</section>
+
+<div class="main">
+  <!-- Botones estado de turnos 'proximos' y 'cancelados' -->
+  <div
+    class="container d-flex flex-row justify-content-end align-items-center border-pill gap-2"
+  >
+    <button
+      type="button"
+      class="btn btn-outline-dark rounded-pill text-bg-success btn-sm"
+    >
+      Proximos
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark rounded-pill text-bg-light btn-sm"
+    >
+      Cancelados
+    </button>
+  </div>
+
+  <!-- Card de cada turno -->
+  <div class="container turno-container">
+    @for(cita of citas; track $index){     
+    <div class="card mb-3" (click)="verCita($index)">          
+      <div class="row g-0">
+        <div class="col-3 d-flex justify-content-center align-items-center">
+          <img
+            src="../../../assets/img/logo.png"
+            class="img-fluid rounded-start doctor"
+            alt="imagen_doctor"
+          />
+        </div>
+        <div class="col-8">
+          <div
+            class="card-body p-2 m-0 d-flex flex-column justify-content-center align-items-center"
+          >
+            <!-- Nombre completo y especialidad -->
+
+            <h6 class="card-title">Obstetra</h6>
+            <h5>Dr. Sandra Chirino</h5>
+            <small> {{ cita.fecha }} - {{ cita.hora }} </small>
+            <small>
+              {{ cita.motivo }}
+            </small>
+          </div>
+        </div>
+        <div class="col-1">
+          <!-- Eliminar turno -->
+          <span class="badge rounded-pill text-bg-light">x</span>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Footer generico -->
+  <section id="nav-footer">
+    <app-footer class="fixed-bottom"></app-footer>
+  </section>
+</div>

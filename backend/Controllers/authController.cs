@@ -8,10 +8,10 @@ namespace AgendApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class authController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private IAuthService _authService;
-        public authController(IAuthService authService) {
+        public AuthController(IAuthService authService) {
             this._authService = authService;
         }
 
