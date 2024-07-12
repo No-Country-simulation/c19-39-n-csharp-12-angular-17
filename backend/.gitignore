@@ -1,3 +1,5 @@
+*.csproj.user
+
 # Compiled source files
 *.dll
 *.exe
