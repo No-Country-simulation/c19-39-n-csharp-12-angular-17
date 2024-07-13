@@ -6,6 +6,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Horario } from '../../interfaces/api';
 import { ApiProviderService } from '../../services/api-provider.service';
 import { LocalStorageService } from '../../services/local-storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-turno',
@@ -57,7 +58,7 @@ export class TurnoComponent implements OnInit {
 
   crearTurno(form: NgForm) {
     if (form.valid) {
-       const nuevoIdCita = this.generarIdUnico();
+      const nuevoIdCita = this.generarIdUnico();
       const obj = {
         idCita: nuevoIdCita,
         fecha: form.value.turno, //input date
@@ -80,11 +81,16 @@ export class TurnoComponent implements OnInit {
           ' ' +
           obj.motivo
       );
+
       //guardar en localStorage en una lista de turnos creados
       this.localServicr.guardarTurno(obj);
       this.router.navigate(['/turno/' + obj.idCita]);
     } else {
-      alert('Por favor complete todos los campos');
+      Swal.fire({
+        icon: "error",
+        title: 'Por favor, completa todos los campos.',
+        showConfirmButton: false,
+      });
     }
   }
 
