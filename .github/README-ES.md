@@ -13,40 +13,40 @@
 [![Issues][issues-shield]][issues-url]
 [![Pulls][pulls-shield]][pulls-url]
 
-Puedes revisar la [versión en Español](./.github/README-ES.md) de este documento si así lo requieres.
+You can check out the [English version](../README.md) of this document if needed.
 
-[Report an issue](https://github.com/No-Country-simulation/c19-39-n-csharp-12-angular-17/issues) · [Suggest something](https://github.com/No-Country-simulation/c19-39-n-csharp-12-angular-17/issues)
+[Reportar un problema](https://github.com/No-Country-simulation/c19-39-n-csharp-12-angular-17/issues) · [Sugerir algo](https://github.com/No-Country-simulation/c19-39-n-csharp-12-angular-17/issues)
 
 </div>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">volver al inicio</a>)</p>
 
-## Getting started
+## Comenzando
 
-AgendApp is an application that will help you book your medical appointments from your mobile phone. It is an effective way to schedule your medical consultations. 
+AgendApp es una aplicación que te ayudará a reservar tus citas médicas desde tu teléfono móvil. Es una forma efectiva de programar tus consultas médicas.
 
-Your medical specialist at your fingertips!
+¡Tu especialista médico al alcance de tu mano!
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">volver al inicio</a>)</p>
 
-## Contributing
+## Contribuir
 
-We welcome contributions from everyone. Whether it's a bug fix, new feature, or improvement to our documentation, your help is appreciated!
+Agradecemos las contribuciones de todos. Ya sea una corrección de errores, una nueva característica o una mejora a nuestra documentación, ¡tu ayuda es bienvenida!
 
-### Contributors
+### Contribuidores
 
 [![CarlosUlisesOchoa](https://avatars.githubusercontent.com/u/26280134?s=64&amp;v=4)](http://github.com/CarlosUlisesOchoa) [![CinthiaOrona2122](https://avatars.githubusercontent.com/u/80229456?s=64&amp;v=4)](http://github.com/CinthiaOrona2122) [![ronaldtro](https://avatars.githubusercontent.com/u/72902488?s=64&amp;v=4)](http://github.com/ronaldtro) [![JoseContrerasDev](https://avatars.githubusercontent.com/u/110321221?s=64&amp;v=4)](http://github.com/JoseContrerasDev) [![DylanVallejo](https://avatars.githubusercontent.com/u/99937413?s=64&amp;v=4)](http://github.com/DylanVallejo)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">volver al inicio</a>)</p>
 
-## Stack
+## Tecnologías utilizadas
 
 [![Angular][angular-badge]][badge-empty-url]
 [![DotNet][dotnet-badge]][badge-empty-url]
 [![CSharp][csharp-badge]][badge-empty-url]
 [![SQLServer][sqlserver-badge]][badge-empty-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">volver al inicio</a>)</p>
 
 [dotnet-badge]: https://img.shields.io/badge/-.NET-5632d5?style=for-the-badge
 [csharp-badge]: https://img.shields.io/badge/C%23-690081?style=for-the-badge
