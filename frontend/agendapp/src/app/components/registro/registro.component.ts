@@ -5,6 +5,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Usuario } from '../../interfaces/usuario';
 import { Medico } from '../../interfaces/medico';
 import { ApiProviderService } from '../../services/api-provider.service';
+import Swal from 'sweetalert2';
+import { Title } from '@angular/platform-browser';
 // import { Especialidad } from '../../interfaces/api';
 // import { RegistroService } from '../../services/registro.service';
 
@@ -22,6 +24,19 @@ export class RegistroComponent implements OnInit {
   usuario: Usuario = {} as Usuario;
   medico: Medico = {} as Medico;
   especialidades: any[] = [];
+
+
+  private Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
 
   user: any = {
     nombre: '',
@@ -51,12 +66,17 @@ export class RegistroComponent implements OnInit {
   verDatos(form: NgForm) {
     if (form.valid) {
       const datos = form.value;
-      confirm(
-        `Nombre: ${datos.nombre} \nApellido: ${datos.apellido} \nEmail: ${datos.email} \nContraseña: ${datos.contrasenia} \nLicencia: ${datos.licenciaMedica} \nEspecialidad: ${datos.especialidad}`
-      );
+      this.Toast.fire({
+        icon: "success",
+        title:`Nombre: ${datos.nombre} \nApellido: ${datos.apellido} \nEmail: ${datos.email} \nContraseña: ${datos.contrasenia} \nLicencia: ${datos.licenciaMedica} \nEspecialidad: ${datos.especialidad}`
+      });
       this.enviarRegistro(form);
     } else {
-      alert('Por favor, completa todos los campos.');
+      Swal.fire({
+        icon: "warning",
+        title: 'Por favor, completa todos los campos.',
+        showConfirmButton: false,
+      });
     }
   }
 
@@ -126,7 +146,11 @@ export class RegistroComponent implements OnInit {
       this.router.navigate(['/login_medicos']);
       form.reset();
     } else {
-      alert('Por favor, completa todos los campos.');
+      Swal.fire({
+        icon: "warning",
+        title: 'Por favor, completa todos los campos.',
+        showConfirmButton: false,
+      });
     }
   }
 }
