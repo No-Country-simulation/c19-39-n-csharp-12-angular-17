@@ -8,6 +8,10 @@ import { TurnoComponent } from './components/turno/turno.component';
 import { TurnodetalleComponent } from './components/turnodetalle/turnodetalle.component';
 import { EspecialidadDetalleComponent } from './components/especialidad.detalle/especialidad.detalle.component';
 import { ListaturnosComponent } from './components/listaturnos/listaturnos.component';
+import { ModuloMedicoComponent } from './components/modulo-medico/modulo-medico.component';
+import { BuscarComponent } from './components/buscar/buscar.component';
+import { FichaPacienteComponent } from './components/ficha-paciente/ficha-paciente.component';
+import { InboxComponent } from './components/inbox/inbox.component';
 
 export const routes: Routes = [
   //Bienvenida
@@ -48,7 +52,7 @@ export const routes: Routes = [
   },
   {
     path: 'mis_turnos',
-    title: 'Usuario | Mis Turnos',
+    title: 'Mis Turnos',
     component: ListaturnosComponent,
   },
   {
@@ -58,7 +62,7 @@ export const routes: Routes = [
   },
   {
     path: 'turno/:id',
-    title: 'Detalle de Turno',
+    title: 'Detalle del Turno',
     component: TurnodetalleComponent,
   },
   {
@@ -68,11 +72,30 @@ export const routes: Routes = [
   },
   {
     path: 'especialidad/:id',
-    title: 'Especialidad Detalle',
+    title: 'Especialistas',
     component: EspecialidadDetalleComponent,
   },
   //Home Medico
-  // {},
+  {
+    path: 'home_medico',
+    title: 'Home Médico',
+    component: ModuloMedicoComponent,
+  },
+  {
+    path: 'buscar',
+    title: 'Buscar Paciente',
+    component: BuscarComponent,
+  },
+  {
+    path: 'ficha_paciente/:id',
+    title: 'Ficha del Paciente',
+    component: FichaPacienteComponent,
+  },
+  {
+    path: 'inbox',
+    title: 'Mensajes',
+    component: InboxComponent
+  }
   //Home Admin
   // {},
   //   {

@@ -23,8 +23,7 @@
 
       <!-- input fecha del turno -->
       <div class="wrapper mb-2">
-        <label for="turno" class="form-label">Fecha de turno:</label>
-
+        <label for="turno"><small>Fecha de turno:</small></label>
         <input
           class="form-control"
           title="turno"
@@ -33,35 +32,60 @@
           name="turno"
           [min]="fecha"
           [max]="fechaTope"
-          required
           ngModel
         />
       </div>
       <!-- input select con horarios disponibles de el medico seleccionado -->
       <div class="wrapper mb-2">
-        <label for="rango" class="form-label">Horario:</label>
-        <select
-          class="form-select hour-menu"
-          aria-label="Elija el horario"
-          name="rango"
-          required
-          ngModel
+        <label for="horaCita"
+          ><small>Seleccione un rango de horario</small></label
         >
+        <select
+          class="form-select"
+          aria-label="Seleccione un rango de horario"
+          name="idHorario"
+          [(ngModel)]="turno.hora"
+          (change)="onChangeHorario($event)"
+        >
+        <option value="0" id="id_auxiliar" type="hidden"></option>
           @for(hora of horarios; track hora.idHorario){
           <option
             class="option-menu"
-            selected
             [id]="hora.idHorario"
-            [value]="hora.rango"
+            [ngValue]="hora.idHorario"
           >
             {{ hora.rango }}
           </option>
           }
         </select>
       </div>
+      <!-- input select con los horarios segun rango seleccionado -->
+      <div class="wrapper mb-2">
+        <label for="horaCita"
+          ><small>Elija un horario</small></label
+        >
+        <select
+        class="form-select"
+        aria-label="Elija un horario"
+        name="horaCita"
+        [(ngModel)]="turno.horaCita"
+        (click)="verDato(turno.horaCita)"
+        
+        >
+        @if(rangoHoras.length > 0){
+          @for(hora of rangoHoras; track $index){
+          <option class="option-menu" selected [id]="$index" [ngValue]="hora">
+            {{ hora }}:00
+          </option>
+          }
+        }
+        </select>
+      </div>
       <!-- input motivo de la consulta -->
       <div class="wrapper mb-2">
-        <label for="motivo"></label>
+          <label for="horaCita"
+          ><small>Escriba el motivo de consulta</small></label
+        >
         <textarea
           class="form-control"
           title="motivoConsulta"
@@ -69,8 +93,7 @@
           [maxlength]="100"
           name="motivo"
           id="motivo"
-          required=""
-          ngModel
+          [(ngModel)]="turno.motivoConsulta"
         >
         </textarea>
       </div>

@@ -79,12 +79,13 @@
     <div class="container titulos">
       <h2 class="my-3">Especialidades</h2>
       <div class="container-button-group">
-        @for(especialidad of limitEspecialidades(); track especialidad.id){
+        @for(especialidad of limitEspecialidades(); track
+        especialidad.idCategoria){
         <div>
           <a
             type="button"
             class="btn"
-            [routerLink]="['/especialidad/', especialidad.id]"
+            [routerLink]="['/especialidad/', especialidad.idCategoria]"
           >
             <img
               title="especialidad.nombre"
@@ -105,16 +106,15 @@
     <div class="container titulos">
       <h2 class="my-3">Agenda de turnos</h2>
       @switch (citas.length === 0){ @case (true) {
-      <p>sin turnos</p>
-      } @default{
-      <!-- Routerlink con 'position absolute' que redirige por id de turno -->
-      @if(cita?.id){
-      <a
-        class="position-absolute card-touch"
-        [routerLink]="['/turno/', cita.id]"
-      ></a>
-      } @for(cita of citas; track $index){
-      <div class="card mb-3">
+      <div class="card mb-3 card-vacia">
+        <div
+          class="card-body p-2 m-0 d-flex flex-column justify-content-center align-items-center"
+        >
+          <span>No tienes turnos</span>
+        </div>
+      </div>
+      } @default{ @for(cita of citas; track cita.idCita){
+      <div class="card mb-3" (click)="verTurnoDetalle(cita.idCita)">
         <div class="row g-0">
           <div class="col-3 d-flex justify-content-center align-items-center">
             <img
@@ -130,15 +130,13 @@
               <!-- Nombre completo y especialidad -->
               <h6 class="card-title">{{ "Especialidad" }}</h6>
               <h5>Dr. {{ "Nombre" }}{{ "Apellido" }}</h5>
-              <small> {{ cita.fecha }} - {{ cita.hora }} </small>
               <small>
-                {{ cita.motivo }}
+                {{ cita.fecha | date : "dd/MM/yy" }} - {{ cita.hora }}
+              </small>
+              <small>
+                {{ cita.motivoConsulta }}
               </small>
             </div>
-          </div>
-          <div class="col-1">
-            <!-- Eliminar turno -->
-            <span class="badge rounded-pill text-bg-light">x</span>
           </div>
         </div>
       </div>
@@ -149,5 +147,5 @@
 
 <!-- Footer generico -->
 <section id="nav-footer">
-  <app-footer></app-footer>
+  <app-footer class="fixed-bottom"></app-footer>
 </section>

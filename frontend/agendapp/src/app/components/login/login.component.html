@@ -4,7 +4,7 @@
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >
-  <form #form="ngForm" (ngSubmit)="verDatos(form)">
+  <form #form="ngForm" (ngSubmit)="submit(form)">
     <div class="card bg-transparent border-0">
       <div class="card-body m-0 p-0">
         <div class="wrapper mb-2">
@@ -21,7 +21,7 @@
           <input
             class="form-control"
             type="password"
-            name="contrasenia"
+            name="password"
             placeholder="Contraseña"
             required
             ngModel
@@ -68,11 +68,11 @@
   </form>
 </div>
 
-} @else if(section == 'login_medicos'){
+} @else if(section === 'login_medicos'){
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >
-  <form #form="ngForm" (ngSubmit)="verDatos(form)">
+  <form #form="ngForm" (ngSubmit)="submit(form)">
     <div class="card bg-transparent border-0">
       <div class="card-body m-0 p-0">
         <div class="wrapper mb-2">
@@ -89,7 +89,7 @@
           <input
             class="form-control"
             type="password"
-            name="contrasenia"
+            name="password"
             placeholder="Contraseña"
             required
             ngModel
@@ -103,7 +103,7 @@
             <input
               class="form-check-input"
               type="checkbox"
-              value=""
+              [value]="true"
               id="flexCheckDefault"
             />
             Recordame

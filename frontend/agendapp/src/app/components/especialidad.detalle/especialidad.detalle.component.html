@@ -11,6 +11,11 @@
     </a>
     <h3 class="ms-5 pb-1">Agendá Tu Turno</h3>
   </div>
+  @if (especialidades){
+  <div class="container fraseBienvenida">
+      <p>{{especialidadNombre}}</p>
+    </div>
+    }
 </section>
 
 <div class="main">
@@ -31,12 +36,12 @@
           >
             <!-- Nombre completo y especialidad -->
             <h5 class="d-block text-nowrap">
-              Dr. {{ med.nombre }}{{ med.apellido }}
+              Dr. {{ med.nombre }}&ensp;{{ med.apellido }}
             </h5>
-            <h6 class="card-title">{{ med.categoria }}</h6>
+            <h6 class="card-title">{{ especialidadNombre }}</h6>
             <!-- fecha, hora y consulta -->
             <small class="pill">
-              {{ med.horario }}
+              {{ '' }}
             </small>
           </div>
         </div>

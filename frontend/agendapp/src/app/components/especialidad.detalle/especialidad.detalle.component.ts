@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { ApiProviderService } from '../../services/api-provider.service';
+import { Categoria, Horario } from '../../interfaces/api';
+import { Usuario } from '../../interfaces/usuario';
 
 @Component({
   selector: 'app-especialidad.detalle',
@@ -13,8 +15,10 @@ import { ApiProviderService } from '../../services/api-provider.service';
 export class EspecialidadDetalleComponent implements OnInit {
   section: string = ''; //registro_medicos o registro_pacientes
   id: number = 0;
-  especialidades: any[] = [];
-  medicos: any[] = [];
+  especialidades: Categoria[] = [];
+  horarios: Horario[] = [];
+  especialidadNombre = '';
+  medicos: Usuario[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -30,19 +34,19 @@ export class EspecialidadDetalleComponent implements OnInit {
   }
 
   //!!eliminar
-  guardarIdMedico(id: string | number) {
-    console.log('Medico id: ' + id);
+  guardarIdMedico(id: any) {
     this.router.navigate(['/turno']);
-    localStorage.setItem('medicoId', id.toString());//!!eliminar
+    localStorage.setItem('medicoId', id.toString());
   }
 
+  //Obtener especialidades
   getEspecialidad(id: number) {
-    this.apiProviderService.getEspecialidadById(this.id).subscribe((data: any) => {
-      this.especialidades = data;
-      console.log('Especialidades:', this.especialidades);
-      this.especialidades.forEach((especialidad: any) => {
+    this.apiProviderService.getEspecialidadById(id).subscribe((data: any) => {     
+      this.especialidades = data;     
+      this.especialidadNombre = this.especialidades[0].nombre;
+      this.especialidades.forEach((especialidad: Categoria) => {
         if (especialidad.medicos && Array.isArray(especialidad.medicos)) {
-          especialidad.medicos.forEach((medico: any) => {
+          especialidad.medicos.forEach((medico: Usuario) => {
             this.medicos.push(medico);
           });
         }
@@ -50,6 +54,15 @@ export class EspecialidadDetalleComponent implements OnInit {
 
       console.log('Especialidades:', this.especialidades);
       console.log('Médicos:', this.medicos);
+    });
+  }
+
+  //Obtener horarios
+  getHorarios() {
+    this.apiProviderService.getHorarios().subscribe((data: any) => {
+      this.horarios.forEach((horario: Horario) => {
+        this.horarios.push(horario);
+      });
     });
   }
 }

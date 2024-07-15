@@ -1,21 +1,32 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Login } from '../interfaces/auth';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private apiUrl = 'http://localhost:3000/api/';
+  private apiUrl = 'https://www.agendapp.somee.com/api/';
 
   constructor(private http: HttpClient) {}
 
   //Loguear usuario
-  loginUsuario(usuario: any) {
-    return this.http.post(`${this.apiUrl}Auth/usuario`, usuario);
+  loginUsuario(usuario: Login): Observable<Login> {
+    return this.http.post<Login>(`${this.apiUrl}Auth/usuario`, usuario).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return new Observable<Login>();
+      })
+    
+    );
   }
 
   //Loguear medico
-  loginMedico(medico: any) {
-    return this.http.post(`${this.apiUrl}Auth/medico`, medico);
+  loginMedico(medico: Login): Observable<Login> {
+    return this.http.post<Login>(`${this.apiUrl}Auth/medico`, medico).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return new Observable<Login>();
+      })
+    );
   }
 }

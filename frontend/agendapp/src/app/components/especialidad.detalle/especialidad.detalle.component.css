@@ -75,3 +75,11 @@ img {
 .card-container {
   padding-bottom: 5rem;
 }
+
+.fraseBienvenida > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-top: 1rem;
+}
