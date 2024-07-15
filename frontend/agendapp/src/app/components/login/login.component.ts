@@ -5,6 +5,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Login } from '../../interfaces/auth';
 import { LoginService } from '../../services/login.service';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -21,10 +22,10 @@ export class LoginComponent {
     private router: Router,
     private loginService: LoginService
   ) {
-    this.section = this.route.snapshot.routeConfig?.path || '';
+     this.section = this.route.snapshot.routeConfig?.path || '';   
   }
-
-  //Submit del formulario (temporal)
+  
+ //Submit del formulario (temporal)
   submit(form: NgForm) {
     if (!form.valid) {
       console.log('Error al hacer login');
