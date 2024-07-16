@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Login } from '../../interfaces/auth';
 import { LoginService } from '../../services/login.service';
-
 
 @Component({
   selector: 'app-login',
@@ -13,7 +11,7 @@ import { LoginService } from '../../services/login.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   vistaHeader = true;
   section: string = '';
 
@@ -22,27 +20,23 @@ export class LoginComponent {
     private router: Router,
     private loginService: LoginService
   ) {
-     this.section = this.route.snapshot.routeConfig?.path || '';   
+    this.section = this.route.snapshot.routeConfig?.path || '';
+    console.log(this.section);
   }
-  
- //Submit del formulario (temporal)
-  submit(form: NgForm) {
-    if (!form.valid) {
-      console.log('Error al hacer login');
-      return;
-    } else if(this.section === 'login_usuario') {
-      const datos = form.value;
-      this.loginUsuario(datos);
-    }else if(this.section === 'login_medicos') {
-      const datos = form.value;
-      this.loginMedicos(datos);
-    }else{
-      console.log('Error al hacer login');
+
+  ngOnInit(): void {
+    if (this.section === 'login_usuarios') {
+      this.vistaHeader = true;
+    } else if (this.section === 'login_medicos') {
+      this.vistaHeader = true;
     }
   }
 
+  //Submit del formulario (temporal)
+
   //servicio de login del LS
-  loginUsuario(datos: Login) {
+  loginUsuario(form: NgForm) {
+    const datos = form.value;
     let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
 
     if (datos.email === usuario.email && datos.password === usuario.password) {
@@ -55,7 +49,8 @@ export class LoginComponent {
   }
 
   //servicio de login del LS
-  loginMedicos(datos: Login) {
+  loginMedicos(form: NgForm) {
+    const datos = form.value;
     let medico = JSON.parse(localStorage.getItem('medico') || '{}');
 
     if (datos.email === medico.email && datos.password === medico.password) {
