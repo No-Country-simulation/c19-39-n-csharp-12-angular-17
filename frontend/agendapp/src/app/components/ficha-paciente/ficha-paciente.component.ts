@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ApiProviderService } from '../../services/api-provider.service';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
+import { CommonModule } from '@angular/common';
 import { Cita } from '../../interfaces/api';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Usuario } from '../../interfaces/usuario';
-import { ApiProviderService } from '../../services/api-provider.service';
-import { CommonModule } from '@angular/common';
-
 
 @Component({
-  selector: 'app-turnodetalle',
+  selector: 'app-ficha-paciente',
   standalone: true,
   imports: [
     RouterLink,
@@ -18,10 +17,10 @@ import { CommonModule } from '@angular/common';
     FooterComponent,
     CommonModule,
   ],
-  templateUrl: './turnodetalle.component.html',
-  styleUrl: './turnodetalle.component.css',
+  templateUrl: './ficha-paciente.component.html',
+  styleUrl: './ficha-paciente.component.css',
 })
-export class TurnodetalleComponent implements OnInit {
+export class FichaPacienteComponent implements OnInit {
   section: string = '';
   turno = {} as Cita; //turno con idHorario y idMedico
   usuario = {} as Usuario; //usuario logueado
@@ -48,7 +47,7 @@ export class TurnodetalleComponent implements OnInit {
 
   //Obtener usuario logueado del LS
   getUsuario() {
-    let usuario = JSON.parse(localStorage.getItem('medico') || '{}');
+    let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     this.usuario = usuario;
   }
 
@@ -93,6 +92,6 @@ export class TurnodetalleComponent implements OnInit {
     this.apiServiceProvider.getHorarioById(id).subscribe((data: any) => {
       this.rangoHoraId = data[0].rango;
       console.log('Horario:', this.rangoHoraId);
-    });    
+    });
   }
 }

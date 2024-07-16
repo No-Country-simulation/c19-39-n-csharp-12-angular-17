@@ -16,104 +16,315 @@
       "usuarios": []
     }
   ],
-  "especialidad": [
-    { "idEspecialidad": 1, "nombre": "Cardiología" },
-    { "idEspecialidad": 2, "nombre": "Dermatología" }
-  ],
   "categorias": [
     {
       "idCategoria": 1,
       "nombre": "Cardiología",
-      "medicos": []
+      "medicos": [
+        {
+          "idUsuario": 458,
+          "dni": "1021123245",
+          "nombre": "Monica",
+          "apellido": "Garcia",
+          "email": "moni@gmail.com",
+          "telefono": "3121234504",
+          "contrasenia": "789",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        },
+        {
+          "idUsuario": 789,
+          "dni": "1282342344",
+          "nombre": "Ronaldinho",
+          "apellido": "Castro",
+          "email": "roni@gmail.com",
+          "telefono": "3123123123",
+          "contrasenia": "lop",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        },
+        {
+          "idUsuario": 686,
+          "dni": "7546876877",
+          "nombre": "Damian",
+          "apellido": "De Luca",
+          "email": "dl@gmail.com",
+          "telefono": "15572345",
+          "contrasenia": "1678",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        }
+      ]
     },
     {
       "idCategoria": 2,
       "nombre": "Dermatología",
       "medicos": [
         {
-          "idUsuario": 555,
-          "nombre": "Julian",
-          "apellido": "Perez",
-          "email": "jupe2@example.com",
-          "categoria": "Dermatología",
-          "horario": "13:00 - 17:00"
+          "idUsuario": 6858,
+          "dni": "1021123245",
+          "nombre": "Mario",
+          "apellido": "Gonzalez",
+          "email": "ma@gmail.com",
+          "telefono": "3121234504",
+          "contrasenia": "mario",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
         },
         {
-          "idUsuario": 557,
-          "nombre": "María",
-          "apellido": "Gómez",
-          "email": "mariag@example.com",
-          "categoria": "Dermatología",
-          "horario": "09:00 - 12:00"
-        },
-
-        {
-          "idUsuario": 456,
-          "nombre": "Carlos",
-          "apellido": "Rodríguez",
-          "email": "carlosr@example.com",
-          "categoria": "Dermatología",
-          "horario": "14:00 - 18:00"
-        },
-
-        {
-          "idUsuario": 781,
-          "nombre": "Laura",
-          "apellido": "Martínez",
-          "email": "lauram@example.com",
-          "categoria": "Dermatología",
-          "horario": "10:00 - 13:00"
-        },
-
-        {
-          "idUsuario": 123,
-          "nombre": "Santiago",
-          "apellido": "Fernández",
-          "email": "santif@example.com",
-          "categoria": "Dermatología",
-          "horario": "11:00 - 14:00"
+          "idUsuario": 99789,
+          "dni": "1282342344",
+          "nombre": "Leandro",
+          "apellido": "Caceres",
+          "email": "lean@gmail.com",
+          "telefono": "3123123123",
+          "contrasenia": "78",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
         }
       ]
     },
     {
       "idCategoria": 3,
       "nombre": "Ginecología",
-      "medicos": []
+      "medicos": [
+        {
+          "idUsuario": 1414,
+          "dni": "1282342344",
+          "nombre": "Rosalia",
+          "apellido": "Camaño",
+          "email": "roca@gmail.com",
+          "telefono": "78712383",
+          "contrasenia": "987",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        },
+        {
+          "idUsuario": 686,
+          "dni": "12127",
+          "nombre": "Karina",
+          "apellido": "Milei",
+          "email": "dl@gmail.com",
+          "telefono": "166645",
+          "contrasenia": "12345678",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        }
+      ]
     },
     {
       "idCategoria": 4,
       "nombre": "Neurología",
-      "medicos": []
+      "medicos": [
+        {
+          "idUsuario": 23654,
+          "dni": "1282342344",
+          "nombre": "Rolando",
+          "apellido": "De Loredo",
+          "email": "ro81@gmail.com",
+          "telefono": "57473123",
+          "contrasenia": "9813678",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        },
+        {
+          "idUsuario": 111,
+          "dni": "654879",
+          "nombre": "Maria",
+          "apellido": "Ansaldi",
+          "email": "ma@gmail.com",
+          "telefono": "78552345",
+          "contrasenia": "lala",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        }
+      ]
     },
     {
       "idCategoria": 5,
-      "nombre": "Obstetricia",
-      "medicos": []
-    }
-  ],
-  "citas": [
-    {
-      "idCita": 1,
-      "fecha": "2024-07-05",
-      "hora": "10:00",
-      "idPaciente": 1,
-      "idMedico": 1,
-      "motivoConsulta": "Dolor de pecho"
+      "nombre": "Neumonología",
+      "medicos": [
+        {
+          "idUsuario": 999,
+          "dni": "3335579",
+          "nombre": "Williams",
+          "apellido": "Maciel",
+          "email": "wma@gmail.com",
+          "telefono": "6954345",
+          "contrasenia": "ojos",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        }
+      ]
     },
     {
-      "idCita": 2,
-      "fecha": "2024-07-06",
-      "hora": "11:00",
-      "idPaciente": 2,
-      "idMedico": 2,
-      "motivoConsulta": "Revisión de piel"
+      "idCategoria": 6,
+      "nombre": "Obstetricia",
+      "medicos": [
+        {
+          "idUsuario": 13,
+          "dni": "654811",
+          "nombre": "Rodrigo",
+          "apellido": "De Luciani",
+          "email": "roDL@gmail.com",
+          "telefono": "53123",
+          "contrasenia": "rod",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        },
+        {
+          "idUsuario": 1212,
+          "dni": "654879",
+          "nombre": "Marizol",
+          "apellido": "Antonelli",
+          "email": "ma@gmail.com",
+          "telefono": "77745",
+          "contrasenia": "maru",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        }
+      ]
+    },
+    {
+      "idCategoria": 7,
+      "nombre": "Dentista",
+      "medicos": [
+        {
+          "idUsuario": 9898,
+          "dni": "42666644",
+          "nombre": "Gabriel",
+          "apellido": "Ballesteros",
+          "email": "gabo@gmail.com",
+          "telefono": "156985123",
+          "contrasenia": "gabo",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        },
+        {
+          "idUsuario": 369,
+          "dni": "5488754879",
+          "nombre": "Daniel",
+          "apellido": "Lio",
+          "email": "Dalio@gmail.com",
+          "telefono": "78552345",
+          "contrasenia": "dani",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        }
+      ]
+    },
+    {
+      "idCategoria": 8,
+      "nombre": "Radiología",
+      "medicos": [
+        {
+          "idUsuario": 7394,
+          "dni": "1282342344",
+          "nombre": "Carla",
+          "apellido": "Moretti",
+          "email": "car@gmail.com",
+          "telefono": "688123",
+          "contrasenia": "carlita",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        },
+        {
+          "idUsuario": 81,
+          "dni": "65854879",
+          "nombre": "Maria",
+          "apellido": "Rocasalvo",
+          "email": "ma@gmail.com",
+          "telefono": "156882345",
+          "contrasenia": "rocasalvo",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        }
+      ]
+    },
+    {
+      "idCategoria": 9,
+      "nombre": "Clinica General",
+      "medicos": [
+        {
+          "idUsuario": 23654,
+          "dni": "1282342344",
+          "nombre": "Rolando",
+          "apellido": "De Loredo",
+          "email": "ro81@gmail.com",
+          "telefono": "57473123",
+          "contrasenia": "9813678",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        },
+        {
+          "idUsuario": 77789,
+          "dni": "9654879",
+          "nombre": "Ramiro",
+          "apellido": "Antonelli",
+          "email": "rama@gmail.com",
+          "telefono": "31362345",
+          "contrasenia": "anto",
+          "idRol": 2,
+          "administradores": [],
+          "idRolNavigation": null,
+          "medicos": [],
+          "pacientes": []
+        }
+      ]
     }
   ],
-  "consultas": [
-    { "idConsulta": 1, "idCita": 1, "diagnostico": "Angina de pecho" },
-    { "idConsulta": 2, "idCita": 2, "diagnostico": "Dermatitis" }
-  ],
-  "horarios": [  
+  "horarios": [
     {
       "idHorario": 1,
       "rango": "08:00-12:00",
@@ -140,109 +351,494 @@
       "medicos": []
     }
   ],
+  "usuarios": [
+    {
+      "idUsuario": 1721020226162,
+      "dni": "1021123245",
+      "nombre": "Monica",
+      "apellido": "Garcia",
+      "email": "moni@gmail.com",
+      "telefono": "3121234504",
+      "contrasenia": "789",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 1721021946392,
+      "dni": "1282342344",
+      "nombre": "Ronaldinho",
+      "apellido": "Castro",
+      "email": "roni@gmail.com",
+      "telefono": "3123123123",
+      "contrasenia": "lop",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 1721077095050,
+      "dni": "7546876877",
+      "nombre": "Damian",
+      "apellido": "De Luca",
+      "email": "dl@gmail.com",
+      "telefono": "15572345",
+      "contrasenia": "1678",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 6858,
+      "dni": "1021123245",
+      "nombre": "Mario",
+      "apellido": "Gonzalez",
+      "email": "ma@gmail.com",
+      "telefono": "3121234504",
+      "contrasenia": "mario",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 99789,
+      "dni": "1282342344",
+      "nombre": "Leandro",
+      "apellido": "Caceres",
+      "email": "lean@gmail.com",
+      "telefono": "3123123123",
+      "contrasenia": "78",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 1414,
+      "dni": "1282342344",
+      "nombre": "Rosalia",
+      "apellido": "Camaño",
+      "email": "roca@gmail.com",
+      "telefono": "78712383",
+      "contrasenia": "987",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 686,
+      "dni": "12127",
+      "nombre": "Karina",
+      "apellido": "Milei",
+      "email": "dl@gmail.com",
+      "telefono": "166645",
+      "contrasenia": "12345678",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 23654,
+      "dni": "1282342344",
+      "nombre": "Rolando",
+      "apellido": "De Loredo",
+      "email": "ro81@gmail.com",
+      "telefono": "57473123",
+      "contrasenia": "9813678",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 111,
+      "dni": "654879",
+      "nombre": "Maria",
+      "apellido": "Ansaldi",
+      "email": "ma@gmail.com",
+      "telefono": "78552345",
+      "contrasenia": "lala",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 999,
+      "dni": "3335579",
+      "nombre": "Williams",
+      "apellido": "Maciel",
+      "email": "wma@gmail.com",
+      "telefono": "6954345",
+      "contrasenia": "ojos",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 13,
+      "dni": "654811",
+      "nombre": "Rodrigo",
+      "apellido": "De Luciani",
+      "email": "roDL@gmail.com",
+      "telefono": "53123",
+      "contrasenia": "rod",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 1212,
+      "dni": "654879",
+      "nombre": "Marizol",
+      "apellido": "Antonelli",
+      "email": "ma@gmail.com",
+      "telefono": "77745",
+      "contrasenia": "maru",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 9898,
+      "dni": "42666644",
+      "nombre": "Gabriel",
+      "apellido": "Ballesteros",
+      "email": "gabo@gmail.com",
+      "telefono": "156985123",
+      "contrasenia": "gabo",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 369,
+      "dni": "5488754879",
+      "nombre": "Daniel",
+      "apellido": "Lio",
+      "email": "Dalio@gmail.com",
+      "telefono": "78552345",
+      "contrasenia": "dani",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 7394,
+      "dni": "1282342344",
+      "nombre": "Carla",
+      "apellido": "Moretti",
+      "email": "car@gmail.com",
+      "telefono": "688123",
+      "contrasenia": "carlita",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 81,
+      "dni": "65854879",
+      "nombre": "Maria",
+      "apellido": "Rocasalvo",
+      "email": "ma@gmail.com",
+      "telefono": "156882345",
+      "contrasenia": "rocasalvo",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 23654,
+      "dni": "1282342344",
+      "nombre": "Rolando",
+      "apellido": "De Loredo",
+      "email": "ro81@gmail.com",
+      "telefono": "57473123",
+      "contrasenia": "9813678",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 77789,
+      "dni": "9654879",
+      "nombre": "Ramiro",
+      "apellido": "Antonelli",
+      "email": "rama@gmail.com",
+      "telefono": "31362345",
+      "contrasenia": "anto",
+      "idRol": 2,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 951,
+      "dni": "6542344",
+      "nombre": "Liliana",
+      "apellido": "DeVido",
+      "email": "lili@gmail.com",
+      "telefono": "57473123",
+      "contrasenia": "luli",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 963,
+      "dni": "1010879",
+      "nombre": "Ramiro",
+      "apellido": "Escalante",
+      "email": "raes@gmail.com",
+      "telefono": "554642345",
+      "contrasenia": "raesca",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 932,
+      "dni": "12824",
+      "nombre": "Raul",
+      "apellido": "Benitez",
+      "email": "raulo@gmail.com",
+      "telefono": "9898123",
+      "contrasenia": "rael",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 8456,
+      "dni": "9654879",
+      "nombre": "Cecilia",
+      "apellido": "Escalone",
+      "email": "ce@gmail.com",
+      "telefono": "31362345",
+      "contrasenia": "ceci",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 9478,
+      "dni": "787772344",
+      "nombre": "Graciela",
+      "apellido": "De Maria",
+      "email": "gra@gmail.com",
+      "telefono": "5963123",
+      "contrasenia": "demaria",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 9538,
+      "dni": "74179",
+      "nombre": "Florencia",
+      "apellido": "Antonini",
+      "email": "flor@gmail.com",
+      "telefono": "4521345",
+      "contrasenia": "flopi",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 2568,
+      "dni": "362142344",
+      "nombre": "Gonzalo",
+      "apellido": "De la Fuente",
+      "email": "gdf@gmail.com",
+      "telefono": "4473123",
+      "contrasenia": "delafuente",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 2479,
+      "dni": "6562157",
+      "nombre": "Ramiro",
+      "apellido": "Antonelli",
+      "email": "rama@gmail.com",
+      "telefono": "31362345",
+      "contrasenia": "anto",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 23654,
+      "dni": "1282342344",
+      "nombre": "Rolando",
+      "apellido": "DeLonardi",
+      "email": "ro@gmail.com",
+      "telefono": "57473123",
+      "contrasenia": "369",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 77789,
+      "dni": "9654879",
+      "nombre": "Ramiro",
+      "apellido": "Bonadeo",
+      "email": "ramitagran@gmail.com",
+      "telefono": "3652345",
+      "contrasenia": "bona",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 42369,
+      "dni": "325965",
+      "nombre": "Brisa",
+      "apellido": "Rodriguez",
+      "email": "ro2001@gmail.com",
+      "telefono": "47123",
+      "contrasenia": "bri",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 75214,
+      "dni": "9654879",
+      "nombre": "Ramona",
+      "apellido": "Salas",
+      "email": "rasa@gmail.com",
+      "telefono": "449662345",
+      "contrasenia": "ramona",
+      "idRol": 1,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 23654,
+      "dni": "1282342344",
+      "nombre": "Catalina",
+      "apellido": "Marquez",
+      "email": "cata@gmail.com",
+      "telefono": "3454553",
+      "contrasenia": "catamar",
+      "idRol": 3,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    },
+    {
+      "idUsuario": 77789,
+      "dni": "9654879",
+      "nombre": "Sofia",
+      "apellido": "Bringuetti",
+      "email": "sofi@gmail.com",
+      "telefono": "9842345",
+      "contrasenia": "so",
+      "idRol": 3,
+      "administradores": [],
+      "idRolNavigation": null,
+      "medicos": [],
+      "pacientes": []
+    }
+  ],
+  "citas": [
+    {
+      "idCita": 1,
+      "fecha": "2024-07-05",
+      "hora": "10:00",
+      "idPaciente": 963,
+      "idMedico": 6858,
+      "motivoConsulta": "Picazon en la piel"
+    },
+    {
+      "idCita": 2,
+      "fecha": "2024-07-06",
+      "hora": "11:00",
+      "idPaciente": 9478,
+      "idMedico": 6858,
+      "motivoConsulta": "Revisión de lunares en la piel"
+    }
+  ],
   "medicos": [
     { "idUsuario": 2, "idCategoria": 1, "idHorario": 1 },
     { "idUsuario": 3, "idCategoria": 2, "idHorario": 2 }
   ],
-  "usuarios": [
+  "mensajes": [
     {
-      "idUsuario": 1,
-      "dni": "12345678A",
-      "nombre": "Admin",
-      "apellido": "Uno",
-      "email": "admin1@example.com",
-      "telefono": "123456789",
-      "contrasenia": "admin1pass",
-      "rol": {
-        "idRol": 1,
-        "nombre": "Administrador"
-      }
+      "idMensaje": 1,
+      "idEmisor": 23654,
+      "IdReceptor": 77789,
+      "contenido": "Hola, ¿cómo estás?",
+      "datetime": "2024-07-13T12:00:00Z",
+      "estado": "Enviado"
     },
     {
-      "idUsuario": 2,
-      "dni": "12345678B",
-      "nombre": "Medico",
-      "apellido": "Uno",
-      "email": "medico1@example.com",
-      "telefono": "234567890",
-      "contrasenia": "medico1pass",
-      "rol": {
-        "idRol": 2,
-        "nombre": "Medico"
-      },
-      "categoria": {
-        "idCategoria": 1,
-        "nombre": "Cardiología"
-      },
-      "horario": {
-        "idHorario": 1,
-        "rango": "08:00 - 12:00"
-      }
-    },
-    {
-      "idUsuario": 3,
-      "dni": "12345678C",
-      "nombre": "Medico",
-      "apellido": "Dos",
-      "email": "medico2@example.com",
-      "telefono": "345678901",
-      "contrasenia": "medico2pass",
-      "rol": {
-        "idRol": 2,
-        "nombre": "Medico"
-      },
-      "categoria": {
-        "idCategoria": 2,
-        "nombre": "Dermatología"
-      },
-      "horario": {
-        "idHorario": 2,
-        "rango": "13:00 - 17:00"
-      }
-    },
-    {
-      "idUsuario": 4,
-      "dni": "12345678D",
-      "nombre": "Paciente",
-      "apellido": "Uno",
-      "email": "paciente1@example.com",
-      "telefono": "456789012",
-      "contrasenia": "paciente1pass",
-      "rol": {
-        "idRol": 3,
-        "nombre": "Paciente"
-      },
-      "citas": [
-        {
-          "idCita": 1,
-          "fecha": "2024-07-05",
-          "hora": "10:00",
-          "idMedico": 1,
-          "motivoConsulta": "Dolor de pecho"
-        }
-      ]
-    },
-    {
-      "idUsuario": 5,
-      "dni": "12345678E",
-      "nombre": "Paciente",
-      "apellido": "Dos",
-      "email": "paciente2@example.com",
-      "telefono": "567890123",
-      "contrasenia": "paciente2pass",
-      "rol": {
-        "idRol": 3,
-        "nombre": "Paciente"
-      },
-      "citas": [
-        {
-          "idCita": 2,
-          "fecha": "2024-07-06",
-          "hora": "11:00",
-          "idMedico": 2,
-          "motivoConsulta": "Revisión de piel"
-        }
-      ]
+      "id": 2,
+      "idEmisor": 77789,
+      "IdReceptor": 23654,
+      "contenido": "Estoy bien, gracias. ¿Y tú?",
+      "datetime": "2024-07-13T12:01:00Z",
+      "estado": "Recibido"
     }
   ]
 }

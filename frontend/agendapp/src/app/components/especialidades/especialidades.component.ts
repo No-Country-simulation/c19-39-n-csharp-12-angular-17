@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { ApiProviderService } from '../../services/api-provider.service';
 import { FooterComponent } from '../../shared/footer/footer.component';
+import { Categoria } from '../../interfaces/api';
 
 @Component({
   selector: 'app-especialidades',
@@ -13,7 +14,7 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 })
 export class EspecialidadesComponent implements OnInit {
   section: string = ''; //registro_medicos o registro_pacientes
-  especialidades: any[] = [];
+  especialidades: Categoria[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +28,13 @@ export class EspecialidadesComponent implements OnInit {
     this.getEspecialidades();
   }
 
+
+  verEspecialidadDetalle(id: number) {
+    console.log(id);
+    this.router.navigate(['/especialidad/', id]);
+  }
+
+
   //servicio de especialidades
   // getEspecialidades() {
   //   this.apiProviderService.getEspecialidades().subscribe((data: any) => {
@@ -38,6 +46,7 @@ export class EspecialidadesComponent implements OnInit {
   //Obtener especialidades de la DB
   getEspecialidades() {
     this.apiProviderService.getEspecialidades().subscribe((data: any) => {
+      this.especialidades = data;
       this.especialidades = data.map((especialidad: any) => {
         let imgSrc = '';
         switch (especialidad.idCategoria) {
@@ -70,18 +79,12 @@ export class EspecialidadesComponent implements OnInit {
             break;      
           default:
             break;
-        }
-       
-        const obj = {
-            id: especialidad.idCategoria,
-            nombre: especialidad.nombre,
-            imgSrc: imgSrc,
-          };
-          return obj;
+        }       
+        return imgSrc ? { ...especialidad, imgSrc } : especialidad;
         });
-
-        console.log(this.especialidades);
 
     });
   }
+
+
 }

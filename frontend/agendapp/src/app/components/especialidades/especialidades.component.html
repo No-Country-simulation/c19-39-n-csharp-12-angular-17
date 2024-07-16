@@ -23,12 +23,12 @@
     <div class="container btn-container">
       @if(especialidades.length > 0){
       <div class="container-button-group">
-        <!-- @for(especialidad of especialidades; track $index){
+        @for(especialidad of especialidades; track $index){
         <div>
           <a
             type="button"
             class="btn"
-            [routerLink]="['/especialidad/', especialidad.id]"
+            [routerLink]="['/especialidad/', especialidad.idCategoria]"
           >
             <img
               title="especialidad.nombre"
@@ -39,8 +39,8 @@
             />
           </a>
         </div>
-        } -->
-        <a type="button" class="btn" [routerLink]="['/especialidad/' + 1]">
+        }
+        <!-- <a type="button" class="btn" [routerLink]="['/especialidad/' + 1]">
           <img
             src="../../../assets/img/doctor.png"
             alt="icono_clinico"
@@ -112,7 +112,7 @@
             class="icono_especialidad"
             title="Neumonologia"
           />
-        </a>
+        </a> -->
       </div>
       }
     </div>

@@ -46,7 +46,7 @@ img {
 }
 
 .card {
-  width: 20rem;
+  width: 80dvw;
   background-color: #e9edee;
   border-radius: 26px;
 }
@@ -59,7 +59,7 @@ img {
 }
 
 .politica {
-  margin: 2rem 0.5rem;
+  margin: 2rem;
   padding: 0.5rem;
   width: 80dvw;
   position: fixed;
