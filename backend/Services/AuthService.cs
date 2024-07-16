@@ -1,12 +1,13 @@
 ﻿using AgendApp.Models;
 using AgendApp.Requests;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgendApp.Services
 {
     public interface IAuthService
     {
-        Object AuthUser(AuthRequest request);
-        Object AuthMedico(AuthRequest request);
+        Task<Object> AuthUser(AuthRequest request);
+        Task<Object> AuthMedico(AuthRequest request);
     }
     public class AuthService : IAuthService
     {
@@ -17,13 +18,13 @@ namespace AgendApp.Services
             this._db = context;
         }
 
-        public Object AuthUser(AuthRequest request)
+        public async Task<Object> AuthUser(AuthRequest request)
         {
             try
             {
- 
-                var user = _db.Usuarios.Where(usuario => usuario.Email == request.email &&
-                usuario.Contrasenia == request.password && usuario.IdRol == 1).FirstOrDefault();
+
+                var user = await _db.Usuarios.Where(usuario => usuario.Email == request.email &&
+                usuario.Contrasenia == request.password && usuario.IdRol == 1).FirstOrDefaultAsync();
 
                 if(user == null)
                 {
@@ -48,17 +49,17 @@ namespace AgendApp.Services
                 {
                     status = 500,
                     success = false,
-                    message = ex.Message
+                    message = ex.InnerException?.Message ?? ex.Message
                 };
             }
         }
 
-        public Object AuthMedico(AuthRequest request)
+        public async Task<Object> AuthMedico(AuthRequest request)
         {
             try
             {
-                var med = _db.Usuarios.Where(usuario => usuario.Email == request.email && 
-                usuario.Contrasenia == request.password && usuario.IdRol == 2).FirstOrDefault();
+                var med = await _db.Usuarios.Where(usuario => usuario.Email == request.email &&
+                usuario.Contrasenia == request.password && usuario.IdRol == 2).FirstOrDefaultAsync();
 
                 if(med == null)
                 {
@@ -84,7 +85,7 @@ namespace AgendApp.Services
                 {
                     status = 500,
                     success = false,
-                    message = ex.Message
+                    message = ex.InnerException?.Message ?? ex.Message
                 };
             }
         }

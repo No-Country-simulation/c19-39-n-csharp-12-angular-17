@@ -21,7 +21,7 @@ namespace AgendApp.Controllers
         [Route("usuarios")]
         public async Task<IActionResult> GetUsers() {
 
-            var resp = _userService.getUsers();
+            var resp = await _userService.getUsers();
 
             return Ok(resp);
 
@@ -32,7 +32,7 @@ namespace AgendApp.Controllers
         [Route("roles")]
         public async Task<IActionResult> getRoles()
         {
-            var result = _userService.getRoles();
+            var result = await _userService.getRoles();
 
             return Ok(result);
         }

@@ -5,8 +5,8 @@ namespace AgendApp.Requests
     public class AuthRequest
     {
         [Required]
-        public string email { get; set; }
+        public string? email { get; set; }
         [Required]
-        public string password { get; set; }
+        public string? password { get; set; }
     }
 }

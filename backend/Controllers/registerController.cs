@@ -22,7 +22,7 @@ namespace AgendApp.Controllers
         [Route("usuario")]
         public async Task<IActionResult> RegisterUser([FromBody] UserRegisterRequest request)
         {
-            var result = _registerService.RegisterUser(request);
+            var result = await _registerService.RegisterUser(request);
             return Ok(result);
         }
 
@@ -31,7 +31,7 @@ namespace AgendApp.Controllers
         [Route("medico")]
         public async Task<IActionResult> RegisterMed([FromBody] MedRegisterRequest request)
         {
-            var result = _registerService.RegisterMed(request);
+            var result = await _registerService.RegisterMed(request);
 
             return Ok(result);
         }

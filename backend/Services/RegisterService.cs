@@ -5,17 +5,17 @@ namespace AgendApp.Services
 {
     public interface IRegisterService
     {
-        Object RegisterMed(MedRegisterRequest request);
-        Object RegisterUser(UserRegisterRequest request);
+        Task<Object> RegisterMed(MedRegisterRequest request);
+        Task<Object> RegisterUser(UserRegisterRequest request);
     }
     public class RegisterService : IRegisterService
     {
         private AgendappDbContext _db;
         public RegisterService(AgendappDbContext context) { 
-            this._db = context;
+            _db = context;
         }
 
-        public Object RegisterMed(MedRegisterRequest request)
+        public async Task<Object> RegisterMed(MedRegisterRequest request)
         {
             try
             {
@@ -30,12 +30,13 @@ namespace AgendApp.Services
                     IdRol = 2
                 };
 
-                var addUser = _db.Usuarios.Add(newUser);
-                _db.SaveChanges();
+                //var userExist = _db.Usuarios.FirstOrDefault(u => u.Dni == newUser.Dni || u.Email == newUser.Email);
+                //if (userExist != null) return new { status = 400, success = false, message = "Email y/o Dni registrado"};
 
+                var addUser = _db.Usuarios.Add(newUser);
+                await _db.SaveChangesAsync();
                 var registeredUser = addUser.Entity;
                
-
                 Medico newMed = new Medico {
                     IdUsuario = registeredUser.IdUsuario,
                     IdCategoria = request.idCategoria,
@@ -43,13 +44,28 @@ namespace AgendApp.Services
                 };
 
                 var addMed = _db.Medicos.Add(newMed);
+                var registeredMed = addMed.Entity;
+                await _db.SaveChangesAsync();
 
-                _db.SaveChanges();
-                   
                 return new {
                     status = 200,
                     success = true,
-                    message = "Medico registrado exitosamente"
+                    data = new {
+                        usuario = new {
+                            registeredUser.IdUsuario,
+                            registeredUser.Dni,
+                            registeredUser.Nombre,
+                            registeredUser.Apellido,
+                            registeredUser.Telefono,
+                            registeredUser.Email
+                        },
+                        medico = new {
+                            registeredMed.IdMedico,
+                            registeredMed.IdUsuario,
+                            registeredMed.IdHorario,
+                            registeredMed.IdCategoria
+                        }
+                    }
                 };
                     
             }
@@ -64,7 +80,7 @@ namespace AgendApp.Services
             }
         }
 
-        public Object RegisterUser(UserRegisterRequest request)
+        public async Task<Object> RegisterUser(UserRegisterRequest request)
         {
             try
             {
@@ -80,10 +96,13 @@ namespace AgendApp.Services
                     IdRol = 1
                 };
 
+                var userExist = _db.Usuarios.FirstOrDefault(u => u.Dni == newUser.Dni || u.Email == newUser.Email);
+                if (userExist != null) return new { status = 400, success = false, message = "Email y/o Dni registrado" };
+
                 var addUser = _db.Usuarios.Add(newUser);
                 var user = addUser.Entity;
 
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
 
                 return new
                 {
@@ -98,7 +117,7 @@ namespace AgendApp.Services
                 {
                     status = 500,
                     success = false,
-                    message = ex.Message
+                    message = ex.InnerException?.Message ?? ex.Message
                 };
             }
         }
