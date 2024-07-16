@@ -30,8 +30,8 @@ namespace AgendApp.Services
                     IdRol = 2
                 };
 
-                //var userExist = _db.Usuarios.FirstOrDefault(u => u.Dni == newUser.Dni || u.Email == newUser.Email);
-                //if (userExist != null) return new { status = 400, success = false, message = "Email y/o Dni registrado"};
+                var userExist = _db.Usuarios.FirstOrDefault(u => u.Dni == newUser.Dni || u.Email == newUser.Email);
+                if (userExist != null) return new { status = 400, success = false, message = "Email y/o Dni registrado"};
 
                 var addUser = _db.Usuarios.Add(newUser);
                 await _db.SaveChangesAsync();
@@ -75,7 +75,7 @@ namespace AgendApp.Services
                 {
                     status = 500,
                     success = false,
-                    message = ex.Message,
+                    message = ex.InnerException?.Message ?? ex.Message,
                 };
             }
         }
