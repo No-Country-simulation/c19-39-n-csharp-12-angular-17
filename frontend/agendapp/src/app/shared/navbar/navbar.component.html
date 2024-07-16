@@ -3,7 +3,7 @@
 @if(section){
 <section>
   <nav
-    class="navbar navbar-expand-lg d-flex justify-content-start align-items-center py-4 pt-5"
+    class="navbar d-flex justify-content-start align-items-center py-4 pt-5"
     [ngClass]="{
       'navbar-registro-usuario': section === 'registro_usuarios',
       'navbar-registro-medico': section === 'registro_medicos',
@@ -11,21 +11,22 @@
       'navbar-login-medico': section === 'login_medicos'
     }"
   >
-    <a routerLink="">
+    <a [routerLink]="['/']">
       <img
-        class="ms-4"
+        class="ms-4 caret"
         src="../../../assets/img/caret_back.png"
         alt="icono_regresar"
+        title="Volver a la página principal"
       />
     </a>
     @if(section === 'registro_usuarios'){
-    <h2 class="ms-5">Nueva Cuenta</h2>
+    <h2 class="mx-auto">Nueva Cuenta</h2>
     } @else if(section === 'registro_medicos'){
-    <h2 class="ms-5">Nueva Cuenta</h2>
+    <h2 class="mx-auto">Nueva Cuenta</h2>
     }@else if(section === 'login_usuarios'){
-    <h2 class="ms-5">Inicio de Sesión</h2>
+    <h2 class="mx-auto">Inicio de Sesión</h2>
     }@else if(section === 'login_medicos'){
-    <h2 class="ms-5">Inicio de Sesión</h2>
+    <h2 class="mx-auto">Inicio de Sesión</h2>
     }
   </nav>
 

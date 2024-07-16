@@ -1,0 +1,112 @@
+<section id="nav_medico">
+  <!-- Header de usuario -->
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+</section>
+
+<!-- Main -->
+<div class="main">
+  <section id="fraseBienvenida">
+    @if (section === 'home_medico') {
+    <div class="container fraseBienvenida">
+      <!-- TODO: modificar por el objeto usuario id -->
+      @if(usuario){
+      <h2>Hola, {{ usuario.nombre }}!</h2>
+      }
+    </div>
+    }
+  </section>
+
+  <!-- Botones estado de turnos 'proximos', 'cancelados' y 'completados' -->
+  <div
+    class="container mb-2 d-flex flex-row justify-content-center align-items-center btn-container"
+  >
+    <span class="btn btn-outline-dark rounded-pill text-bg-light btn-sm"
+      >Cancelados</span
+    >
+    <span class="btn btn-outline-dark rounded-pill text-bg-success btn-sm"
+      >Próximos</span
+    >
+    <span class="btn btn-outline-dark rounded-pill text-bg-light btn-sm"
+      >Completados</span
+    >
+  </div>
+
+  <!-- Busqueda / Filtro -->
+  <div class="card bg-transparent border-0 mx-auto filtro-input">
+    <div class="card-body m-0 p-0">
+      <div class="wrapper mb-2">
+        <label for="query">Filtrar cualquier dato de la tabla</label>
+        <input
+          class="form-control"
+          type="text"
+          [(ngModel)]="query"
+          placeholder="Buscar..."
+        />
+      </div>
+    </div>
+  </div>
+
+  <hr />
+  <!-- Lista de turnos con estado próximo -->
+  <section id="card-turnos">
+    <div class="container turno-card">
+      @switch (citas.length === 0){ @case (true) {
+      <div class="card mb-3 card-vacia">
+        <div
+          class="card-body p-2 m-0 d-flex flex-column justify-content-center align-items-center"
+        >
+          <span>No tienes turnos</span>
+        </div>
+      </div>
+      } @default{@for(cita of citas | filter: query; track cita.idCita){
+      <div class="card mb-3 mx-auto">
+        <div class="row g-0">
+          <div class="col-12">
+            <div
+              class="card-body p-2 m-0 d-flex flex-column justify-content-start align-items-center"
+            >
+              <small>
+                {{ cita.fecha | date : "dd/MM/yyyy" }} - {{ cita.hora }}
+              </small>
+              @if(paciente){
+              <span>{{ '' }}</span>
+              }
+            </div>
+            <!-- menu colapsable con motivo de consulta -->
+            <div class="d-flex flex-row justify-content-center">
+              <button
+                class="border-0 bg-transparent"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                <img
+                  src="../../../assets/img/down-arrow.svg"
+                  alt="ver_mas_icono"
+                  class="down-arrow"
+                />
+              </button>
+            </div>
+            <div class="collapse" id="collapseExample">
+              <div
+                class="card d-flex flex-column justify-content-center border-0 m-0 p-0"
+              >
+                <p class="text-start px-4 text-break">
+                  {{ cita.motivoConsulta }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }}}
+    </div>
+  </section>
+</div>
+
+<!-- Footer generico -->
+<section id="nav-footer">
+  <app-footer class="fixed-bottom"></app-footer>
+</section>

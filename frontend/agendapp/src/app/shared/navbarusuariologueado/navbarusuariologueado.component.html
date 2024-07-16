@@ -1,0 +1,45 @@
+<nav
+  class="navbar d-flex justify-content-start align-items-center"
+>
+  <div class="container-fluid">
+    <!-- Logo redirige a Inicio -->
+    <a [routerLink]="['/home_usuario']">
+      <span>
+        <img
+          src="../../../assets/img/logo.png"
+          alt="logo_empresa"
+          class="logo"
+        />
+      </span>
+    </a>
+    <!-- Boton menu toggle -->
+    <div class="d-flex flex-row justify-content-end align-items-center">
+      <!-- TODO: modificar por el objeto usuario id -->
+      @if(usuario){
+      <p class="nombreUsuario p-0 m-0">{{ usuario.nombre}} {{usuario.apellido}}</p>
+      }
+      <button
+        class="navbar-toggler border-0 rounded-circle p-0 ps-1"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar_icon">
+          <img src="../../../assets/img/user.png" alt="icono_usuario" />
+        </span>
+      </button>
+    </div>
+    <!-- Menu desplegable -->
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav align-items-end me-4">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/']">Salir</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+

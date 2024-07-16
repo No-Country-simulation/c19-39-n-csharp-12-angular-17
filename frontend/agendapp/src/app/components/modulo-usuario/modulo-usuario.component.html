@@ -1,0 +1,151 @@
+<section id="nav_usuario">
+  <!-- Header de usuario -->
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+</section>
+
+<!-- Main -->
+<div class="main">
+  <section id="fraseBienvenida">
+    @if (section === 'home_usuario') {
+    <div class="container fraseBienvenida">
+      <!-- TODO: modificar por el objeto usuario id -->
+      @if(usuario){
+      <h2>Hola, {{ usuario.nombre }}!</h2>
+      }
+      <p>Agendá tu consulta virtual!</p>
+    </div>
+    }
+  </section>
+
+  <!-- Slider publicitario -->
+  <section id="slider_publicitario">
+    <div class="container-slider">
+      <div
+        id="carouselExampleSlidesOnly"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="../../../assets/img/slide_1.png"
+              class="d-block"
+              alt="imagen_slide_1"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="../../../assets/img/slide2.png"
+              class="d-block"
+              alt="imagen_slide_2"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="../../../assets/img/slide3.png"
+              class="d-block"
+              alt="imagen_slide_3"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA's -->
+  <section id="btn-calltoaction">
+    <div class="container py-3 mt-1">
+      <div
+        class="d-flex flex-row justify-content-center align-items-center gap-2"
+      >
+        <a
+          class="btn btn-primary btn-lg text-wrap cta"
+          type="button"
+          [routerLink]="['/especialidades']"
+          >Agendá una consulta médica</a
+        >
+        <a
+          class="btn btn-primary btn-lg text-wrap cta"
+          type="button"
+          [routerLink]="['/mis_turnos']"
+          >Tus próximas consultas</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Carousel Especialidades -->
+  <section id="carousel-especialidades">
+    <div class="container titulos">
+      <h2 class="my-3">Especialidades</h2>
+      <div class="container-button-group">
+        @for(especialidad of limitEspecialidades(); track
+        especialidad.idCategoria){
+        <div>
+          <a
+            type="button"
+            class="btn"
+            [routerLink]="['/especialidad/', especialidad.idCategoria]"
+          >
+            <img
+              title="especialidad.nombre"
+              [src]="especialidad.imgSrc"
+              [alt]="'icono_' + especialidad.nombre"
+              class="icono_especialidad"
+              [title]="especialidad.nombre"
+            />
+          </a>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda de Turnos -->
+  <section id="card-turnos">
+    <div class="container titulos">
+      <h2 class="my-3">Agenda de turnos</h2>
+      @switch (citas.length === 0){ @case (true) {
+      <div class="card mb-3 card-vacia">
+        <div
+          class="card-body p-2 m-0 d-flex flex-column justify-content-center align-items-center"
+        >
+          <span>No tienes turnos</span>
+        </div>
+      </div>
+      } @default{ @for(cita of citas; track cita.idCita){
+      <div class="card mb-3" (click)="verTurnoDetalle(cita.idCita)">
+        <div class="row g-0">
+          <div class="col-3 d-flex justify-content-center align-items-center">
+            <img
+              src="../../../assets/img/logo.png"
+              class="img-fluid rounded-start doctor"
+              alt="imagen_doctor"
+            />
+          </div>
+          <div class="col-8">
+            <div
+              class="card-body p-2 m-0 d-flex flex-column justify-content-center align-items-center"
+            >
+              <!-- Nombre completo y especialidad -->
+              <h6 class="card-title">{{ "Especialidad" }}</h6>
+              <h5>Dr. {{ "Nombre" }}{{ "Apellido" }}</h5>
+              <small>
+                {{ cita.fecha | date : "dd/MM/yy" }} - {{ cita.hora }}
+              </small>
+              <small>
+                {{ cita.motivoConsulta }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      }}}
+    </div>
+  </section>
+</div>
+
+<!-- Footer generico -->
+<section id="nav-footer">
+  <app-footer class="fixed-bottom"></app-footer>
+</section>

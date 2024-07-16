@@ -1,0 +1,112 @@
+<section id="nav_usuario">
+  <!-- Header de usuario -->
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+  <div class="container-fluid d-flex flex-row">
+    <a [routerLink]="['/especialidades']">
+      <img
+        class="ms-4 caret"
+        src="../../../assets/img/caret_back.png"
+        alt="icono_regresar"
+      />
+    </a>
+    <h3 class="ms-5 pb-1">Agendá Tu Turno</h3>
+  </div>
+</section>
+
+<div class="main">
+  <!-- datepicker -->
+
+  <form class="form" #form="ngForm" (ngSubmit)="crearTurno(form)">
+    <div class="card bg-transparent">
+      <!-- input hidden con id medico seleccionado -->
+      <input type="hidden" [value]="medID" />
+
+      <!-- input fecha del turno -->
+      <div class="wrapper mb-2">
+        <label for="turno"><small>Fecha de turno:</small></label>
+        <input
+          class="form-control"
+          title="turno"
+          type="date"
+          id="turno"
+          name="turno"
+          [min]="fecha"
+          [max]="fechaTope"
+          ngModel
+        />
+      </div>
+      <!-- input select con horarios disponibles de el medico seleccionado -->
+      <div class="wrapper mb-2">
+        <label for="horaCita"
+          ><small>Seleccione un rango de horario</small></label
+        >
+        <select
+          class="form-select"
+          aria-label="Seleccione un rango de horario"
+          name="idHorario"
+          [(ngModel)]="turno.hora"
+          (change)="onChangeHorario($event)"
+        >
+        <option value="0" id="id_auxiliar" type="hidden"></option>
+          @for(hora of horarios; track hora.idHorario){
+          <option
+            class="option-menu"
+            [id]="hora.idHorario"
+            [ngValue]="hora.idHorario"
+          >
+            {{ hora.rango }}
+          </option>
+          }
+        </select>
+      </div>
+      <!-- input select con los horarios segun rango seleccionado -->
+      <div class="wrapper mb-2">
+        <label for="horaCita"
+          ><small>Elija un horario</small></label
+        >
+        <select
+        class="form-select"
+        aria-label="Elija un horario"
+        name="horaCita"
+        [(ngModel)]="turno.horaCita"
+        (click)="verDato(turno.horaCita)"
+        
+        >
+        @if(rangoHoras.length > 0){
+          @for(hora of rangoHoras; track $index){
+          <option class="option-menu" selected [id]="$index" [ngValue]="hora">
+            {{ hora }}:00
+          </option>
+          }
+        }
+        </select>
+      </div>
+      <!-- input motivo de la consulta -->
+      <div class="wrapper mb-2">
+          <label for="horaCita"
+          ><small>Escriba el motivo de consulta</small></label
+        >
+        <textarea
+          class="form-control"
+          title="motivoConsulta"
+          [minlength]="12"
+          [maxlength]="100"
+          name="motivo"
+          id="motivo"
+          [(ngModel)]="turno.motivoConsulta"
+        >
+        </textarea>
+      </div>
+      <input
+        class="btn btn-primary btn-lg rounded-pill my-3 px-5"
+        type="submit"
+        value="Confirmar turno"
+      />
+    </div>
+  </form>
+</div>
+
+<!-- Footer generico -->
+<section id="nav-footer">
+  <app-footer class="fixed-bottom"></app-footer>
+</section>
