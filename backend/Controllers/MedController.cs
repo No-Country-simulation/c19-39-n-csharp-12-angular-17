@@ -21,7 +21,7 @@ namespace AgendApp.Controllers
         [Route("categorias")]
         public async Task<IActionResult> getCategories()
         {
-            var result = _medService.getCategories();
+            var result = await _medService.getCategories();
 
             return Ok(result);
         }
@@ -31,7 +31,7 @@ namespace AgendApp.Controllers
         [Route("horarios")]
         public async Task<IActionResult> getSchedules()
         {
-            var result = _medService.getSchedules();
+            var result = await _medService.getSchedules();
 
             return Ok(result);
         }

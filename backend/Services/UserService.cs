@@ -1,11 +1,12 @@
 ﻿using AgendApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgendApp.Services
 {
     public interface IUserService
     {
-        Object getUsers();
-        Object getRoles();
+        Task<Object> getUsers();
+        Task<Object> getRoles();
     }
     public class UserService : IUserService
     {
@@ -16,11 +17,11 @@ namespace AgendApp.Services
             _Db = context;
         }
    
-        public Object getUsers()
+        public async Task<Object> getUsers()
         {
             try
             {
-                List<Usuario> users = _Db.Usuarios.ToList();
+                List<Usuario> users = await _Db.Usuarios.ToListAsync();
                 return new
                 {
                     status = 200,
@@ -33,17 +34,17 @@ namespace AgendApp.Services
                 {
                     status = 500,
                     success = false,
-                    message = ex.Message
+                    message = ex.InnerException?.Message ?? ex.Message
                 };
             }
 
         }
 
-        public Object getRoles()
+        public async Task<Object> getRoles()
         {
             try
             {
-                List<Role> roles = _Db.Roles.ToList<Role>();
+                List<Role> roles = await _Db.Roles.ToListAsync<Role>();
 
                 return new
                 {
@@ -59,7 +60,7 @@ namespace AgendApp.Services
                 {
                     status = 500,
                     success = false,
-                    messaeg = ex.Message
+                    messaeg = ex.InnerException?.Message ?? ex.Message
                 };
             }
         }
