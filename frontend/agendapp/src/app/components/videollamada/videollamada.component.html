@@ -4,8 +4,9 @@
     <div class="video">
       <video #video id="video" type="media"></video>
       <div class="btn-container">
-        <button type="button" class="pause" (click)="onPause()">Stop</button>
-        <button type="button" class="play" (click)="onPlay()">Play</button>
+        <button type="button" class="terminar" (click)="stopStream()">Terminar</button>
+        <button type="button" class="pausar" (click)="pauseStream()">Pausar</button>
+        <button type="button" class="play" (click)="playStream()">Play</button>
       </div>
     </div>
   </div>
