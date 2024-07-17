@@ -22,11 +22,19 @@ export class FilterPipe implements PipeTransform {
         (item.hora && item.hora.toLowerCase().includes(args));
 
       const containsDni = item.dni && item.dni.toString().includes(args);
-      const containsId = item.idUsuario && item.idUsuario.toString().includes(args);
+      const containsId =
+        item.idUsuario && item.idUsuario.toString().includes(args);
+      const containsRolId = item.idRol && item.idRol.toString().includes(args);
+      const containsEstado =
+        item.estado && item.estado.toString().includes(args);
 
-      return containsName || containsDni || containsId;
+      return (
+        containsName ||
+        containsDni ||
+        containsId ||
+        containsRolId ||
+        containsEstado
+      );
     });
-
-    return null;
   }
 }

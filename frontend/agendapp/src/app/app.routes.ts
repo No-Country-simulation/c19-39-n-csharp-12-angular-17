@@ -12,6 +12,10 @@ import { ModuloMedicoComponent } from './components/modulo-medico/modulo-medico.
 import { BuscarComponent } from './components/buscar/buscar.component';
 import { FichaPacienteComponent } from './components/ficha-paciente/ficha-paciente.component';
 import { InboxComponent } from './components/inbox/inbox.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { BuscarUsuariosComponent } from './components/buscar-usuarios/buscar-usuarios.component';
+import { EditarComponent } from './components/editar/editar.component';
+import { VideollamadaComponent } from './components/videollamada/videollamada.component';
 
 export const routes: Routes = [
   //Bienvenida
@@ -48,7 +52,7 @@ export const routes: Routes = [
   {
     path: 'home_usuario',
     title: 'Home Usuario',
-    component: ModuloUsuarioComponent,    
+    component: ModuloUsuarioComponent,
   },
   {
     path: 'mis_turnos',
@@ -94,10 +98,29 @@ export const routes: Routes = [
   {
     path: 'inbox',
     title: 'Mensajes',
-    component: InboxComponent
-  }
-  //Home Admin
-  // {},
+    component: InboxComponent,
+  },
+  // Home Admin
+  {
+    path: 'admin',
+    title: 'Admin',
+    component: AdminComponent,
+  },
+  {
+    path: 'buscar',
+    title: 'Buscar Usuarios',
+    component: BuscarUsuariosComponent,
+  },
+  {
+    path: 'editar/:id',
+    title: 'Editar Usuario',
+    component: EditarComponent,
+  },
+  {
+    path: 'videollamada',
+    title: 'Atención Virtual',
+    component: VideollamadaComponent,
+  },
   //   {
   //     path: '**',
   //     // redirectTo: 'auth/login',  /*Cuando esté el login, interceptors, guards*/
