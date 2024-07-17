@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
+var Cors = "MyCors";
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -38,6 +39,15 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
 builder.Services.AddScoped<IMedService, MedService>();
+
+//Añadir Cors
+builder.Services.AddCors(
+    options => options.AddPolicy(name: Cors, buid =>
+    buid.AllowAnyOrigin()
+    //WithOrigins("http://localhost:4200")
+    .AllowAnyHeader()
+    .AllowAnyMethod()));
+
 
 var app = builder.Build();
 

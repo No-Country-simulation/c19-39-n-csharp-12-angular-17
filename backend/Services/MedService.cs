@@ -1,11 +1,12 @@
 ﻿using AgendApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgendApp.Services
 {
     public interface IMedService
     {
-        Object getCategories();
-        Object getSchedules();
+        Task<Object> getCategories();
+        Task<Object> getSchedules();
     }
     public class MedService : IMedService
     {
@@ -15,12 +16,12 @@ namespace AgendApp.Services
             this._db = context;
         }
 
-        public Object getCategories()
+        public async Task<Object> getCategories()
         {
             try
             {
 
-                List<Categoriasmedica> categories = _db.Categoriasmedicas.ToList<Categoriasmedica>();
+                List<Categoriasmedica> categories = await _db.Categoriasmedicas.ToListAsync<Categoriasmedica>();
 
                 return new
                 {
@@ -35,16 +36,16 @@ namespace AgendApp.Services
                 {
                     status = 500,
                     success = false,
-                    message = ex.Message
+                    message = ex.InnerException?.Message ?? ex.Message
                 };
             }
         }
 
-        public Object getSchedules()
+        public async Task<Object> getSchedules()
         {
             try
             {
-                List<Horario> schedules = _db.Horarios.ToList<Horario>();
+                List<Horario> schedules = await _db.Horarios.ToListAsync<Horario>();
 
                 return new
                 {
@@ -59,7 +60,7 @@ namespace AgendApp.Services
                 {
                     status = 500,
                     success = false,
-                    message = ex.Message
+                    message = ex.InnerException?.Message ?? ex.Message
                 };
             }
         }

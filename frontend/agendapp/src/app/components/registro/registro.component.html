@@ -4,7 +4,7 @@
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >
-  <form #form="ngForm" (ngSubmit)="verDatos(form)">
+  <form #form="ngForm" (ngSubmit)="enviarRegistroUsuario(form)">
     <div class="card bg-transparent border-0">
       <div class="card-body m-0 p-0">
         <div class="wrapper mb-2">
@@ -13,9 +13,6 @@
             type="text"
             name="nombre"
             placeholder="Nombre"
-            required
-            minlength="4"
-            maxlength="100"
             [(ngModel)]="user.nombre"
           />
         </div>
@@ -25,9 +22,6 @@
             type="text"
             name="apellido"
             placeholder="Apellido"
-            required
-            minlength="4"
-            maxlength="100"
             [(ngModel)]="user.apellido"
           />
         </div>
@@ -37,9 +31,6 @@
             type="email"
             name="email"
             placeholder="Email"
-            required
-            minlength="5"
-            maxlength="100"
             [(ngModel)]="user.email"
           />
         </div>
@@ -49,9 +40,6 @@
             type="text"
             name="telefono"
             placeholder="Telefono"
-            required
-            minlength="5"
-            maxlength="20"
             [(ngModel)]="user.telefono"
           />
         </div>
@@ -61,9 +49,6 @@
             type="text"
             name="dni"
             placeholder="Dni"
-            required
-            minlength="5"
-            maxlength="20"
             [(ngModel)]="user.dni"
           />
         </div>
@@ -71,12 +56,9 @@
           <input
             class="form-control"
             type="password"
-            name="contrasenia"
+            name="password"
             placeholder="Contraseña"
-            required
-            minlength="5"
-            maxlength="100"
-            [(ngModel)]="user.contrasenia"
+            [(ngModel)]="user.password"
           />
         </div>
         <div
@@ -105,11 +87,11 @@
 </div>
 
 <!-- mostrar formulario para medicos -->
-} @else if(role == 'registro_medicos'){
+} @else if(role === 'registro_medicos'){
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >
-  <form #form="ngForm" (ngSubmit)="verDatos(form)">
+  <form #form="ngForm" (ngSubmit)="enviarRegistroMedico(form)">
     <div class="card bg-transparent border-0">
       <div class="card-body m-0 p-0">
         <div class="wrapper mb-2">
@@ -118,10 +100,7 @@
             type="text"
             name="nombre"
             placeholder="Nombre"
-            required
-            minlength="4"
-            maxlength="100"
-            [(ngModel)]="user.nombre"
+            [(ngModel)]="medico.nombre"
           />
         </div>
         <div class="wrapper mb-2">
@@ -130,10 +109,7 @@
             type="text"
             name="apellido"
             placeholder="Apellido"
-            required
-            minlength="4"
-            maxlength="100"
-            [(ngModel)]="user.apellido"
+            [(ngModel)]="medico.apellido"
           />
         </div>
         <div class="wrapper mb-2">
@@ -142,10 +118,7 @@
             type="email"
             name="email"
             placeholder="Email"
-            required
-            minlength="5"
-            maxlength="100"
-            [(ngModel)]="user.email"
+            [(ngModel)]="medico.email"
           />
         </div>
         <div class="wrapper mb-2">
@@ -154,10 +127,7 @@
             type="text"
             name="telefono"
             placeholder="Telefono"
-            required
-            minlength="5"
-            maxlength="20"
-            [(ngModel)]="user.telefono"
+            [(ngModel)]="medico.telefono"
           />
         </div>
         <div class="wrapper mb-2">
@@ -166,50 +136,52 @@
             type="text"
             name="dni"
             placeholder="Dni"
-            required
-            minlength="5"
-            maxlength="20"
-            [(ngModel)]="user.dni"
+            [(ngModel)]="medico.dni"
           />
         </div>
         <div class="wrapper mb-2">
           <input
             class="form-control"
             type="password"
-            name="contrasenia"
+            name="password"
             placeholder="Contraseña"
-            required
-            minlength="5"
-            maxlength="100"
-            [(ngModel)]="user.contrasenia"
-          />
-        </div>
-        <div class="wrapper mb-2">
-          <input
-            class="form-control"
-            type="text"
-            name="licenciaMedica"
-            placeholder="Licencia Medica n°"
-            required
-            [(ngModel)]="medico.licenciaMedica"
+            [(ngModel)]="medico.password"
           />
         </div>
         <div class="wrapper mb-2">
           <select
             class="form-select"
             aria-label="Elija su especialidad"
-            name="especialidad"
-            required
-            [(ngModel)]="medico.especialidad"
+            name="idCategoria"
+            [(ngModel)]="medico.idCategoria"
           >
             @for(esp of especialidades; track esp.idCategoria){
             <option
               class="option-menu"
               selected
               [id]="esp.idCategoria"
-              [value]="esp.nombre"
+              [ngValue]="esp.idCategoria"
             >
               {{ esp.nombre }}
+            </option>
+            }
+          </select>
+        </div>
+        <div class="wrapper mb-2">
+          <select
+            class="form-select"
+            aria-label="Elija su horario"
+            name="idHorario"
+            [(ngModel)]="medico.idHorario"
+          >
+            @for(hora of horarios; track hora.idHorario){
+            <option
+              class="option-menu"
+              selected
+              [id]="hora.idHorario"
+              [ngValue]="hora.idHorario"
+            >
+              {{ hora.rango }}
             </option>
             }
           </select>
@@ -234,5 +206,4 @@
     </div>
   </form>
 </div>
-<!-- mostrar formulario para medicos -->
 }

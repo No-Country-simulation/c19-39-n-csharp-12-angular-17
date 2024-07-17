@@ -22,7 +22,7 @@ export class LocalStorageService {
     return listaTurnos ? JSON.parse(listaTurnos) : [];
   }
 
-  private guardarListaTurnos(turnos: any[]) {
+  guardarListaTurnos(turnos: any[]) {
     localStorage.setItem(this.key, JSON.stringify(turnos));
   }
 
@@ -33,12 +33,7 @@ export class LocalStorageService {
     localStorage.setItem('turnoCreado', JSON.stringify(turno));
   }
 
-  obtenerTurno(id: number) {
-    const listaTurno = this.obtenerListaTurnos();
-    let v = listaTurno.find((turno: any) => turno.id === id);
-    console.log('Turno:', v);
-   return v;
-    }
-  }
+
+}
 
 

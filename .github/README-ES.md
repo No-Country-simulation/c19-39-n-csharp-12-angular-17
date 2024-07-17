@@ -53,7 +53,7 @@ Agradecemos las contribuciones de todos. Ya sea una corrección de errores, una 
 [sqlserver-badge]: https://img.shields.io/badge/SQL%20Server-1f72b8?style=for-the-badge
 [angular-badge]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge
 [typescript-badge]: https://img.shields.io/badge/Typescript-007ACC?style=for-the-badge&logo=typescript&logoColor=white&color=blue
-[contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-4-blue?style=for-the-badge
+[contributors-shield]: https://img.shields.io/badge/CONTRIBUTORS-5-blue?style=for-the-badge
 [contributors-url]: https://github.com/No-Country-simulation/c19-39-n-csharp-12-angular-17/graphs/contributors
 [stars-shield]: https://img.shields.io/badge/STARS-3-yellow?style=for-the-badge
 [stars-url]: https://github.com/No-Country-simulation/c19-39-n-csharp-12-angular-17/stargazers

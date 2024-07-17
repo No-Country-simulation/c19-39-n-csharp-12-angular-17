@@ -75,18 +75,23 @@ img {
   width: 70px;
 }
 
+#card-turnos {
+  padding-bottom: 5rem;
+}
+
 .card {
   border-radius: 18px;
+  cursor: pointer;
 }
 
 .card:hover {
   background-color: #3332;
 }
 
-.card-touch {
-  z-index: 1;
-  width: 18rem;
-  height: 7rem;
+
+.card-vacia {
+  height: 6rem;
+  font-weight: 700;
 }
 
 h5 {
@@ -97,17 +102,7 @@ small {
   font-weight: 700;
 }
 
-
 div.container-fluid {
   padding: 0.1rem 0.5rem;
-}
-
-
-img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 26px;
-  padding: 0.5rem;
 }
 

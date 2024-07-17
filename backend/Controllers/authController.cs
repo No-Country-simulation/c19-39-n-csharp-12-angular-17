@@ -20,7 +20,7 @@ namespace AgendApp.Controllers
         [Route("usuario")]
         public async Task<IActionResult> AuthUser([FromBody] AuthRequest request)
         {
-            var resp = _authService.AuthUser(request);
+            var resp = await _authService.AuthUser(request);
 
             return Ok(resp);
         }
@@ -30,7 +30,7 @@ namespace AgendApp.Controllers
         [Route("medico")]
         public async Task<IActionResult> AuthMedico([FromBody] AuthRequest request)
         {
-            var resp = _authService.AuthMedico(request);
+            var resp = await _authService.AuthMedico(request);
 
             return Ok(resp);
         }

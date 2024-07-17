@@ -1,4 +1,5 @@
 *.csproj.user
+.obj/
 
 # Compiled source files
 *.dll
