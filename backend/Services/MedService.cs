@@ -1,4 +1,5 @@
 ﻿using AgendApp.Models;
+using AgendApp.Requests;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendApp.Services
@@ -7,9 +8,11 @@ namespace AgendApp.Services
     {
         Task<Object> getCategorie(int id);
         Task<Object> getCategories();
+        Task<Object> setSchedule(ScheduleRequest request);
         Task<Object> getSchedules();
         Task<Object> getSchedule(int id);
         Task<Object> getMedicos();
+
     }
     public class MedService : IMedService
     {
@@ -68,6 +71,38 @@ namespace AgendApp.Services
                 };
 
             }catch(Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
+
+        public async Task<Object> setSchedule(ScheduleRequest request)
+        {
+            try
+            {
+                Horario newSchedule = new Horario
+                {
+                    Rango = request.rango
+                };
+
+                var schedule = await _db.Horarios.AddAsync(newSchedule);
+
+                await _db.SaveChangesAsync();
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = schedule.Entity
+                };
+                
+            }
+            catch (Exception ex)
             {
                 return new
                 {

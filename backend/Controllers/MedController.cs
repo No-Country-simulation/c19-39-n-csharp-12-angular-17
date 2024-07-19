@@ -1,4 +1,5 @@
-﻿using AgendApp.Services;
+﻿using AgendApp.Requests;
+using AgendApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +29,18 @@ namespace AgendApp.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("categorias")]
-        public async Task<IActionResult> getCategories()
+        public async Task<IActionResult> GetCategories()
         {
             var result = await _medService.getCategories();
 
+            return Ok(result);
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("horario")]
+        public async Task<IActionResult> SetSchedule([FromBody] ScheduleRequest request)
+        {
+            var result = await _medService.setSchedule(request);
             return Ok(result);
         }
 
@@ -48,7 +57,7 @@ namespace AgendApp.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("horarios")]
-        public async Task<IActionResult> getSchedules()
+        public async Task<IActionResult> GetSchedules()
         {
             var result = await _medService.getSchedules();
 
@@ -59,7 +68,7 @@ namespace AgendApp.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("medicos")]
-        public async Task<IActionResult> getMedicos()
+        public async Task<IActionResult> GetMedicos()
         {
             var result = await _medService.getMedicos();
 
