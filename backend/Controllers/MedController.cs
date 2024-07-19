@@ -41,6 +41,7 @@ namespace AgendApp.Controllers
         public async Task<IActionResult> SetSchedule([FromBody] ScheduleRequest request)
         {
             var result = await _medService.setSchedule(request);
+
             return Ok(result);
         }
 
