@@ -28,6 +28,16 @@ namespace AgendApp.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("horario/{id}")]
+        public async Task<IActionResult> GetSchedule(int id)
+        {
+            var result = await _medService.getSchedule(id);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
         [Route("horarios")]
         public async Task<IActionResult> getSchedules()
         {

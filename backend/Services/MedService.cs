@@ -7,6 +7,7 @@ namespace AgendApp.Services
     {
         Task<Object> getCategories();
         Task<Object> getSchedules();
+        Task<Object> getSchedule(int id);
         Task<Object> getMedicos();
     }
     public class MedService : IMedService
@@ -82,6 +83,40 @@ namespace AgendApp.Services
                 };
 
             }catch(Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
+
+        public async Task<Object> getSchedule(int id)
+        {
+            try
+            {
+                Horario? horario = await _db.Horarios.FirstOrDefaultAsync(h => h.IdHorario == id);
+
+                if(horario == null)
+                {
+                    return new
+                    {
+                        status = 400,
+                        success = false,
+                        message = "Horario no existe"
+                    };
+                }
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = horario
+                };
+            }
+            catch (Exception ex)
             {
                 return new
                 {

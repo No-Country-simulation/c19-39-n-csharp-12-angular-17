@@ -2,8 +2,8 @@
 
 
 # Build directories
-.bin/
-.obj/
+bin/
+obj/
 
 # Compiled source files
 *.dll
