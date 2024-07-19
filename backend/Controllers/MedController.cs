@@ -43,6 +43,7 @@ namespace AgendApp.Controllers
         {
             var result = await _medService.getSchedules();
 
+
             return Ok(result);
         }
 
