@@ -2,7 +2,6 @@
   class="navbar d-flex justify-content-start align-items-center"
 >
   <div class="container-fluid">
-    <!-- Logo redirige a Inicio -->
     <a [routerLink]="['/home_usuario']">
       <span>
         <img
@@ -12,9 +11,7 @@
         />
       </span>
     </a>
-    <!-- Boton menu toggle -->
-    <div class="d-flex flex-row justify-content-end align-items-center">
-      <!-- TODO: modificar por el objeto usuario id -->
+   <div class="d-flex flex-row justify-content-end align-items-center">
       @if(usuario){
       <p class="nombreUsuario p-0 m-0">{{ usuario.nombre}} {{usuario.apellido}}</p>
       }
@@ -32,7 +29,6 @@
         </span>
       </button>
     </div>
-    <!-- Menu desplegable -->
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav align-items-end me-4">
         <li class="nav-item">
@@ -42,4 +38,5 @@
     </div>
   </div>
 </nav>
+
 

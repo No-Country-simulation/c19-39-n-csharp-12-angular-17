@@ -18,20 +18,20 @@
 <!-- Botones estado de turnos 'proximos' y 'cancelados' -->
 <div class="main">
     <div
-      class="container-fluid border-pill gap-2 d-flex justify-content-end align-items-end btn-container"
+      class="container-fluid bg-transparent border-pill gap-2 d-flex justify-content-end align-items-end btn-container"
     >
-      <button
-        type="button"
-        class="btn btn-outline-dark rounded-pill text-bg-success btn-sm"
-      >
-        Proximos
-      </button>
-      <button
-        type="button"
-        class="btn btn-outline-dark rounded-pill text-bg-light btn-sm"
-      >
-        Cancelados
-      </button>
+      <span
+      class="btn btn-outline-dark rounded-pill btn-sm"
+      [ngClass]="{ active: botonActivo === 'cancelados' }"
+      (click)="setActivo('cancelados')"
+      >Cancelados</span
+    >
+    <span
+      class="btn btn-outline-dark rounded-pill btn-sm"
+      [ngClass]="{ active: botonActivo === 'proximos' }"
+      (click)="setActivo('proximos')"
+      >Próximos</span
+    >
     </div>
 
   <!-- Card de cada turno -->
@@ -77,7 +77,7 @@
               class="btn btn-outline-terciary btn-lg p-0 m-0"
               (click)="verTurnoDetalle(cita.idCita)"
             >
-              👁
+              <img class="ver-detalle-icon" src="../../../assets/img/eye-password-show.svg" alt="ver-turno-detalle">
             </button>
           </div>
         </div>

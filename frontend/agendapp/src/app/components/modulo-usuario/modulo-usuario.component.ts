@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { ApiProviderService } from '../../services/api-provider.service';
@@ -7,6 +7,7 @@ import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologuea
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Usuario } from '../../interfaces/usuario';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-modulo-usuario',
@@ -15,7 +16,7 @@ import { CommonModule } from '@angular/common';
     RouterLink,
     FooterComponent,
     NavbarusuariologueadoComponent,
-    CommonModule,
+    CommonModule
   ],
   templateUrl: './modulo-usuario.component.html',
   styleUrl: './modulo-usuario.component.css',
@@ -33,12 +34,11 @@ export class ModuloUsuarioComponent implements OnInit {
   //!!temporal
   usuario = {} as Usuario;
 
-  constructor(
-    private route: ActivatedRoute,
-    private apiProviderService: ApiProviderService,
-    private localServicr: LocalStorageService,
-    private router: Router
-  ) {}
+    route = inject(ActivatedRoute);
+    apiProviderService = inject(ApiProviderService);
+    apiService = inject(ApiService);
+    localServicr = inject(LocalStorageService);
+    router = inject(Router);
 
   ngOnInit(): void {
     this.section = this.route.snapshot.routeConfig?.path || '';
@@ -49,9 +49,11 @@ export class ModuloUsuarioComponent implements OnInit {
 
   //Obtener usuario del LS  //!!temporalmente
   getUsuario(): void {
-    let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-    // console.log(usuario);
-    this.usuario = usuario;
+    const usuario = localStorage.getItem('usuario');
+    if (usuario) {
+      this.usuario = JSON.parse(usuario);
+      console.log(this.usuario);
+    }
   }
 
   // servicio de cita de la JsonServer
@@ -104,6 +106,7 @@ export class ModuloUsuarioComponent implements OnInit {
   //Obtener especialidades de la DB
   getEspecialidades(): void {
     this.apiProviderService.getEspecialidades().subscribe((data: any) => {
+      console.log(data);
       this.especialidades = data.map((especialidad: Categoria) => {
         let imgSrc = '';
         switch (especialidad.idCategoria) {
@@ -121,15 +124,16 @@ export class ModuloUsuarioComponent implements OnInit {
             break;
         }
         const obj = {
-          id: especialidad.idCategoria,
+          idCategoria: especialidad.idCategoria,
           nombre: especialidad.nombre,
           imgSrc: imgSrc,
           medicos: [],
         };
+        this.especialidades.push(obj);
         return obj;
       });
 
-      // console.log(this.especialidades);
+      console.log(this.especialidades);
     });
   }
 

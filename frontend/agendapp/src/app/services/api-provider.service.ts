@@ -8,42 +8,8 @@ import { Categoria, Horario, Rol } from '../interfaces/api';
   providedIn: 'root',
 })
 export class ApiProviderService {
-  // private apiUrl = 'https://www.agendapp.somee.com/api/';
-  // constructor(private http: HttpClient) {}
-  // //Obtener todos los usuarios
-  // getUsuarios(): Observable<Usuario> {
-  //   return this.http.get<Usuario>(`${this.apiUrl}User/usuarios`).pipe(
-  //     catchError((error: HttpErrorResponse) => {
-  //       return new Observable<Usuario>();
-  //     })
-  //   );
-  // }
-  // //Obtener todos los roles
-  // getRoles():Observable<Rol> {
-  //   return this.http.get<Rol>(`${this.apiUrl}User/roles`).pipe(
-  //     catchError((error: HttpErrorResponse) => {
-  //       return new Observable<Rol>();
-  //     })
-  //   );
-  // }
-  // //Obtener todas las especialidades
-  // getEspecialidades():Observable<Categoria> {
-  //   return this.http.get<Categoria>(`${this.apiUrl}Med/categorias`).pipe(
-  //     catchError((error: HttpErrorResponse) => {
-  //       return new Observable<Categoria>();
-  //     })
-  //   );
-  // }
-  // //Obtener todos los horarios
-  // getHorarios():Observable<Horario> {
-  //   return this.http.get<Horario>(`${this.apiUrl}Med/horarios`).pipe(
-  //     catchError((error: HttpErrorResponse) => {
-  //       return new Observable<Horario>();
-  //     })
-  //   );
-  // }
-  /************  Funciones temp db.json ***************/
   private apiUrl = 'http://localhost:3000/';
+  
   constructor(private http: HttpClient) {}
 
   
@@ -88,8 +54,13 @@ export class ApiProviderService {
     return this.http.get(`${this.apiUrl}citas?idCita=${id}`);
   }
 
+  //Obtener todos los mensajes
+  getMensajes() {
+    return this.http.get(`${this.apiUrl}mensajes`);
+  }
+
   //Obtener mensajes de un usuario
-  getMensajes(id: number) {
+  getMensajeById(id: number) {
     return this.http.get(`${this.apiUrl}mensajes?idUsuario=${id}`);
   }
 

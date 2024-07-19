@@ -1,0 +1,146 @@
+.video-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: black;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  bottom: 10px;
+  margin: 10px;
+  z-index: 1;
+  width: 100%;
+}
+
+.play {
+  background-color: greenyellow;
+}
+
+.play:hover {
+  background-color: rgb(99, 187, 11);
+}
+
+.pause {
+  background-color: red;
+}
+
+.pause:hover {
+  background-color: rgb(172, 12, 12);
+}
+
+/*video paciente*/
+.video {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+/*contenedor de video source*/
+video {
+  width: 100%;
+  height: 100%;
+  border-radius: 26px;
+  object-fit: cover;
+}
+
+/*video doctor*/
+.video2 {
+  position: absolute;
+  z-index: 1050;
+  top: 0;
+  right: 0;
+  padding: 1.5rem;
+  width: 25%;
+  height: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .video2 {
+    width: 50%;
+    height: 25%;
+  }
+}
+
+div.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  background-color: transparent;
+  position: absolute;
+  bottom: 0.1rem;
+  padding: 1rem 0px;
+  width: 100%;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.btn-sm {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  width: 2.5rem;
+  height: auto;
+}
+
+button.img-comenzar {
+  background-color: greenyellow;
+}
+
+button.img-detener {
+  background-color: red;
+}
+
+button.img-pausar {
+  background-color: lightgray;
+}
+
+a.img-home-medico {
+  background-color: lightgray;
+}
+
+/*footer personalizado*/
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  width: 2rem;
+}
+
+.navbar {
+  background-color: #d2ebfa;
+  margin-top: 2rem;
+}
