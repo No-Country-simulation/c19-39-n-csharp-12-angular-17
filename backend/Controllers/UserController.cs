@@ -1,4 +1,5 @@
-﻿using AgendApp.Services;
+﻿using AgendApp.Requests;
+using AgendApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,16 @@ namespace AgendApp.Controllers
             var result = await _userService.getRoles();
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("cita")]
+        public async Task<IActionResult> setCita(CitaRequest request)
+        {
+            var resp = await _userService.setCita(request);
+
+            return Ok(resp);
         }
 
     }
