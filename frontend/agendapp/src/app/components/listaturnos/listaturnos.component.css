@@ -59,3 +59,15 @@ h5 {
 small {
   font-weight: 700;
 }
+
+span.active {
+  border-color: #198754;
+  background-color: #198754;
+  color: white !important;
+  font-weight: bold;
+}
+
+img.ver-detalle-icon{
+  width: 25px;
+  background: transparent;
+}

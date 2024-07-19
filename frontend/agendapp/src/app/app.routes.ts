@@ -1,125 +1,165 @@
 import { Routes } from '@angular/router';
-import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegistroComponent } from './components/registro/registro.component';
-import { ModuloUsuarioComponent } from './components/modulo-usuario/modulo-usuario.component';
-import { EspecialidadesComponent } from './components/especialidades/especialidades.component';
-import { TurnoComponent } from './components/turno/turno.component';
-import { TurnodetalleComponent } from './components/turnodetalle/turnodetalle.component';
-import { EspecialidadDetalleComponent } from './components/especialidad.detalle/especialidad.detalle.component';
-import { ListaturnosComponent } from './components/listaturnos/listaturnos.component';
-import { ModuloMedicoComponent } from './components/modulo-medico/modulo-medico.component';
-import { BuscarComponent } from './components/buscar/buscar.component';
-import { FichaPacienteComponent } from './components/ficha-paciente/ficha-paciente.component';
-import { InboxComponent } from './components/inbox/inbox.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { BuscarUsuariosComponent } from './components/buscar-usuarios/buscar-usuarios.component';
-import { EditarComponent } from './components/editar/editar.component';
-import { VideollamadaComponent } from './components/videollamada/videollamada.component';
 
 export const routes: Routes = [
   //Bienvenida
   {
     path: '',
     title: 'AgendaApp',
-    component: BienvenidaComponent,
+    loadComponent: () =>
+      import('./components/bienvenida/bienvenida.component').then(
+        (m) => m.BienvenidaComponent
+      ),
   },
   //Login de usuarios
   {
     path: 'login_usuarios',
     title: 'Login Usuarios',
-    component: LoginComponent,
+    loadComponent: () =>
+      import('./components/login/login.component').then(
+        (m) => m.LoginComponent
+      ),
   },
   //Login de medicos
   {
     path: 'login_medicos',
     title: 'Login Médico',
-    component: LoginComponent,
+    loadComponent: () =>
+      import('./components/login/login.component').then(
+        (m) => m.LoginComponent
+      ),
   },
   //Registro para medicos
   {
     path: 'registro_medicos',
     title: 'Registro Médico',
-    component: RegistroComponent,
+    loadComponent: () =>
+      import('./components/registro/registro.component').then(
+        (m) => m.RegistroComponent
+      ),
   },
   //Registro para pacientes
   {
     path: 'registro_usuarios',
     title: 'Registro Usuarios',
-    component: RegistroComponent,
+    loadComponent: () =>
+      import('./components/registro/registro.component').then(
+        (m) => m.RegistroComponent
+      ),
   },
   //Home Usuario
   {
     path: 'home_usuario',
     title: 'Home Usuario',
-    component: ModuloUsuarioComponent,
+    loadComponent: () =>
+      import('./components/modulo-usuario/modulo-usuario.component').then(
+        (m) => m.ModuloUsuarioComponent
+      ),
   },
   {
     path: 'mis_turnos',
     title: 'Mis Turnos',
-    component: ListaturnosComponent,
+    loadComponent: () =>
+      import('./components/listaturnos/listaturnos.component').then(
+        (m) => m.ListaturnosComponent
+      ),
   },
   {
     path: 'turno',
     title: 'Crear Turno',
-    component: TurnoComponent,
+    loadComponent: () =>
+      import('./components/turno/turno.component').then(
+        (m) => m.TurnoComponent
+      ),
   },
   {
     path: 'turno/:id',
     title: 'Detalle del Turno',
-    component: TurnodetalleComponent,
+    loadComponent: () =>
+      import('./components/turnodetalle/turnodetalle.component').then(
+        (m) => m.TurnodetalleComponent
+      ),
   },
   {
     path: 'especialidades',
     title: 'Especialidades',
-    component: EspecialidadesComponent,
+    loadComponent: () =>
+      import('./components/especialidades/especialidades.component').then(
+        (m) => m.EspecialidadesComponent
+      ),
   },
   {
     path: 'especialidad/:id',
     title: 'Especialistas',
-    component: EspecialidadDetalleComponent,
+    loadComponent: () =>
+      import(
+        './components/especialidad.detalle/especialidad.detalle.component'
+      ).then((m) => m.EspecialidadDetalleComponent),
   },
   //Home Medico
   {
     path: 'home_medico',
     title: 'Home Médico',
-    component: ModuloMedicoComponent,
+    loadComponent: () =>
+      import('./components/modulo-medico/modulo-medico.component').then(
+        (m) => m.ModuloMedicoComponent
+      ),
   },
   {
     path: 'buscar',
     title: 'Buscar Paciente',
-    component: BuscarComponent,
+    loadComponent: () =>
+      import('./components/buscar/buscar.component').then(
+        (m) => m.BuscarComponent
+      ),
   },
   {
     path: 'ficha_paciente/:id',
     title: 'Ficha del Paciente',
-    component: FichaPacienteComponent,
+    loadComponent: () =>
+      import('./components/ficha-paciente/ficha-paciente.component').then(
+        (m) => m.FichaPacienteComponent
+      ),
   },
   {
     path: 'inbox',
     title: 'Mensajes',
-    component: InboxComponent,
+    loadComponent: () =>
+      import('./components/inbox/inbox.component').then(
+        (m) => m.InboxComponent
+      ),
   },
   // Home Admin
   {
     path: 'admin',
     title: 'Admin',
-    component: AdminComponent,
+    loadComponent: () =>
+      import('./components/admin/admin.component').then(
+        (m) => m.AdminComponent
+      ),
   },
   {
     path: 'buscar',
     title: 'Buscar Usuarios',
-    component: BuscarUsuariosComponent,
+    loadComponent: () =>
+      import('./components/buscar-usuarios/buscar-usuarios.component').then(
+        (m) => m.BuscarUsuariosComponent
+      ),
   },
   {
     path: 'editar/:id',
     title: 'Editar Usuario',
-    component: EditarComponent,
+    loadComponent: () =>
+      import('./components/editar/editar.component').then(
+        (m) => m.EditarComponent
+      ),
   },
   {
     path: 'videollamada',
     title: 'Atención Virtual',
-    component: VideollamadaComponent,
+    loadComponent: () =>
+      import('./components/videollamada/videollamada.component').then(
+        (m) => m.VideollamadaComponent
+      ),
   },
   //   {
   //     path: '**',

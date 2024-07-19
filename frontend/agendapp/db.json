@@ -828,15 +828,15 @@
       "idMensaje": 1,
       "idEmisor": 23654,
       "IdReceptor": 77789,
-      "contenido": "Hola, ¿cómo estás?",
+      "contenido": "Hola, ¿cómo estás?, fijate si ya podés ingresar al turno detalle",
       "datetime": "2024-07-13T12:00:00Z",
       "estado": "Enviado"
     },
     {
-      "id": 2,
+      "idMensaje": 2,
       "idEmisor": 77789,
       "IdReceptor": 23654,
-      "contenido": "Estoy bien, gracias. ¿Y tú?",
+      "contenido": "Ya realicé los cambios del usuario que me habias comentado",
       "datetime": "2024-07-13T12:01:00Z",
       "estado": "Recibido"
     }

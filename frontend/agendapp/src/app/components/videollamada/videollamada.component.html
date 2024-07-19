@@ -3,25 +3,97 @@
   <div class="video-container">
     <div class="video">
       <video #video id="video" type="media"></video>
-      <div class="btn-container">
-        <button type="button" class="terminar" (click)="stopStream()">Terminar</button>
-        <button type="button" class="pausar" (click)="pauseStream()">Pausar</button>
-        <button type="button" class="play" (click)="playStream()">Play</button>
+      <div class="controls">
+        <button
+          type="button"
+          class="btn btn-outline-dark btn-sm rounded-circle img-comenzar"
+          title="comenzar"
+          (click)="playStream()"
+        >
+          <img
+            class="img img-comenzar"
+            src="../../../assets/img/phonecallSTART.svg"
+            alt="iniciar llamada"
+          />
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-dark btn-sm rounded-circle img-pausar"
+          title="pausar"
+          (click)="pauseStream()"
+        >
+          <img
+            class="img img-pausar"
+            src="../../../assets/img/pauseALL.svg"
+            alt="pausar llamada"
+          />
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-dark btn-sm rounded-circle img-detener"
+          title="detener"
+          (click)="stopStream()"
+        >
+          <img
+            class="img img-detener"
+            src="../../../assets/img/phonecallEND.svg"
+            alt="detener llamada"
+          />
+        </button>
       </div>
     </div>
   </div>
   <div class="video2">
-    <video autoplay loop controls muted #video2>
+    <video autoplay muted #video2>
       <source
         src="../../../assets/videos/femaledoctor2.webm"
         type="video/mp4"
       />
       Your browser does not support HTML5 video.
-    </video> 
+    </video>
   </div>
 </section>
 
-<!-- Footer generico -->
-<section id="nav-footer">
-  <app-footer class="fixed-bottom"></app-footer>
+<!-- Footer -->
+<section>
+  <nav class="navbar d-flex flex-row justify-content-around py-3 fixed-bottom">
+    <ul class="d-flex flex-row justify-content-around align-items-center">
+      <li>
+        <a [routerLink]="['/home_medico']" class="border">
+          <img
+            src="../../../assets/img/home.svg"
+            alt=""
+            class="border m-0 p-0"
+          />
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/buscar']" class="border">
+          <img
+            src="../../../assets/img/list-solid.svg"
+            alt=""
+            class="border m-0 p-0"
+          />
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/inbox']" class="border">
+          <img
+            src="../../../assets/img/inbox.svg"
+            alt=""
+            class="border m-0 p-0"
+          />
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/videollamada']" class="border">
+          <img
+            src="../../../assets/img/videocameraON.svg"
+            alt="icono_videollamada"
+            title="Videollamada"
+          />
+        </a>
+      </li>
+    </ul>
+  </nav>
 </section>

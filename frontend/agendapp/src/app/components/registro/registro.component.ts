@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -6,6 +6,7 @@ import { ApiProviderService } from '../../services/api-provider.service';
 import { RegistroService } from '../../services/registro.service';
 import { Categoria, Horario } from '../../interfaces/api';
 import { MedicoRegister, UsuarioRegister } from '../../interfaces/auth';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-registro',
@@ -40,12 +41,13 @@ export class RegistroComponent implements OnInit {
     idHorario: 0,
   };
 
-  constructor(
-    private route: ActivatedRoute,
-    private apiServiceProvider: ApiProviderService,
-    private router: Router,
-    private registroService: RegistroService
-  ) {
+  apiService = inject(ApiService);
+  route = inject(ActivatedRoute);
+  apiServiceProvider = inject(ApiProviderService);
+  router = inject(Router);
+  registroService = inject(RegistroService);
+
+  constructor() {
     this.role = this.route.snapshot.routeConfig?.path || '';
   }
 
@@ -55,7 +57,7 @@ export class RegistroComponent implements OnInit {
     this.getHorarios();
   }
 
-  //servicio de especialidades DB
+  //servicio de especialidades JS
   getEspecialidades() {
     this.apiServiceProvider.getEspecialidades().subscribe((data: any) => {
       this.especialidades = data;
@@ -65,14 +67,13 @@ export class RegistroComponent implements OnInit {
 
   //servicio de horarios DB
   getHorarios() {
-    this.apiServiceProvider.getHorarios().subscribe((data: any) => {
-      this.horarios = data;
+    this.apiService.getHorarios().subscribe((data: any) => {
+      this.horarios = data.data;     
       console.log(this.horarios);
     });
   }
 
   enviarRegistroUsuario(form: NgForm) {
-    //objeto usuario/paciente
     if (form.valid) {
       const usuario = {
         nombre: form.value.nombre,
@@ -82,17 +83,15 @@ export class RegistroComponent implements OnInit {
         dni: form.value.dni,
         password: form.value.password,
       };
-      // console.log(usuario);
-      // this.registroService
-      //   .registrarUsuario(usuario)
-      //   .subscribe((data: UsuarioRegister) => {
-      //     console.log(data);
-      //     localStorage.setItem('medico', JSON.stringify(data));
-      //   });
-      console.log('usuario registrado, desde register.component', usuario);
+      console.log(usuario);
+      this.registroService
+        .registrarUsuario(usuario)
+        .subscribe((data: UsuarioRegister) => {
+          console.log(data);
+        });
       localStorage.setItem('usuario', JSON.stringify(usuario));
       this.router.navigate(['/login_usuarios']);
-      // form.reset();
+      form.reset();
     } else {
       alert('Por favor, completa todos los campos.');
     }
@@ -110,15 +109,14 @@ export class RegistroComponent implements OnInit {
         idCategoria: form.value.idCategoria,
         idHorario: form.value.idHorario,
       };
-      // this.registroService
-      //   .registrarMedico(medico)
-      //   .subscribe((data: MedicoRegister) => {
-      //     console.log(data);
-      //   });
-      console.log('usuario registrado, desde register.component', medico);
+      this.registroService
+        .registrarMedico(medico)
+        .subscribe((data: MedicoRegister) => {
+          console.log(data);
+        });
       localStorage.setItem('medico', JSON.stringify(medico));
       this.router.navigate(['/login_medicos']);
-      // form.reset();
+      form.reset();
     } else {
       alert('Por favor, completa todos los campos.');
     }

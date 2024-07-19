@@ -1,6 +1,0 @@
-{
-    "/api": {
-        "target": "https://www.agendapp.somee.com",
-        "secure": false
-    }
-}

@@ -48,7 +48,7 @@ export class TurnodetalleComponent implements OnInit {
 
   //Obtener usuario logueado del LS
   getUsuario() {
-    let usuario = JSON.parse(localStorage.getItem('medico') || '{}');
+    let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     this.usuario = usuario;
   }
 

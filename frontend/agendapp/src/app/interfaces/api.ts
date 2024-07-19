@@ -1,3 +1,5 @@
+import { Usuario } from "./usuario";
+
 export interface Rol {
   idRol: number;
   nombre: string;
@@ -28,11 +30,11 @@ export interface Categoria {
   idCategoria: number;
   nombre: string;
   imgSrc?: string;
-  medicos?: [];
+  medicos?: Usuario[];
 }
 
 export interface Horario {
   idHorario: number;
   rango: string;
-  medicos: [];
+  medicos: Usuario[];
 }

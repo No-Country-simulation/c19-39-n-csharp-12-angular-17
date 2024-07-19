@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -15,62 +15,67 @@ export class LoginComponent implements OnInit {
   vistaHeader = true;
   section: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private loginService: LoginService
-  ) {
-    this.section = this.route.snapshot.routeConfig?.path || '';
-    console.log(this.section);
-  }
+  route = inject(ActivatedRoute);
+  router = inject(Router);
+  loginService = inject(LoginService);
 
   ngOnInit(): void {
+    this.route.url.subscribe((url) => {
+      this.section = this.route.snapshot.routeConfig?.path || '';
+      this.vistaHeader = ['login_usuarios', 'login_medicos'].includes(
+        this.section
+      );
+    });
+  }
+
+  submit(form: NgForm) {
     if (this.section === 'login_usuarios') {
-      this.vistaHeader = true;
+      this.loginUsuario(form);
     } else if (this.section === 'login_medicos') {
-      this.vistaHeader = true;
+      this.loginMedicos(form);
     }
   }
 
-  //Submit del formulario (temporal)
-
-  //servicio de login del LS
   loginUsuario(form: NgForm) {
     const datos = form.value;
-    let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-
-    if (datos.email === usuario.email && datos.password === usuario.password) {
-      console.log('Login de usuario exitoso');
-      this.router.navigate(['/home_usuario']);
-    } else {
-      alert('Credenciales incorrectas');
+    if (form.valid) {
+      this.loginService.loginUsuario(datos).subscribe(
+        (data: any) => {
+          if (data.status === 200) {
+            this.router.navigate(['/home_usuario']);
+          } else {
+            alert('Credenciales incorrectas');
+          }
+        },
+        (error) => {
+          alert('Error en el servicio de login');
+          console.error(error);
+        }
+      );
     }
-    console.log(usuario);
   }
 
-  //servicio de login del LS
   loginMedicos(form: NgForm) {
     const datos = form.value;
-    let medico = JSON.parse(localStorage.getItem('medico') || '{}');
-
-    if (datos.email === medico.email && datos.password === medico.password) {
-      console.log('Login de medico exitoso');
-      this.router.navigate(['/home_medico']);
-    } else {
-      alert('Credenciales incorrectas');
-    }
-    console.log(medico);
-  }
-
-  //Submit del formulario (DB)
-  onSubmit(form: NgForm) {
     if (form.valid) {
-      const datos = form.value;
-      if (this.section === 'login_usuario') {
-        this.loginService.loginUsuario(datos);
-      } else if (this.section === 'login_medico') {
-        this.loginService.loginMedico(datos);
-      }
+      this.loginService.loginMedico(datos).subscribe(
+        {
+          next: (data: any) => {
+            if (data.status === 200) {
+              this.router.navigate(['/home_medico']);
+            } else {
+              alert('Credenciales incorrectas');
+            }
+          },
+          error: (error) => {
+            alert('Error en el servicio de login');
+            console.error(error);
+          },
+          complete: () => {
+            console.log('Completado');
+          },
+        }
+      );
     }
   }
 }

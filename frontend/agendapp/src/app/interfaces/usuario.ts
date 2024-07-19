@@ -1,4 +1,4 @@
-import { Rol, Cita } from './api';
+import { Rol } from './api';
 
 export interface Usuario {
   idUsuario: number;
@@ -10,7 +10,7 @@ export interface Usuario {
   contrasenia: string;
   idRol: Rol;
   idRolNavigation: null;
-  administradores: [];
-  medicos: [];
-  pacientes: [];
+  administradores: Usuario[];
+  medicos: Usuario[];
+  pacientes: Usuario[];
 }

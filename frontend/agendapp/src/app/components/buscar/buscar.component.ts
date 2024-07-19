@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
-import { LocalStorageService } from '../../services/local-storage.service';
 import { FormsModule } from '@angular/forms';
 import { ApiProviderService } from '../../services/api-provider.service';
 import { FilterPipe } from '../../services/filter.pipe';
@@ -12,10 +11,10 @@ import { FilterPipe } from '../../services/filter.pipe';
   standalone: true,
   imports: [
     RouterLink,
+    FormsModule,
+    FilterPipe,
     NavbarusuariologueadoComponent,
     FooterComponent,
-    FormsModule,
-    FilterPipe
   ],
   templateUrl: './buscar.component.html',
   styleUrl: './buscar.component.css',
@@ -26,14 +25,12 @@ export class BuscarComponent implements OnInit {
   usuarios: Object[] = [];
   query: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private apiServicr: ApiProviderService,
-    private router: Router
-  ) {}
+  route = inject(ActivatedRoute);
+  router = inject(Router);
+  apiServicr = inject(ApiProviderService);
 
   ngOnInit(): void {
-        this.section = this.route.snapshot.routeConfig?.path || '';
+    this.section = this.route.snapshot.routeConfig?.path || '';
     this.verUsuarios();
   }
 
@@ -47,5 +44,4 @@ export class BuscarComponent implements OnInit {
   verTurnoDetalle(id: number) {
     this.router.navigate(['/ficha_paciente/', id]);
   }
-
 }

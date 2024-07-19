@@ -2,18 +2,17 @@ import {
   Component,
   ViewChild,
   ElementRef,
-  AfterViewInit,
   OnDestroy,
   OnInit,
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from '../../shared/footer/footer.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-videollamada',
   standalone: true,
-  imports: [ReactiveFormsModule, FooterComponent],
+  imports: [ReactiveFormsModule, FooterComponent, RouterLink],
   templateUrl: './videollamada.component.html',
   styleUrl: './videollamada.component.css',
 })
@@ -22,6 +21,7 @@ export class VideollamadaComponent implements OnInit, OnDestroy {
   public video!: ElementRef<HTMLVideoElement>;
   error: any;
   private stream!: MediaStream;
+
 
   async ngOnInit() {
     if (navigator.mediaDevices.getUserMedia) {
@@ -52,6 +52,7 @@ export class VideollamadaComponent implements OnInit, OnDestroy {
 
   playStream(){
     if(this.stream){
+       this.video.nativeElement.srcObject = this.stream;
       this.video.nativeElement.play();
     } else {
       console.error('No hay stream para reproducir');
@@ -72,49 +73,5 @@ export class VideollamadaComponent implements OnInit, OnDestroy {
     this.stopStream();
   }
 
-  // async ngAfterViewInit() {
-  //   await this.setupDevices();
-  // }
 
-  // constructor(private router: Router) {}
-
-  // async setupDevices() {
-  //   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-  //     try {
-  //       const stream = await navigator.mediaDevices.getUserMedia({
-  //         video: true,
-  //       });
-  //       if (stream) {
-  //         if (this.video) {
-  //           this.video.nativeElement.srcObject = stream;
-  //           this.video.nativeElement.play();
-  //           this.error = null;
-  //         }
-  //       } else {
-  //         this.error = 'No tienes dispositivo de salida de video';
-  //         console.log('No tienes dispositivo de salida de video');
-  //       }
-  //     } catch (e) {
-  //       this.error = e;
-  //       console.log('Mostrar errores: ', e);
-  //     }
-  //   }
-  // }
-
-  // onPlay() {
-  //   if (this.video) {
-  //     this.video.nativeElement.play();
-  //     console.log('Video reproduciendose');
-  //   }
-  // }
-
-  // onPause() {
-  //   if (this.video) {
-  //     this.video.nativeElement.pause();
-
-  //     console.log('Video pausado');
-  //   }
-  // }
-
-  // ngOnDestroy(): void {}
 }

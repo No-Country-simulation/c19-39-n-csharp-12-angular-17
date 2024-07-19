@@ -20,13 +20,22 @@
   <div
     class="container mb-2 d-flex flex-row justify-content-center align-items-center btn-container"
   >
-    <span class="btn btn-outline-dark rounded-pill text-bg-light btn-sm"
+    <span
+      class="btn btn-outline-dark rounded-pill btn-sm"
+      [ngClass]="{ active: botonActivo === 'cancelados' }"
+      (click)="setActivo('cancelados')"
       >Cancelados</span
     >
-    <span class="btn btn-outline-dark rounded-pill text-bg-success btn-sm"
+    <span
+      class="btn btn-outline-dark rounded-pill btn-sm"
+      [ngClass]="{ active: botonActivo === 'proximos' }"
+      (click)="setActivo('proximos')"
       >Próximos</span
     >
-    <span class="btn btn-outline-dark rounded-pill text-bg-light btn-sm"
+    <span
+      class="btn btn-outline-dark rounded-pill btn-sm"
+      [ngClass]="{ active: botonActivo === 'completados' }"
+      (click)="setActivo('completados')"
       >Completados</span
     >
   </div>
@@ -61,6 +70,15 @@
       } @default{@for(cita of citas | filter: query; track cita.idCita){
       <div class="card mb-3 mx-auto">
         <div class="row g-0">
+          <span
+            class="icono-videocall"
+            (click)="iniciarVideoConsulta(cita.idCita)"
+          >
+            <img
+              src="../../../assets/img/videocall.svg"
+              alt="icono-videocall"
+            />
+          </span>
           <div class="col-12">
             <div
               class="card-body p-2 m-0 d-flex flex-column justify-content-start align-items-center"
@@ -69,17 +87,17 @@
                 {{ cita.fecha | date : "dd/MM/yyyy" }} - {{ cita.hora }}
               </small>
               @if(paciente){
-              <span>{{ '' }}</span>
+              <span>{{ "" }}</span>
               }
             </div>
             <!-- menu colapsable con motivo de consulta -->
-            <div class="d-flex flex-row justify-content-center">
+            <div class="d-flex flex-row justify-content-center collapse-container">
               <button
                 class="border-0 bg-transparent"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseExample"
-                aria-expanded="false"
+                aria-expanded="true"
                 aria-controls="collapseExample"
               >
                 <img

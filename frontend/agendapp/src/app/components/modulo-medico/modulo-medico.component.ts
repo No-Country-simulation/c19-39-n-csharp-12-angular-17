@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -33,17 +33,23 @@ export class ModuloMedicoComponent implements OnInit {
   query: string = '';
   paciente = {} as Usuario;
   rangoHoraId = {}; //segun idHorario sus rangos en numeros
+  botonActivo: string = 'proximos';
 
   constructor(
     private route: ActivatedRoute,
     private apiProviderService: ApiProviderService,
-    private localServicr: LocalStorageService
+    private localServicr: LocalStorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.section = this.route.snapshot.routeConfig?.path || '';
     this.getCitasMedico();
     this.getUsuarioById();
+  }
+
+  setActivo(nombreBoton: string) {
+    this.botonActivo = nombreBoton;
   }
 
   //Obtener usuario del LS  //!!temporalmente
@@ -101,5 +107,10 @@ export class ModuloMedicoComponent implements OnInit {
       };
       console.log('Horario:', this.rangoHoraId);
     });
+  }
+
+  iniciarVideoConsulta(idCita: number) {
+    console.log('Iniciar video consulta', idCita);
+    this.router.navigate(['/videollamada']);
   }
 }

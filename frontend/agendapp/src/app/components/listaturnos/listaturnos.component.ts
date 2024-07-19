@@ -6,8 +6,6 @@ import { Cita } from '../../interfaces/api';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { CommonModule } from '@angular/common';
-import { Usuario } from '../../interfaces/usuario';
-import { forkJoin, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-listaturnos',
@@ -29,6 +27,7 @@ export class ListaturnosComponent implements OnInit {
   rangoHoraId = {}; //segun idHorario sus rangos en numeros
   citaHora: any;
   mediosYrangos: any[] = [];
+  botonActivo: string = 'proximos';
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +41,10 @@ export class ListaturnosComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerListaCitas();
     console.log(this.mediosYrangos);
+  }
+
+  setActivo(nombreBoton: string) {
+    this.botonActivo = nombreBoton;
   }
 
   verTurnoDetalle(id: number): void {
@@ -88,7 +91,7 @@ export class ListaturnosComponent implements OnInit {
         apellido: data[0].apellido,
       };
       console.log('Medico:', this.medico);
-      this.mediosYrangos.push({...this.medico})
+      this.mediosYrangos.push({ ...this.medico });
     });
   }
 
