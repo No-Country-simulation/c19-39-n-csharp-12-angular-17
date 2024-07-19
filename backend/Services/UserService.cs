@@ -1,4 +1,5 @@
 ﻿using AgendApp.Models;
+using AgendApp.Requests;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendApp.Services
@@ -7,6 +8,8 @@ namespace AgendApp.Services
     {
         Task<Object> getUsers();
         Task<Object> getRoles();
+
+        Task<Object> setCita(CitaRequest request);
     }
     public class UserService : IUserService
     {
@@ -21,7 +24,8 @@ namespace AgendApp.Services
         {
             try
             {
-                List<Usuario> users = await _Db.Usuarios.ToListAsync();
+                List<Usuario> users = await _Db.Usuarios.Where(u => u.IdRol == 1).ToListAsync();
+
                 return new
                 {
                     status = 200,
@@ -64,5 +68,63 @@ namespace AgendApp.Services
                 };
             }
         }
+
+        public async Task<Object> setCita(CitaRequest request)
+        {
+            try
+            {
+                Paciente? paciente = await _Db.Pacientes.FirstOrDefaultAsync(p => p.IdUsuario == request.idUsuario);
+
+                if (paciente == null)
+                {
+                    Paciente newPaciente = new Paciente
+                    {
+                        IdUsuario = request.idUsuario
+                    };
+
+                    paciente = _Db.Pacientes.Add(newPaciente).Entity;
+                    await _Db.SaveChangesAsync();
+                }
+
+
+                Cita newCita = new Cita
+                {
+                    IdPaciente = paciente.IdPaciente,
+                    IdMedico = request.idMedico,
+                    Hora = request.hora,
+                    Fecha = DateOnly.Parse(request.fecha),
+                    MotivoConsulta = request.motivoConsulta
+                };
+
+                Cita cita = _Db.Citas.Add(newCita).Entity;
+
+                await _Db.SaveChangesAsync();
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = new
+                    {
+                        cita.IdCita,
+                        cita.IdPaciente,
+                        cita.IdMedico,
+                        cita.Hora,
+                        cita.Fecha,
+                        cita.MotivoConsulta
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
+
     }
 }

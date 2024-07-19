@@ -7,6 +7,7 @@ namespace AgendApp.Services
     {
         Task<Object> getCategories();
         Task<Object> getSchedules();
+        Task<Object> getMedicos();
     }
     public class MedService : IMedService
     {
@@ -55,6 +56,32 @@ namespace AgendApp.Services
                 };
             }
             catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
+
+        public async Task<Object> getMedicos()
+        {
+            try
+            {
+
+
+                List<Medico> medicos = await _db.Medicos.Include(i => i.IdUsuarioNavigation).ToListAsync();
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = medicos
+                };
+
+            }catch(Exception ex)
             {
                 return new
                 {

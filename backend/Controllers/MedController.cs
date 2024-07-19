@@ -35,5 +35,15 @@ namespace AgendApp.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("medicos")]
+        public async Task<IActionResult> getMedicos()
+        {
+            var result = await _medService.getMedicos();
+
+            return Ok(result);
+        }
     }
 }
