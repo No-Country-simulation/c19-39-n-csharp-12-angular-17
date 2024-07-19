@@ -30,8 +30,18 @@ namespace AgendApp.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("usuario/{id}")]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            var result = await _userService.getUser(id);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
         [Route("roles")]
-        public async Task<IActionResult> getRoles()
+        public async Task<IActionResult> GetRoles()
         {
             var result = await _userService.getRoles();
 
@@ -41,7 +51,7 @@ namespace AgendApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("cita")]
-        public async Task<IActionResult> setCita(CitaRequest request)
+        public async Task<IActionResult> SetCita(CitaRequest request)
         {
             var resp = await _userService.setCita(request);
 
