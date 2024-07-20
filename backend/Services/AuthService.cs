@@ -24,7 +24,7 @@ namespace AgendApp.Services
             {
 
                 var user = await _db.Usuarios.Where(usuario => usuario.Email == request.email &&
-                usuario.Contrasenia == request.password && usuario.IdRol == 1).FirstOrDefaultAsync();
+                usuario.Contrasenia == request.password && (usuario.IdRol == 1 || usuario.IdRol == 3)).FirstOrDefaultAsync();
 
                 if(user == null)
                 {
