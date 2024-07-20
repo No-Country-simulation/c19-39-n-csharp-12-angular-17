@@ -28,9 +28,16 @@ export class NavbarusuariologueadoComponent {
     } else if (
       this.section === 'home_medico' ||
       this.section === 'buscar' ||
-      this.section === 'inbox'
+      this.section === 'inbox' ||
+      this.section === 'videllamada'
     ) {
-      this.getMedico();
+      this.getUsuario();
+    }else if( this.section === 'admin' ||
+      this.section === 'buscar_usuarios' ||
+      this.section === 'inbox_admin' ||
+      this.section === 'configuraciones'
+    ){
+      this.getUsuario();
     }
   }
 
@@ -40,8 +47,13 @@ export class NavbarusuariologueadoComponent {
     this.usuario = usuario;
   }
 
-  getMedico(): void {
-    let medico = JSON.parse(localStorage.getItem('medico') || '{}');
-    this.usuario = medico;
-  }
+  // getMedico(): void {
+  //   let medico = JSON.parse(localStorage.getItem('medico') || '{}');
+  //   this.usuario = medico;
+  // }
+
+  // getAdmin(): void {
+  //   let admin = JSON.parse(localStorage.getItem('admin') || '{}');
+  //   this.usuario = admin;
+  // }
 }

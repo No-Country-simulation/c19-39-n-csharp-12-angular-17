@@ -122,10 +122,18 @@ export const routes: Routes = [
   },
   {
     path: 'inbox',
-    title: 'Mensajes',
+    title: 'Mensajes | Medico',
     loadComponent: () =>
       import('./components/inbox/inbox.component').then(
         (m) => m.InboxComponent
+      ),
+  },
+  {
+    path: 'videollamada',
+    title: 'Atención Virtual',
+    loadComponent: () =>
+      import('./components/videollamada/videollamada.component').then(
+        (m) => m.VideollamadaComponent
       ),
   },
   // Home Admin
@@ -133,12 +141,12 @@ export const routes: Routes = [
     path: 'admin',
     title: 'Admin',
     loadComponent: () =>
-      import('./components/admin/admin.component').then(
+      import('./components/modulo-admin/admin.component').then(
         (m) => m.AdminComponent
       ),
   },
   {
-    path: 'buscar',
+    path: 'buscar_usuarios',
     title: 'Buscar Usuarios',
     loadComponent: () =>
       import('./components/buscar-usuarios/buscar-usuarios.component').then(
@@ -154,11 +162,19 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'videollamada',
-    title: 'Atención Virtual',
+    path: 'inbox_admin',
+    title: 'Mensajes | Admin',
     loadComponent: () =>
-      import('./components/videollamada/videollamada.component').then(
-        (m) => m.VideollamadaComponent
+      import('./components/inboxadmin/inboxadmin.component').then(
+        (m) => m.InboxadminComponent
+      ),
+  },
+  {
+    path: 'configuraciones',
+    title: 'Configurar Servicios',
+    loadComponent: () =>
+      import('./components/configuraciones/settings.component').then(
+        (m) => m.SettingsComponent
       ),
   },
   //   {

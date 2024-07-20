@@ -46,6 +46,11 @@ export class LoginComponent implements OnInit {
           } else {
             alert('Credenciales incorrectas');
           }
+          if(data.data){
+            localStorage.setItem('usuario', JSON.stringify(data.data));
+          }else{
+            console.log('No se pudo guardar el usuario en el Local Storage');
+          }
         },
         (error) => {
           alert('Error en el servicio de login');
@@ -58,22 +63,22 @@ export class LoginComponent implements OnInit {
   loginMedicos(form: NgForm) {
     const datos = form.value;
     if (form.valid) {
-      this.loginService.loginMedico(datos).subscribe(
-        {
-          next: (data: any) => {
-            if (data.status === 200) {
-              this.router.navigate(['/home_medico']);
-            } else {
-              alert('Credenciales incorrectas');
-            }
-          },
-          error: (error) => {
-            alert('Error en el servicio de login');
-            console.error(error);
-          },
-          complete: () => {
-            console.log('Completado');
-          },
+      this.loginService.loginUsuario(datos).subscribe(
+        (data: any) => {
+          if (data.status === 200) {
+            this.router.navigate(['/home_medico']);
+          } else {
+            alert('Credenciales incorrectas');
+          }
+          if (data.data) {
+            localStorage.setItem('medico', JSON.stringify(data.data));
+          } else {
+            console.log('No se pudo guardar el medico en el Local Storage');
+          }
+        },
+        (error) => {
+          alert('Error en el servicio de login');
+          console.error(error);
         }
       );
     }

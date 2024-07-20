@@ -1,0 +1,34 @@
+<section id="nav_admin">
+  <!-- Header de usuario -->
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+</section>
+<div class="d-flex flex-row justify-content-start align-items-center py-3 ps-2">
+  <h3>Hola {{ usuario.nombre }}!</h3>
+</div>
+
+<div class="main border">
+  <div class="container-fluid">
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <a [routerLink]="['/inbox_admin']" class="btn btn-primary" type="button"
+        >Ver Mensajes</a
+      >
+      <a
+        [routerLink]="['/configuraciones']"
+        class="btn btn-primary"
+        type="button"
+        >Configurar Servicios</a
+      >
+      <a
+        [routerLink]="['/buscar_usuarios']"
+        class="btn btn-primary"
+        type="button"
+        >Buscar Usuarios</a
+      >
+    </div>
+  </div>
+</div>
+
+<!-- Footer generico -->
+<section id="nav-footer">
+  <app-footer class="fixed-bottom"></app-footer>
+</section>

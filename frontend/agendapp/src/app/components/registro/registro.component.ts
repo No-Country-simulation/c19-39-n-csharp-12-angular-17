@@ -17,7 +17,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class RegistroComponent implements OnInit {
   vistaHeader = true;
-  role: string = '';
+  section: string = '';
   especialidades: Categoria[] = [];
   horarios: Horario[] = [];
 
@@ -48,11 +48,10 @@ export class RegistroComponent implements OnInit {
   registroService = inject(RegistroService);
 
   constructor() {
-    this.role = this.route.snapshot.routeConfig?.path || '';
   }
 
   ngOnInit(): void {
-    console.log(this.role);
+    console.log(this.section);
     this.getEspecialidades();
     this.getHorarios();
   }

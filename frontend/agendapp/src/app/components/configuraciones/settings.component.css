@@ -14,30 +14,34 @@
     margin-top: 1rem;
 }
 
-.filtro-input {
-    margin-top: 1rem;
-    width: 23rem;
-}
-
 .wrapper {
     width: 100%;
     padding: 0.1rem 1rem;
     text-align: center;
 }
 
-label {
-    margin-bottom: 0.7rem;
+img {
+    width: 20%;
+    height: auto;
+    object-fit: cover;
 }
 
-input.form-control {
-    padding: 4px;
-    border-radius: 9px;
-    font-size: 1em;
+select {
+    width: 50dvw;
+    overflow: auto;
+    height: 10rem;
 }
 
-input::placeholder {
-    color: #727272;
-    padding: 0px 0px 0px 10px;
+span.icono-editar {
+    cursor: pointer;
+    width: 10px;
+}
+
+span.badge {
+    font-size: 0.6em;
+    font-weight: 100;
+    width: 4rem;
+    height: 1.2rem;
 }
 
 tr {
@@ -54,9 +58,4 @@ td {
     font-size: 0.9em;
     align-items: center;
     text-align: center;
-}
-
-li {
-    text-decoration: none;
-    list-style: none;
 }

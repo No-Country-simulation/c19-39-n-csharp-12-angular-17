@@ -3,7 +3,6 @@ import { Usuario } from "./usuario";
 export interface Rol {
   idRol: number;
   nombre: string;
-  usuarios: [];
 }
 
 export interface Cita {
@@ -30,11 +29,18 @@ export interface Categoria {
   idCategoria: number;
   nombre: string;
   imgSrc?: string;
-  medicos?: Usuario[];
 }
 
 export interface Horario {
   idHorario: number;
   rango: string;
-  medicos: Usuario[];
+}
+
+export interface Mensaje {
+  idMensaje: number;
+  idEmisor: number;
+  idReceptor: number;
+  contenido: string;
+  datetime: string;
+  estado: string;
 }

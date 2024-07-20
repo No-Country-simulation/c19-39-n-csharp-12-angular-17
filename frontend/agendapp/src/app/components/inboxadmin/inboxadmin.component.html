@@ -1,0 +1,73 @@
+<!-- Header de usuario -->
+<section id="nav_medico">
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+</section>
+
+<!-- Main -->
+<div class="main">
+  <section id="fraseBienvenida">
+    @if (section === 'inbox_admin') {
+    <div class="container fraseBienvenida">
+      <!-- TODO: modificar por el objeto usuario id -->
+      <h2>Mensajes</h2>
+    </div>
+    }
+  </section>
+
+  <!-- Card de cada mensaje -->
+  <section id="mensajes-sms">
+    <div class="container">
+      @switch (mensajes.length === 0) { @case (true) {
+      <div class="card mb-3 card-vacia">
+        <div
+          class="card-body p-2 m-0 d-flex flex-column justify-content-center align-items-center"
+        >
+          <span>No tienes mensajes</span>
+        </div>
+      </div>
+      } @default { @for(mensaje of mensajes; track mensaje.idMensaje) {
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-2 d-flex justify-content-center align-items-center">
+            <img
+              src="../../../assets/img/logo.png"
+              class="img-fluid rounded-start doctor"
+              alt="imagen_doctor"
+            />
+          </div>
+          <div class="col-9 cuerpo-mensaje">
+            <div
+              class="card-body p-2 m-0 d-flex flex-column justify-content-start align-items-center"
+            >
+              <small class="card-title fw-bold">{{ mensaje.idEmisor }}</small>
+              <p class="card-text">{{ mensaje.contenido }}</p>             
+            </div>
+          </div>
+          <div class="col-1 d-flex flex-column justify-content-center align-items-center pe-2">
+            @if(mensaje.estado === 'Enviado') {            
+            <small>
+              {{ mensaje.estado }}
+            </small>
+            <small class="text-muted">{{
+                  mensaje.datetime | date: 'HH:mm'
+                }}</small>
+            } @else if (mensaje.estado === 'Recibido') {
+            <small>
+              {{ mensaje.estado}}
+            </small>
+            <small class="text-muted">{{
+                  mensaje.datetime | date: 'HH:mm'
+                }}</small>
+            }
+          </div>
+        </div>
+      </div>
+      } } }
+    </div>
+  </section>
+</div>
+
+<!-- Footer generico -->
+<section id="nav-footer">
+  <app-footer class="fixed-bottom"></app-footer>
+</section>

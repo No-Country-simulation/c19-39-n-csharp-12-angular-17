@@ -30,7 +30,7 @@ export class EspecialidadDetalleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getEspecialidad(this.id);
+    // this.getEspecialidad(this.id);
   }
 
   //!!eliminar
@@ -40,22 +40,22 @@ export class EspecialidadDetalleComponent implements OnInit {
   }
 
   //Obtener especialidades
-  getEspecialidad(id: number) {
-    this.apiProviderService.getEspecialidadById(id).subscribe((data: any) => {     
-      this.especialidades = data;     
-      this.especialidadNombre = this.especialidades[0].nombre;
-      this.especialidades.forEach((especialidad: Categoria) => {
-        if (especialidad.medicos && Array.isArray(especialidad.medicos)) {
-          especialidad.medicos.forEach((medico: Usuario) => {
-            this.medicos.push(medico);
-          });
-        }
-      });
+  // getEspecialidad(id: number) {
+  //   this.apiProviderService.getEspecialidadById(id).subscribe((data: any) => {     
+  //     this.especialidades = data;     
+  //     this.especialidadNombre = this.especialidades[0].nombre;
+  //     this.especialidades.forEach((especialidad: Categoria) => {
+  //       if (especialidad.medicos && Array.isArray(especialidad.medicos)) {
+  //         especialidad.medicos.forEach((medico: Usuario) => {
+  //           this.medicos.push(medico);
+  //         });
+  //       }
+  //     });
 
-      console.log('Especialidades:', this.especialidades);
-      console.log('Médicos:', this.medicos);
-    });
-  }
+  //     console.log('Especialidades:', this.especialidades);
+  //     console.log('Médicos:', this.medicos);
+  //   });
+  // }
 
   //Obtener horarios
   getHorarios() {

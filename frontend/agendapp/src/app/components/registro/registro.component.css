@@ -1,6 +1,7 @@
 form {
   padding: 2rem 0px;
 }
+
 .card {
   width: 23rem;
 }
@@ -15,7 +16,7 @@ input.form-control {
 }
 
 input::placeholder {
-  color: #c4bfbf;
+  color: #727272;
 }
 
 a {

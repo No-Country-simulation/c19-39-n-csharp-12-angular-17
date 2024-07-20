@@ -1,21 +1,28 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { parseISO, format } from 'date-fns';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
-import { CommonModule } from '@angular/common';
-import { ApiProviderService } from '../../services/api-provider.service';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ApiProviderService } from '../../services/api-provider.service';
+import { Mensaje } from '../../interfaces/api';
 
 @Component({
-  selector: 'app-inbox',
+  selector: 'app-inboxadmin',
   standalone: true,
-  imports: [FooterComponent, NavbarusuariologueadoComponent, CommonModule, FormsModule],
-  templateUrl: './inbox.component.html',
-  styleUrl: './inbox.component.css',
+  imports: [
+    FooterComponent,
+    NavbarusuariologueadoComponent,
+    CommonModule,
+    FormsModule,
+  ],
+  templateUrl: './inboxadmin.component.html',
+  styleUrl: './inboxadmin.component.css',
 })
-export class InboxComponent implements OnInit {
+export class InboxadminComponent implements OnInit {
   section: string = '';
-  mensajes: any[] = [];
+  mensajes: Mensaje[] = [];
 
   route = inject(ActivatedRoute);
   apiServicr = inject(ApiProviderService);
@@ -29,7 +36,16 @@ export class InboxComponent implements OnInit {
   obtenerMensajes() {
     this.apiServicr.getMensajes().subscribe((data: any) => {
       this.mensajes = data;
+      this.mensajes.forEach((mensaje: any) => {
+        mensaje.hora = this.extraerHora(mensaje.datetime);
+      });
       console.log(this.mensajes);
     });
-  }  
+  }
+
+  extraerHora(datetime: string): string {
+    const date = parseISO(datetime);
+    console.log(date);
+    return format(date, 'HH:mm:ss');
+  }
 }

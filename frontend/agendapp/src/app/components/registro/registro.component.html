@@ -1,6 +1,6 @@
 @if(vistaHeader){
 <app-navbar></app-navbar>
-} @if(role === 'registro_usuarios'){
+} @if(section === 'registro_usuarios'){
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >
@@ -87,7 +87,7 @@
 </div>
 
 <!-- mostrar formulario para medicos -->
-} @else if(role === 'registro_medicos'){
+} @else if(section === 'registro_medicos'){
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >

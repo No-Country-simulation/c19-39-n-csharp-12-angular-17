@@ -1,0 +1,157 @@
+<section id="nav_medico">
+  <!-- Header de usuario -->
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+</section>
+
+<!-- Main -->
+<div class="main">
+  <section id="fraseBienvenida">
+    <div class="container fraseBienvenida">
+      <h2>Configurar Servicios</h2>
+    </div>
+  </section>
+
+  <div
+    class="container d-flex flex-column justify-content-center align-items-center mt-2 p-4"
+  >
+    <!-- ABM Horarios -->
+    <div class="d-flex flex-row justify-content-around w-100">
+      <h4>Horarios</h4>
+      <span
+        type="button"
+        class="badge rounded-pill text-bg-success"
+        title="Agregar +"
+        >Agregar +</span
+      >
+    </div>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr class="col">
+          <th>ID</th>
+          <th>Rango</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(hora of horarios; track hora.idHorario){
+        <tr>
+          <td>{{ hora.idHorario }}</td>
+          <td>{{ hora.rango }}</td>
+          <td style="width: 5rem">
+            <span class="icono-editar" (click)="editarHorario(hora.idHorario)">
+              <img src="../../../assets/img/edit.svg" alt="icono-editar" />
+            </span>
+            <span
+              class="icono-eliminar"
+              (click)="eliminarHorario(horario.idHorario)"
+            >
+              <img src="../../../assets/img/trash.svg" alt="icono-editar" />
+            </span>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+    <hr />
+
+    <!-- ABM Especialidades -->
+    <div class="d-flex flex-row justify-content-around w-100">
+      <h4>Especialidades</h4>
+      <span
+        type="button"
+        class="badge rounded-pill bg-success btn-sm"
+        title="Agregar +"
+        >Agregar +</span
+      >
+    </div>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr class="col">
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Logo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(esp of especialidades; track esp.idCategoria){
+        <tr>
+          <td>{{ esp.idCategoria }}</td>
+          <td>{{ esp.nombre }}</td>
+          @if(esp.imgSrc){
+          <td>{{ esp.imgSrc }}</td>
+          }@else {
+          <td>Sin logo</td>
+          }
+          <td style="width: 5rem">
+            <span
+              class="icono-editar"
+              (click)="editarEspecialidad(esp.idCategoria)"
+            >
+              <img src="../../../assets/img/edit.svg" alt="icono-editar" />
+            </span>
+            <span
+              class="icono-eliminar"
+              (click)="eliminarEspecialidad(horario.idHorario)"
+            >
+              <img src="../../../assets/img/trash.svg" alt="icono-editar" />
+            </span>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+    <hr />
+
+    <!-- ABM Citas -->
+    <div class="d-flex flex-row justify-content-around w-100">
+      <h4>Citas</h4>
+      <span
+        type="button"
+        class="badge rounded-pill text-bg-success"
+        title="Agregar +"
+        >Agregar +</span
+      >
+    </div>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr class="col">
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>ID Paciente</th>
+          <th>ID Medico</th>
+          <th>Motivo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(cita of citas; track cita.idCita){
+        <tr>
+          <td>{{ cita.idCita }}</td>
+          <td>{{ cita.fecha | date: 'dd/MM/yy' }}</td>
+          <td>{{ cita.hora }}</td>
+          <td>{{ cita.idPaciente }}</td>
+          <td>{{ cita.idMedico }}</td>
+          <td>{{ cita.motivoConsulta }}</td>
+          <td style="width: 5rem">
+            <span class="icono-editar" (click)="editarHorario(cita.idCita)">
+              <img src="../../../assets/img/edit.svg" alt="icono-editar" />
+            </span>
+            <span class="icono-eliminar" (click)="eliminarHorario(cita.idCita)">
+              <img src="../../../assets/img/trash.svg" alt="icono-editar" />
+            </span>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Footer generico -->
+<section id="nav-footer">
+  <app-footer class="fixed-bottom"></app-footer>
+</section>
