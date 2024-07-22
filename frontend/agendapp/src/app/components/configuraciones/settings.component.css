@@ -21,7 +21,8 @@
 }
 
 img {
-    width: 20%;
+    width: 1.2rem;
+    margin-right: 10px;
     height: auto;
     object-fit: cover;
 }

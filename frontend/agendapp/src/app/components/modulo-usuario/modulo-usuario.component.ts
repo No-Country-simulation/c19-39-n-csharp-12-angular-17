@@ -2,12 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { ApiProviderService } from '../../services/api-provider.service';
-import { Categoria, Cita } from '../../interfaces/api';
+import { Categoria } from '../../interfaces/api';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Usuario } from '../../interfaces/usuario';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { Cita } from '../../interfaces/cita';
 
 @Component({
   selector: 'app-modulo-usuario',

@@ -60,3 +60,15 @@ li {
     text-decoration: none;
     list-style: none;
 }
+
+img {
+    width: 1.2rem;
+    margin-right: 10px;
+    height: auto;
+    object-fit: cover;
+}
+
+span.icono-editar {
+    cursor: pointer;
+    width: 10px;
+}

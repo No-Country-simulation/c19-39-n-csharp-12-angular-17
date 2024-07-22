@@ -7,6 +7,7 @@ import { RegistroService } from '../../services/registro.service';
 import { Categoria, Horario } from '../../interfaces/api';
 import { MedicoRegister, UsuarioRegister } from '../../interfaces/auth';
 import { ApiService } from '../../services/api.service';
+import { HorariosService } from '../../services/horarios.service';
 
 @Component({
   selector: 'app-registro',
@@ -46,6 +47,7 @@ export class RegistroComponent implements OnInit {
   apiServiceProvider = inject(ApiProviderService);
   router = inject(Router);
   registroService = inject(RegistroService);
+  horarioService = inject(HorariosService);
 
   constructor() {
   }
@@ -66,7 +68,7 @@ export class RegistroComponent implements OnInit {
 
   //servicio de horarios DB
   getHorarios() {
-    this.apiService.getHorarios().subscribe((data: any) => {
+    this.horarioService.getHorarios().subscribe((data: any) => {
       this.horarios = data.data;     
       console.log(this.horarios);
     });

@@ -1,0 +1,94 @@
+<!-- Ajustar el id para que la funcion lo pueda llamar -->
+<div
+  class="modal fade"
+  id="modaleditarusuario"
+  tabindex="-1"
+  aria-labelledby="modaleditarusuario"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modaleditarusuario">Editar Usuario</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #form="ngForm" (ngSubmit)="editarUsuario(form)">
+          <div class="card bg-transparent border-0">
+            <div class="card-body m-0 p-0">
+              <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="nombre"
+            placeholder="Nombre"
+            [(ngModel)]="user.nombre"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="apellido"
+            placeholder="Apellido"
+            [(ngModel)]="user.apellido"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            placeholder="Email"
+            [(ngModel)]="user.email"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="telefono"
+            placeholder="Telefono"
+            [(ngModel)]="user.telefono"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="text"
+            name="dni"
+            placeholder="Dni"
+            [(ngModel)]="user.dni"
+          />
+        </div>
+        <div class="wrapper mb-2">
+          <input
+            class="form-control"
+            type="password"
+            name="contrasenia"
+            placeholder="Contraseña"
+            [(ngModel)]="user.contrasenia"
+          />
+        </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <input type="submit" value="Editar" class="btn btn-primary btn-sm" data-bs-dismiss="modal" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

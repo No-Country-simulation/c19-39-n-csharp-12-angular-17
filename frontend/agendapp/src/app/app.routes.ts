@@ -154,14 +154,6 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'editar/:id',
-    title: 'Editar Usuario',
-    loadComponent: () =>
-      import('./components/editar/editar.component').then(
-        (m) => m.EditarComponent
-      ),
-  },
-  {
     path: 'inbox_admin',
     title: 'Mensajes | Admin',
     loadComponent: () =>

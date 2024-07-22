@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiProviderService } from '../../services/api-provider.service';
-import { Mensaje } from '../../interfaces/api';
+import { Mensaje } from '../../interfaces/mensaje';
 
 @Component({
   selector: 'app-inboxadmin',

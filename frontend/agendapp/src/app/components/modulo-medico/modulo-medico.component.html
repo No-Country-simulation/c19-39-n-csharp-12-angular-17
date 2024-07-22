@@ -67,7 +67,7 @@
           <span>No tienes turnos</span>
         </div>
       </div>
-      } @default{@for(cita of citas | filter: query; track cita.idCita){
+      } @default{ @for(cita of citas | filter: query; track cita.idCita){
       <div class="card mb-3 mx-auto">
         <div class="row g-0">
           <span
@@ -84,14 +84,16 @@
               class="card-body p-2 m-0 d-flex flex-column justify-content-start align-items-center"
             >
               <small>
-                {{ cita.fecha | date : "dd/MM/yyyy" }} - {{ cita.hora }}
+                {{ cita.fecha | date : "dd/MM/yyyy" }} - {{ cita.horaCita }}
               </small>
               @if(paciente){
-              <span>{{ "" }}</span>
+              <span>{{ "Paciente" }}</span>
               }
             </div>
             <!-- menu colapsable con motivo de consulta -->
-            <div class="d-flex flex-row justify-content-center collapse-container">
+            <div
+              class="d-flex flex-row justify-content-center collapse-container"
+            >
               <button
                 class="border-0 bg-transparent"
                 type="button"
@@ -119,7 +121,7 @@
           </div>
         </div>
       </div>
-      }}}
+      }} }
     </div>
   </section>
 </div>

@@ -22,7 +22,7 @@
         <div
           class="card-body p-2 m-0 d-flex flex-column justify-content-center align-items-center"
         >
-          <span>No tienes mensajes</span>
+          <span>No tienes mensajes {{mensajes.length}}</span>
         </div>
       </div>
       } @default { @for(mensaje of mensajes; track mensaje.idMensaje) {

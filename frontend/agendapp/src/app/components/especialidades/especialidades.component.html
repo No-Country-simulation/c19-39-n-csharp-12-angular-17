@@ -23,7 +23,7 @@
     <div class="container btn-container">
       @if(especialidades.length > 0){
       <div class="container-button-group">
-        @for(especialidad of especialidades; track $index){
+        @for(especialidad of especialidades; track especialidad.idCategoria){
         <div>
           <a
             type="button"

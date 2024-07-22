@@ -1,3 +1,6 @@
+<!-- Modal Editar Usuario -->
+ <app-modal-editarusuario (usuarioEditado)="usuarioEditadoHandler($event)"></app-modal-editarusuario>
+
 <section id="nav_medico">
   <!-- Header de usuario -->
   <app-navbarusuariologueado></app-navbarusuariologueado>
@@ -44,7 +47,7 @@
             [id]="rol.idRol"
             [value]="rol.idRol"
           >
-            {{rol.idRol}}&ensp;-&ensp;{{ rol.nombre }}
+            {{ rol.idRol }}&ensp;-&ensp;{{ rol.nombre }}
           </option>
           }
         </select>
@@ -57,21 +60,27 @@
   <table class="table table-sm mx-auto">
     <thead>
       <tr class="col">
-        <th>Roles</th>
-        <th>ID</th>
-        <th>Nombre y Apellido</th>
-        <th>DNI</th>
-        <th>Email</th>
+        <th style="width: 2rem; padding-left: 1rem;">Roles</th>
+        <th style="width: 6rem">ID</th>
+        <th style="width: 15rem">Nombre y Apellido</th>
+        <th style="width: 9rem">DNI</th>
+        <th style="width: 10rem">Email</th>
+        <th style="width: 6rem">Acciones</th>
       </tr>
     </thead>
     <tbody>
       @for(user of usuariosFiltrados | filter: query; track user.idUsuario){
-      <tr (click)="verTurnoDetalle(user.idUsuario)">
+      <tr class="align-self-center">
         <td>{{ user.idRol }}</td>
         <td>{{ user.idUsuario }}</td>
         <td>{{ user.nombre }}&ensp;{{ user.apellido }}</td>
         <td>{{ user.dni }}</td>
         <td>{{ user.email }}</td>
+        <td>
+          <span class="icono-editar">
+              <img src="../../../assets/img/eye-password-show.svg" alt="icono-editar" (click)="abrirModalEditarUsuario()" />
+            </span>
+        </td>
       </tr>
       }
     </tbody>

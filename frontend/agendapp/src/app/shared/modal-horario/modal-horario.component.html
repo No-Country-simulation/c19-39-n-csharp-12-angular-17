@@ -1,0 +1,52 @@
+<!-- Ajustar el id para que la funcion lo pueda llamar -->
+<div
+  class="modal fade"
+  id="modalhorarios"
+  tabindex="-1"
+  aria-labelledby="modalHorarios"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalHorarios">Agregar Horario</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #form="ngForm" (ngSubmit)="agregarHorario(form)">
+          <div class="card bg-transparent border-0">
+            <div class="card-body m-0 p-0">
+              <div class="wrapper mb-2">
+                <input
+                  class="form-control"
+                  type="text"
+                  name="rango"
+                  placeholder="Rango"
+                  maxlength="20"
+                  minlength="7"
+                  required
+                  [(ngModel)]="horario.rango"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <input type="submit" value="Guardar" class="btn btn-primary btn-sm" data-bs-dismiss="modal" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

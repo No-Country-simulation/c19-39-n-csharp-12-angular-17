@@ -1,3 +1,12 @@
+<!-- Modal Agregar Horario-->
+<app-modal-horario
+  (horarioAgregado)="horarioAgregadoHandler($event)"
+></app-modal-horario>
+<!-- Modal Agregar Categoria -->
+<app-modal-categoria
+  (categoriaAgregada)="categoriaAgregadaHandler($event)"
+></app-modal-categoria>
+
 <section id="nav_medico">
   <!-- Header de usuario -->
   <app-navbarusuariologueado></app-navbarusuariologueado>
@@ -12,13 +21,14 @@
   </section>
 
   <div
-    class="container d-flex flex-column justify-content-center align-items-center mt-2 p-4"
+    class="container-fluid d-flex flex-column justify-content-center align-items-center mt-2 p-4"
   >
     <!-- ABM Horarios -->
     <div class="d-flex flex-row justify-content-around w-100">
       <h4>Horarios</h4>
       <span
         type="button"
+        (click)="abrirModalHorario()"
         class="badge rounded-pill text-bg-success"
         title="Agregar +"
         >Agregar +</span
@@ -29,23 +39,44 @@
         <tr class="col">
           <th>ID</th>
           <th>Rango</th>
-          <th>Acciones</th>
+          <th style="width: 9rem">Acciones</th>
         </tr>
       </thead>
       <tbody>
         @for(hora of horarios; track hora.idHorario){
-        <tr>
+        <tr (click)="verPorSuId(hora.idHorario)">
           <td>{{ hora.idHorario }}</td>
+          @if(!hora.isEditable){
           <td>{{ hora.rango }}</td>
-          <td style="width: 5rem">
-            <span class="icono-editar" (click)="editarHorario(hora.idHorario)">
+          }@else {
+          <td>
+            <input
+              title="rango_horario"
+              type="text"
+              class="form-control"
+              [(ngModel)]="hora.rango"
+              name="rango"
+              id="rango"
+            />
+          </td>
+          }
+
+          <td>
+            <span class="icono-editar" (click)="editar(hora.idHorario, hora)">
               <img src="../../../assets/img/edit.svg" alt="icono-editar" />
             </span>
-            <span
-              class="icono-eliminar"
-              (click)="eliminarHorario(horario.idHorario)"
-            >
-              <img src="../../../assets/img/trash.svg" alt="icono-editar" />
+            <span class="icono-guardar" (click)="guardarHorario(hora)">
+              <img src="../../../assets/img/save.svg" alt="icono-guardar" />
+            </span>
+            <span class="icono-cancelar" (click)="cancelar(hora)">
+              <img src="../../../assets/img/cancel.svg" alt="icono-cancelar" />
+            </span>
+            <span class="icono-eliminar">
+              <img
+                src="../../../assets/img/trash.svg"
+                alt="icono-eliminar"
+                (click)="eliminar(hora.idHorario)"
+              />
             </span>
           </td>
         </tr>
@@ -60,6 +91,7 @@
       <h4>Especialidades</h4>
       <span
         type="button"
+        (click)="abrirModalCategoria()"
         class="badge rounded-pill bg-success btn-sm"
         title="Agregar +"
         >Agregar +</span
@@ -76,26 +108,43 @@
       </thead>
       <tbody>
         @for(esp of especialidades; track esp.idCategoria){
-        <tr>
+        <tr (click)="verPorSuId(esp.idCategoria)">
           <td>{{ esp.idCategoria }}</td>
+          @if(!esp.isEditable){
           <td>{{ esp.nombre }}</td>
+          }@else {
+          <td>
+            <input
+              title="categoria_nombre"
+              type="text"
+              class="form-control"
+              [(ngModel)]="esp.nombre"
+              name="categoria"
+              id="categoria"
+            />
+          </td>
+          }
           @if(esp.imgSrc){
           <td>{{ esp.imgSrc }}</td>
           }@else {
           <td>Sin logo</td>
           }
-          <td style="width: 5rem">
-            <span
-              class="icono-editar"
-              (click)="editarEspecialidad(esp.idCategoria)"
-            >
+          <td>
+            <span class="icono-editar" (click)="editar(esp.idCategoria, esp)">
               <img src="../../../assets/img/edit.svg" alt="icono-editar" />
             </span>
-            <span
-              class="icono-eliminar"
-              (click)="eliminarEspecialidad(horario.idHorario)"
-            >
-              <img src="../../../assets/img/trash.svg" alt="icono-editar" />
+            <span class="icono-guardar" (click)="guardarCategoria(esp)">
+              <img src="../../../assets/img/save.svg" alt="icono-guardar" />
+            </span>
+            <span class="icono-cancelar" (click)="cancelar(esp)">
+              <img src="../../../assets/img/cancel.svg" alt="icono-cancelar" />
+            </span>
+            <span class="icono-eliminar">
+              <img
+                src="../../../assets/img/trash.svg"
+                alt="icono-eliminar"
+                (click)="eliminar(esp.idCategoria)"
+              />
             </span>
           </td>
         </tr>
@@ -129,28 +178,35 @@
       </thead>
       <tbody>
         @for(cita of citas; track cita.idCita){
-        <tr>
+        <tr (click)="verPorSuId(cita.idCita)">
           <td>{{ cita.idCita }}</td>
-          <td>{{ cita.fecha | date: 'dd/MM/yy' }}</td>
+          <td>{{ cita.fecha | date : "dd/MM/yy" }}</td>
           <td>{{ cita.hora }}</td>
           <td>{{ cita.idPaciente }}</td>
           <td>{{ cita.idMedico }}</td>
           <td>{{ cita.motivoConsulta }}</td>
-          <td style="width: 5rem">
-            <span class="icono-editar" (click)="editarHorario(cita.idCita)">
-              <img src="../../../assets/img/edit.svg" alt="icono-editar" />
+          <!-- <td style="width: 6rem">
+            <span class="icono-editar">
+              <img
+                src="../../../assets/img/edit.svg"
+                alt="icono-editar"
+                (click)="editar(cita.idCita)"
+              />
             </span>
-            <span class="icono-eliminar" (click)="eliminarHorario(cita.idCita)">
-              <img src="../../../assets/img/trash.svg" alt="icono-editar" />
+            <span class="icono-eliminar">
+              <img
+                src="../../../assets/img/trash.svg"
+                alt="icono-eliminar"
+                (click)="eliminar(cita.idCita)"
+              />
             </span>
-          </td>
+          </td> -->
         </tr>
         }
       </tbody>
     </table>
   </div>
 </div>
-
 <!-- Footer generico -->
 <section id="nav-footer">
   <app-footer class="fixed-bottom"></app-footer>

@@ -1,15 +1,29 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Categoria, Cita, Horario } from '../../interfaces/api';
+import { Categoria, Horario } from '../../interfaces/api';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
+import { CitasService } from '../../services/citas.service';
+import { Cita } from '../../interfaces/cita';
+import { CategoriasService } from '../../services/categorias.service';
+import { HorariosService } from '../../services/horarios.service';
+import { ModalHorarioComponent } from '../../shared/modal-horario/modal-horario.component';
+import * as bootstrap from 'bootstrap';
+import { ModalCategoriaComponent } from '../../shared/modal-categoria/modal-categoria.component';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [FormsModule, NavbarusuariologueadoComponent, FooterComponent, CommonModule],
+  imports: [
+    FormsModule,
+    NavbarusuariologueadoComponent,
+    FooterComponent,
+    CommonModule,
+    ModalHorarioComponent,
+    ModalCategoriaComponent
+  ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
 })
@@ -17,7 +31,11 @@ export class SettingsComponent implements OnInit {
   horarios: Horario[] = [];
   especialidades: Categoria[] = [];
   citas: Cita[] = [];
-  isEditable = false;
+  isEditable: boolean = false;
+
+//Elementos para acceder al ID del modal y con el que 'abrimos' el modal en el componente padre
+  @ViewChild(ModalHorarioComponent) modalhorarios: ModalHorarioComponent = new ModalHorarioComponent();
+  @ViewChild(ModalCategoriaComponent) modalcategorias: ModalCategoriaComponent = new ModalCategoriaComponent();
 
   horario: Horario = {
     idHorario: 0,
@@ -41,6 +59,9 @@ export class SettingsComponent implements OnInit {
   };
 
   apiService = inject(ApiService);
+  citaService = inject(CitasService);
+  categoriaService = inject(CategoriasService);
+  horarioService = inject(HorariosService);
 
   ngOnInit(): void {
     this.getEspecialidades();
@@ -50,7 +71,7 @@ export class SettingsComponent implements OnInit {
 
   //servicio de especialidades DB
   getEspecialidades() {
-    this.apiService.getEspecialidades().subscribe((data: any) => {
+    this.categoriaService.getEspecialidades().subscribe((data: any) => {
       this.especialidades = data.data;
       console.log(this.especialidades);
     });
@@ -58,7 +79,7 @@ export class SettingsComponent implements OnInit {
 
   //servicio de horarios DB
   getHorarios() {
-    this.apiService.getHorarios().subscribe((data: any) => {
+    this.horarioService.getHorarios().subscribe((data: any) => {
       this.horarios = data.data;
       console.log(this.horarios);
     });
@@ -66,91 +87,72 @@ export class SettingsComponent implements OnInit {
 
   //servicio de citas DB
   getCitas() {
-    this.apiService.getCitas().subscribe((data: any) => {
-      this.citas = data.data.map((cita: any) => {
+    this.citaService.getCitas().subscribe((data: any) => {
+      this.citas = data.data.map((cita: Cita) => {
         return {
           ...cita,
-          medico: {
-            ...cita.idMedicoNavigation.idUsuarioNavigation,
-            ...cita.idMedicoNavigation,
-          },
-          paciente: {
-            ...cita.idPacienteNavigation.idUsuarioNavigation,
-            ...cita.idPacienteNavigation,
-          },
         };
       });
       console.log(this.citas);
     });
   }
 
-  //Funciones de los select
+  //Funciones de acciones para todos los grupos
+  editar(id: number, item: any) {
+    item.isEditable = true;
+    console.log('Editar: ' + id);
+  }
 
-  buscarHorarioId(form: NgForm) {
-    if (form.valid) {
-      const idHorario = form.value.idHorario;
-      console.log('Dato seleccionado del select horario' + idHorario);
+  //guardar Horario
+  guardarHorario(horario: Horario) {
+    horario.isEditable = false;
+    //falta el PUT
+  }
+
+  //guardar Categoria
+  guardarCategoria(categoria: Categoria) {
+    categoria.isEditable = false;
+    //falta el PUT
+  }
+
+  cancelar(item: any) {
+    item.isEditable = false;
+    console.log('Cancelar: ');
+  }
+
+  eliminar(id: number) {
+    console.log('Eliminar: ' + id);
+  }
+
+  verPorSuId(dataId: any) {
+    console.log('Item seleccionado: ' + dataId);
+  }
+
+  //Acciones sobre los modales
+  abrirModalHorario() {
+    const modal = document.getElementById('modalhorarios');
+    if (modal) {
+      const instanciaModal = new bootstrap.Modal(modal);
+      instanciaModal.show();
     }
   }
 
-  editarHorario(hora: any) {
-    debugger;
-    this.horarios.forEach((e: any) => {
-      e.isEditable = false;
-    });
-    hora.isEditable = true;
+
+  abrirModalCategoria() {
+    const modal = document.getElementById('modalcategorias');
+    if (modal) {
+      const instanciaModal = new bootstrap.Modal(modal);
+      instanciaModal.show();
+    }  
   }
 
-  agregarHorario() {
-    const obj = {
-      idHorario: 22,
-      rango: '',
-      isEditable: true,
-    };
-    this.horarios.unshift(obj);
+  horarioAgregadoHandler(event: Horario) {
+    console.log('Horario agregado' + event);
+    this.getHorarios();
   }
 
-  eliminarHorario(hora: any) {
-    this.horarios = this.horarios.filter(
-      (e: any) => e.idHorario !== hora.idHorario
-    );
-  }
-
-  buscarEspecialidadId(form: NgForm) {
-    if (form.valid) {
-      const idHorario = form.value.idHorario;
-      console.log('Dato seleccionado del select horario' + idHorario);
-    }
-  }
-
-  editarEspecialidad(especialidad: any) {
-    debugger;
-    this.especialidades.forEach((e: any) => {
-      e.isEditable = false;
-    });
-    especialidad.isEditable = true;
-  }
-
-  agregarEspecialidad() {
-    const obj = {
-      idCategoria: 22,
-      nombre: '',
-      imgSrc: '',
-      isEditable: true,
-    };
-    this.especialidades.unshift(obj);
-  }
-
-  eliminarEspecialidad(especialidad: any) {
-    this.especialidades = this.especialidades.filter(
-      (e: any) => e.idCategoria !== especialidad.idCategoria
-    );
-  }
-
-  buscarCitaId(form: NgForm) {
-    if (form.valid) {
-      const idHorario = form.value.idHorario;
-      console.log('Dato seleccionado del select horario' + idHorario);
-    }
+  categoriaAgregadaHandler(event: Categoria) {
+    console.log('Categoria agregada' + event);
+    this.getEspecialidades();
   }
 }

@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../interfaces/usuario';
 import { catchError, Observable } from 'rxjs';
-import { Categoria, Cita, Horario, Rol } from '../interfaces/api';
+import { Usuario } from '../interfaces/usuario';
+import { Rol } from '../interfaces/api';
 
 @Injectable({
   providedIn: 'root',
@@ -21,9 +21,18 @@ export class ApiService {
     );
   }
 
-  //Obtener todos los medicos
-  getMedicos(): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.apiUrl}Med/medicos`).pipe(
+  //editarUsuario  (no implementado)
+  putUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.apiUrl}User/usuario`, usuario).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return new Observable<Usuario>();
+      })
+    );
+  }
+
+  //Obtener usuario por id
+  getUsuarioByID(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.apiUrl}User/usuario/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         return new Observable<Usuario>();
       })
@@ -39,28 +48,10 @@ export class ApiService {
       })
     );
   }
-  //Obtener todas las especialidades
-  getEspecialidades(): Observable<Categoria> {
-    return this.http.get<Categoria>(`${this.apiUrl}Med/categorias`).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return new Observable<Categoria>();
-      })
-    );
-  }
-  //Obtener todos los horarios
-  getHorarios(): Observable<Horario> {
-    return this.http.get<Horario>(`${this.apiUrl}Med/horarios`).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return new Observable<Horario>();
-      })
-    );
-  }
 
-  getCitas(): Observable<Cita> {
-    return this.http.get<Cita>(`${this.apiUrl}App/citas`).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return new Observable<Cita>();
-      })
-    );
-  }
+
+
+
+
+
 }

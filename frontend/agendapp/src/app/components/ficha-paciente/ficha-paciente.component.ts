@@ -4,9 +4,9 @@ import { ApiProviderService } from '../../services/api-provider.service';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { CommonModule } from '@angular/common';
-import { Cita } from '../../interfaces/api';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Usuario } from '../../interfaces/usuario';
+import { Cita } from '../../interfaces/cita';
 
 @Component({
   selector: 'app-ficha-paciente',

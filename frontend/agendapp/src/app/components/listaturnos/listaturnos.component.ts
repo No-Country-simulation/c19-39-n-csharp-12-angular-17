@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { ApiProviderService } from '../../services/api-provider.service';
-import { Cita } from '../../interfaces/api';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { CommonModule } from '@angular/common';
+import { Cita } from '../../interfaces/cita';
 
 @Component({
   selector: 'app-listaturnos',
