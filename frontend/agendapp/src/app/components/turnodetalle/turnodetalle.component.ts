@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
-import { Cita } from '../../interfaces/api';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Usuario } from '../../interfaces/usuario';
 import { ApiProviderService } from '../../services/api-provider.service';
 import { CommonModule } from '@angular/common';
+import { Cita } from '../../interfaces/cita';
 
 
 @Component({

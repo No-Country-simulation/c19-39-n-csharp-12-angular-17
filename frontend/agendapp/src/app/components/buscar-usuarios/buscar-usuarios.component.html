@@ -1,1 +1,93 @@
-<p>buscar-usuarios works!</p>
+<!-- Modal Editar Usuario -->
+ <app-modal-editarusuario (usuarioEditado)="usuarioEditadoHandler($event)"></app-modal-editarusuario>
+
+<section id="nav_medico">
+  <!-- Header de usuario -->
+  <app-navbarusuariologueado></app-navbarusuariologueado>
+</section>
+
+<!-- Main -->
+<div class="main">
+  <section id="fraseBienvenida">
+    @if (section === 'buscar_usuarios') {
+    <div class="container fraseBienvenida">
+      <!-- TODO: modificar por el objeto usuario id -->
+      <h2>Buscar Usuarios</h2>
+    </div>
+    }
+  </section>
+
+  <!-- Busqueda / Filtro -->
+
+  <div class="card bg-transparent border-0 mx-auto filtro-input">
+    <div class="card-body m-0 p-0">
+      <div class="wrapper mb-2">
+        <label for="query">Filtrar cualquier dato de la tabla</label>
+        <input
+          class="form-control"
+          type="text"
+          [(ngModel)]="query"
+          placeholder="Buscar..."
+        />
+      </div>
+
+      <div class="wrapper mb-2">
+        <select
+          class="form-select"
+          aria-label="Elija el rol a filtrar"
+          name="idRol"
+          [(ngModel)]="rolSeleccionado"
+          (change)="onRoleChange()"
+        >
+          <option value="">Elija el rol a filtrar</option>
+          @for(rol of roles; track rol.idRol){
+          <option
+            class="option-menu"
+            selected
+            [id]="rol.idRol"
+            [value]="rol.idRol"
+          >
+            {{ rol.idRol }}&ensp;-&ensp;{{ rol.nombre }}
+          </option>
+          }
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <hr class="bg-transparent" />
+
+  <table class="table table-sm mx-auto">
+    <thead>
+      <tr class="col">
+        <th style="width: 2rem; padding-left: 1rem;">Roles</th>
+        <th style="width: 6rem">ID</th>
+        <th style="width: 15rem">Nombre y Apellido</th>
+        <th style="width: 9rem">DNI</th>
+        <th style="width: 10rem">Email</th>
+        <th style="width: 6rem">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(user of usuariosFiltrados | filter: query; track user.idUsuario){
+      <tr class="align-self-center">
+        <td>{{ user.idRol }}</td>
+        <td>{{ user.idUsuario }}</td>
+        <td>{{ user.nombre }}&ensp;{{ user.apellido }}</td>
+        <td>{{ user.dni }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <span class="icono-editar">
+              <img src="../../../assets/img/eye-password-show.svg" alt="icono-editar" (click)="abrirModalEditarUsuario()" />
+            </span>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer generico -->
+<section id="nav-footer">
+  <app-footer class="fixed-bottom"></app-footer>
+</section>

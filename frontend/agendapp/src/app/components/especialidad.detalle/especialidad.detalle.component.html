@@ -11,16 +11,16 @@
     </a>
     <h3 class="ms-5 pb-1">Agendá Tu Turno</h3>
   </div>
-  @if (especialidades){
+  @if (especialidad){
   <div class="container fraseBienvenida">
-      <p>{{especialidadNombre}}</p>
+      <p>{{especialidad.nombre}}</p>
     </div>
     }
 </section>
 
 <div class="main">
   <div class="container card-container">
-    @if(especialidades){ @for(med of medicos; track $index){
+    @if(especialidad){ @for(med of medicosFiltrados; track med.idUsuario){
     <div class="card mb-3"  (click)="guardarIdMedico(med.idUsuario)">
       <div class="row g-0">
         <div class="col-2 d-flex justify-content-end align-items-center">
@@ -38,10 +38,10 @@
             <h5 class="d-block text-nowrap">
               Dr. {{ med.nombre }}&ensp;{{ med.apellido }}
             </h5>
-            <h6 class="card-title">{{ especialidadNombre }}</h6>
+            <h6 class="card-title">{{ especialidad.nombre }}</h6>
             <!-- fecha, hora y consulta -->
             <small class="pill">
-              {{ '' }}
+              {{'Rango horario'}}
             </small>
           </div>
         </div>

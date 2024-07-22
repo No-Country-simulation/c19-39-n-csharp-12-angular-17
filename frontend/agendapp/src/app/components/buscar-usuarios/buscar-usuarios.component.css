@@ -1,0 +1,74 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 2rem 0px;
+    padding-bottom: 5rem;
+}
+
+.fraseBienvenida>h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+.filtro-input {
+    margin-top: 1rem;
+    width: 23rem;
+}
+
+.wrapper {
+    width: 100%;
+    padding: 0.1rem 1rem;
+    text-align: center;
+}
+
+label {
+    margin-bottom: 0.7rem;
+}
+
+input.form-control {
+    padding: 4px;
+    border-radius: 9px;
+    font-size: 1em;
+}
+
+input::placeholder {
+    color: #727272;
+    padding: 0px 0px 0px 10px;
+}
+
+tr {
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+tr:hover {
+    background-color: #f0e98f;
+}
+
+th,
+td {
+    font-size: 0.9em;
+    align-items: center;
+    text-align: center;
+}
+
+li {
+    text-decoration: none;
+    list-style: none;
+}
+
+img {
+    width: 1.2rem;
+    margin-right: 10px;
+    height: auto;
+    object-fit: cover;
+}
+
+span.icono-editar {
+    cursor: pointer;
+    width: 10px;
+}

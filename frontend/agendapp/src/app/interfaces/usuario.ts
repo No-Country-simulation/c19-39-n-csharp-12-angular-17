@@ -8,9 +8,5 @@ export interface Usuario {
   email: string;
   telefono: string;
   contrasenia: string;
-  idRol: Rol;
-  idRolNavigation: null;
-  administradores: Usuario[];
-  medicos: Usuario[];
-  pacientes: Usuario[];
+  idRol: number;  
 }

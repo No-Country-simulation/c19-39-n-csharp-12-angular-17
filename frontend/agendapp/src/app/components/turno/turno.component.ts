@@ -3,10 +3,13 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Cita, Horario } from '../../interfaces/api';
+import { Horario } from '../../interfaces/api';
 import { ApiProviderService } from '../../services/api-provider.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Usuario } from '../../interfaces/usuario';
+import { Cita } from '../../interfaces/cita';
+import { HorariosService } from '../../services/horarios.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-turno',
@@ -48,6 +51,8 @@ export class TurnoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiServiceProvider: ApiProviderService,
+    private apiService: ApiService,
+    private horarioService: HorariosService,
     private router: Router,
     private localServicr: LocalStorageService
   ) {
@@ -63,12 +68,15 @@ export class TurnoComponent implements OnInit {
 
   //obtener usuario logueado
   obtenerUsuario() {
-    let data = JSON.parse(localStorage.getItem('usuario') || '{}');
-    this.usuario = data;
-    console.log('Usuario:', this.usuario);
+    this.apiService.getUsuarioByID(1).subscribe((data: any) => {
+      this.usuario = data;
+      console.log('Usuario:', this.usuario);
+
+    });
+    // let data = JSON.parse(localStorage.getItem('usuario') || '{}');
   }
 
-  //Obtener medico de la DB
+  //Obtener medico del JSON server
   obtenerMedico(id: number) {
     this.apiServiceProvider.getUsuarioById(id).subscribe((data: any) => {
       console.log('Medico:', data);
@@ -118,8 +126,8 @@ export class TurnoComponent implements OnInit {
 
   //Obtener horarios de la DB
   obtenerHorarios() {
-    this.apiServiceProvider.getHorarios().subscribe((data: any) => {
-      this.horarios = data;
+    this.horarioService.getHorarios().subscribe((data: any) => {
+      this.horarios = data.data;
       console.log('Horarios:', this.horarios);
     });
   }

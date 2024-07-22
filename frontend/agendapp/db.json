@@ -2,18 +2,15 @@
   "roles": [
     {
       "idRol": 1,
-      "nombre": "usuario",
-      "usuarios": []
+      "nombre": "usuario"
     },
     {
       "idRol": 2,
-      "nombre": "medico",
-      "usuarios": []
+      "nombre": "medico"
     },
     {
       "idRol": 3,
-      "nombre": "admin",
-      "usuarios": []
+      "nombre": "admin"
     }
   ],
   "categorias": [
@@ -327,28 +324,23 @@
   "horarios": [
     {
       "idHorario": 1,
-      "rango": "08:00-12:00",
-      "medicos": []
+      "rango": "08:00-12:00"
     },
     {
       "idHorario": 2,
-      "rango": "14:00-16:00",
-      "medicos": []
+      "rango": "14:00-16:00"
     },
     {
       "idHorario": 3,
-      "rango": "16:00-18:00",
-      "medicos": []
+      "rango": "16:00-18:00"
     },
     {
       "idHorario": 4,
-      "rango": "18:00-20:00",
-      "medicos": []
+      "rango": "18:00-20:00"
     },
     {
       "idHorario": 5,
-      "rango": "20:00-22:00",
-      "medicos": []
+      "rango": "20:00-22:00"
     }
   ],
   "usuarios": [
@@ -360,11 +352,7 @@
       "email": "moni@gmail.com",
       "telefono": "3121234504",
       "contrasenia": "789",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 1721021946392,
@@ -374,11 +362,7 @@
       "email": "roni@gmail.com",
       "telefono": "3123123123",
       "contrasenia": "lop",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 1721077095050,
@@ -388,11 +372,7 @@
       "email": "dl@gmail.com",
       "telefono": "15572345",
       "contrasenia": "1678",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 6858,
@@ -402,11 +382,7 @@
       "email": "ma@gmail.com",
       "telefono": "3121234504",
       "contrasenia": "mario",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 99789,
@@ -416,11 +392,7 @@
       "email": "lean@gmail.com",
       "telefono": "3123123123",
       "contrasenia": "78",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 1414,
@@ -430,11 +402,7 @@
       "email": "roca@gmail.com",
       "telefono": "78712383",
       "contrasenia": "987",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 686,
@@ -444,11 +412,7 @@
       "email": "dl@gmail.com",
       "telefono": "166645",
       "contrasenia": "12345678",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 23654,
@@ -458,11 +422,7 @@
       "email": "ro81@gmail.com",
       "telefono": "57473123",
       "contrasenia": "9813678",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 111,
@@ -472,11 +432,7 @@
       "email": "ma@gmail.com",
       "telefono": "78552345",
       "contrasenia": "lala",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 999,
@@ -486,11 +442,7 @@
       "email": "wma@gmail.com",
       "telefono": "6954345",
       "contrasenia": "ojos",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 13,
@@ -500,11 +452,7 @@
       "email": "roDL@gmail.com",
       "telefono": "53123",
       "contrasenia": "rod",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 1212,
@@ -514,11 +462,7 @@
       "email": "ma@gmail.com",
       "telefono": "77745",
       "contrasenia": "maru",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 9898,
@@ -528,11 +472,7 @@
       "email": "gabo@gmail.com",
       "telefono": "156985123",
       "contrasenia": "gabo",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 369,
@@ -542,11 +482,7 @@
       "email": "Dalio@gmail.com",
       "telefono": "78552345",
       "contrasenia": "dani",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 7394,
@@ -556,11 +492,7 @@
       "email": "car@gmail.com",
       "telefono": "688123",
       "contrasenia": "carlita",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 81,
@@ -570,11 +502,7 @@
       "email": "ma@gmail.com",
       "telefono": "156882345",
       "contrasenia": "rocasalvo",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 23654,
@@ -584,11 +512,7 @@
       "email": "ro81@gmail.com",
       "telefono": "57473123",
       "contrasenia": "9813678",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 77789,
@@ -598,11 +522,7 @@
       "email": "rama@gmail.com",
       "telefono": "31362345",
       "contrasenia": "anto",
-      "idRol": 2,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 2
     },
     {
       "idUsuario": 951,
@@ -612,11 +532,7 @@
       "email": "lili@gmail.com",
       "telefono": "57473123",
       "contrasenia": "luli",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 1
     },
     {
       "idUsuario": 963,
@@ -626,11 +542,7 @@
       "email": "raes@gmail.com",
       "telefono": "554642345",
       "contrasenia": "raesca",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 1
     },
     {
       "idUsuario": 932,
@@ -640,11 +552,7 @@
       "email": "raulo@gmail.com",
       "telefono": "9898123",
       "contrasenia": "rael",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 1
     },
     {
       "idUsuario": 8456,
@@ -654,11 +562,7 @@
       "email": "ce@gmail.com",
       "telefono": "31362345",
       "contrasenia": "ceci",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 1
     },
     {
       "idUsuario": 9478,
@@ -668,138 +572,9 @@
       "email": "gra@gmail.com",
       "telefono": "5963123",
       "contrasenia": "demaria",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
-    },
-    {
-      "idUsuario": 9538,
-      "dni": "74179",
-      "nombre": "Florencia",
-      "apellido": "Antonini",
-      "email": "flor@gmail.com",
-      "telefono": "4521345",
-      "contrasenia": "flopi",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
-    },
-    {
-      "idUsuario": 2568,
-      "dni": "362142344",
-      "nombre": "Gonzalo",
-      "apellido": "De la Fuente",
-      "email": "gdf@gmail.com",
-      "telefono": "4473123",
-      "contrasenia": "delafuente",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
-    },
-    {
-      "idUsuario": 2479,
-      "dni": "6562157",
-      "nombre": "Ramiro",
-      "apellido": "Antonelli",
-      "email": "rama@gmail.com",
-      "telefono": "31362345",
-      "contrasenia": "anto",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
-    },
-    {
-      "idUsuario": 23654,
-      "dni": "1282342344",
-      "nombre": "Rolando",
-      "apellido": "DeLonardi",
-      "email": "ro@gmail.com",
-      "telefono": "57473123",
-      "contrasenia": "369",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
-    },
-    {
-      "idUsuario": 77789,
-      "dni": "9654879",
-      "nombre": "Ramiro",
-      "apellido": "Bonadeo",
-      "email": "ramitagran@gmail.com",
-      "telefono": "3652345",
-      "contrasenia": "bona",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
-    },
-    {
-      "idUsuario": 42369,
-      "dni": "325965",
-      "nombre": "Brisa",
-      "apellido": "Rodriguez",
-      "email": "ro2001@gmail.com",
-      "telefono": "47123",
-      "contrasenia": "bri",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
-    },
-    {
-      "idUsuario": 75214,
-      "dni": "9654879",
-      "nombre": "Ramona",
-      "apellido": "Salas",
-      "email": "rasa@gmail.com",
-      "telefono": "449662345",
-      "contrasenia": "ramona",
-      "idRol": 1,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
-    },
-    {
-      "idUsuario": 23654,
-      "dni": "1282342344",
-      "nombre": "Catalina",
-      "apellido": "Marquez",
-      "email": "cata@gmail.com",
-      "telefono": "3454553",
-      "contrasenia": "catamar",
-      "idRol": 3,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
-    },
-    {
-      "idUsuario": 77789,
-      "dni": "9654879",
-      "nombre": "Sofia",
-      "apellido": "Bringuetti",
-      "email": "sofi@gmail.com",
-      "telefono": "9842345",
-      "contrasenia": "so",
-      "idRol": 3,
-      "administradores": [],
-      "idRolNavigation": null,
-      "medicos": [],
-      "pacientes": []
+      "idRol": 1
     }
+    
   ],
   "citas": [
     {

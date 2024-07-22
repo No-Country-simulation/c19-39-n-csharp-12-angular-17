@@ -122,35 +122,10 @@ export const routes: Routes = [
   },
   {
     path: 'inbox',
-    title: 'Mensajes',
+    title: 'Mensajes | Medico',
     loadComponent: () =>
       import('./components/inbox/inbox.component').then(
         (m) => m.InboxComponent
-      ),
-  },
-  // Home Admin
-  {
-    path: 'admin',
-    title: 'Admin',
-    loadComponent: () =>
-      import('./components/admin/admin.component').then(
-        (m) => m.AdminComponent
-      ),
-  },
-  {
-    path: 'buscar',
-    title: 'Buscar Usuarios',
-    loadComponent: () =>
-      import('./components/buscar-usuarios/buscar-usuarios.component').then(
-        (m) => m.BuscarUsuariosComponent
-      ),
-  },
-  {
-    path: 'editar/:id',
-    title: 'Editar Usuario',
-    loadComponent: () =>
-      import('./components/editar/editar.component').then(
-        (m) => m.EditarComponent
       ),
   },
   {
@@ -159,6 +134,39 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/videollamada/videollamada.component').then(
         (m) => m.VideollamadaComponent
+      ),
+  },
+  // Home Admin
+  {
+    path: 'admin',
+    title: 'Admin',
+    loadComponent: () =>
+      import('./components/modulo-admin/admin.component').then(
+        (m) => m.AdminComponent
+      ),
+  },
+  {
+    path: 'buscar_usuarios',
+    title: 'Buscar Usuarios',
+    loadComponent: () =>
+      import('./components/buscar-usuarios/buscar-usuarios.component').then(
+        (m) => m.BuscarUsuariosComponent
+      ),
+  },
+  {
+    path: 'inbox_admin',
+    title: 'Mensajes | Admin',
+    loadComponent: () =>
+      import('./components/inboxadmin/inboxadmin.component').then(
+        (m) => m.InboxadminComponent
+      ),
+  },
+  {
+    path: 'configuraciones',
+    title: 'Configurar Servicios',
+    loadComponent: () =>
+      import('./components/configuraciones/settings.component').then(
+        (m) => m.SettingsComponent
       ),
   },
   //   {

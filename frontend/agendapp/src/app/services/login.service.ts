@@ -16,8 +16,7 @@ export class LoginService {
     return this.http.post<Login>(`${this.apiUrl}Auth/usuario`, usuario).pipe(
       catchError((error: HttpErrorResponse) => {
         return new Observable<Login>();
-      })
-    
+      })    
     );
   }
 

@@ -1,10 +1,10 @@
 @if(vistaHeader){
 <app-navbar></app-navbar>
-} @if(role === 'registro_usuarios'){
+} @if(section === 'registro_usuarios'){
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >
-  <form #form="ngForm" (ngSubmit)="enviarRegistroUsuario(form)">
+  <form #form="ngForm" (ngSubmit)="enviarRegistroUsuario(form)"> 
     <div class="card bg-transparent border-0">
       <div class="card-body m-0 p-0">
         <div class="wrapper mb-2">
@@ -87,7 +87,7 @@
 </div>
 
 <!-- mostrar formulario para medicos -->
-} @else if(role === 'registro_medicos'){
+} @else if(section === 'registro_medicos'){
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-2"
 >

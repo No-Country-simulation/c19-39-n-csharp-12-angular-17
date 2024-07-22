@@ -7,8 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { FilterPipe } from '../../services/filter.pipe';
 import { CommonModule } from '@angular/common';
 import { ApiProviderService } from '../../services/api-provider.service';
-import { Cita } from '../../interfaces/api';
 import { Usuario } from '../../interfaces/usuario';
+import { Cita } from '../../interfaces/cita';
+import { CitasService } from '../../services/citas.service';
 
 @Component({
   selector: 'app-modulo-medico',
@@ -38,6 +39,7 @@ export class ModuloMedicoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiProviderService: ApiProviderService,
+    private citaService: CitasService,
     private localServicr: LocalStorageService,
     private router: Router
   ) {}
@@ -61,12 +63,13 @@ export class ModuloMedicoComponent implements OnInit {
 
   //Obtener turnos del LS
   getCitasMedico() {
-    this.apiProviderService.getCitas().subscribe((data: any) => {
-      this.citas = data;
+    this.citaService.getCitas().subscribe((data: any) => {
+      this.citas = data.data;
+      console.log('Citas:', this.citas);
       this.citas.forEach((cita: any) => {
         this.getCitaDetalles(cita.idCita);
       });
-      console.log(this.citas);
+      // console.log(this.citas);
     });
   }
 
@@ -78,36 +81,36 @@ export class ModuloMedicoComponent implements OnInit {
           this.cita = {
             idCita: cita.idCita,
             fecha: cita.fecha,
-            hora: cita.hora,
+            hora: cita.hora,  //falta solucionar el horario que llegue como ID
             idPaciente: cita.idPaciente,
             idMedico: cita.idMedico,
             motivoConsulta: cita.motivoConsulta,
             horaCita: cita.horaCita,
           };
-          this.getPacientePorId(cita.idPaciente);
-          this.getHorarioPorId(cita.hora);
+          // this.getPacientePorId(cita.idPaciente);
+          // this.getHorarioPorId(cita.hora);
         }
       });
     }
   }
 
-  //Obtener medico por id
-  getPacientePorId(id: number) {
-    this.apiProviderService.getUsuarioById(id).subscribe((data: any) => {
-      this.paciente = data[0];     
-      console.log('Paciente:', this.paciente);
-    });
-  }
+  // //Obtener medico por id
+  // getPacientePorId(id: number) {
+  //   this.apiProviderService.getUsuarioById(id).subscribe((data: any) => {
+  //     this.paciente = data[0];     
+  //     console.log('Paciente:', this.paciente);
+  //   });
+  // }
 
-  //obtener horarios por id
-  getHorarioPorId(id: any) {
-    this.apiProviderService.getHorarioById(id).subscribe((data: any) => {
-      this.rangoHoraId = {
-        rango: data[0]?.rango,
-      };
-      console.log('Horario:', this.rangoHoraId);
-    });
-  }
+  // //obtener horarios por id
+  // getHorarioPorId(id: any) {
+  //   this.apiProviderService.getHorarioById(id).subscribe((data: any) => {
+  //     this.rangoHoraId = {
+  //       rango: data[0]?.rango,
+  //     };
+  //     console.log('Horario:', this.rangoHoraId);
+  //   });
+  // }
 
   iniciarVideoConsulta(idCita: number) {
     console.log('Iniciar video consulta', idCita);

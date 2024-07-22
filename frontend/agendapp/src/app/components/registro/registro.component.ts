@@ -7,6 +7,7 @@ import { RegistroService } from '../../services/registro.service';
 import { Categoria, Horario } from '../../interfaces/api';
 import { MedicoRegister, UsuarioRegister } from '../../interfaces/auth';
 import { ApiService } from '../../services/api.service';
+import { HorariosService } from '../../services/horarios.service';
 
 @Component({
   selector: 'app-registro',
@@ -17,7 +18,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class RegistroComponent implements OnInit {
   vistaHeader = true;
-  role: string = '';
+  section: string = '';
   especialidades: Categoria[] = [];
   horarios: Horario[] = [];
 
@@ -46,13 +47,13 @@ export class RegistroComponent implements OnInit {
   apiServiceProvider = inject(ApiProviderService);
   router = inject(Router);
   registroService = inject(RegistroService);
+  horarioService = inject(HorariosService);
 
   constructor() {
-    this.role = this.route.snapshot.routeConfig?.path || '';
   }
 
   ngOnInit(): void {
-    console.log(this.role);
+    console.log(this.section);
     this.getEspecialidades();
     this.getHorarios();
   }
@@ -67,7 +68,7 @@ export class RegistroComponent implements OnInit {
 
   //servicio de horarios DB
   getHorarios() {
-    this.apiService.getHorarios().subscribe((data: any) => {
+    this.horarioService.getHorarios().subscribe((data: any) => {
       this.horarios = data.data;     
       console.log(this.horarios);
     });

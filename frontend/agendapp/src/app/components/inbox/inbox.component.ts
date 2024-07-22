@@ -4,11 +4,12 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { CommonModule } from '@angular/common';
 import { ApiProviderService } from '../../services/api-provider.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-inbox',
   standalone: true,
-  imports: [FooterComponent, NavbarusuariologueadoComponent, CommonModule],
+  imports: [FooterComponent, NavbarusuariologueadoComponent, CommonModule, FormsModule],
   templateUrl: './inbox.component.html',
   styleUrl: './inbox.component.css',
 })

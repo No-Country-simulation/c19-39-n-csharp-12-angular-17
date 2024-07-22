@@ -1,0 +1,62 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 2rem 0px;
+    padding-bottom: 5rem;
+}
+
+.fraseBienvenida>h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+.wrapper {
+    width: 100%;
+    padding: 0.1rem 1rem;
+    text-align: center;
+}
+
+img {
+    width: 1.2rem;
+    margin-right: 10px;
+    height: auto;
+    object-fit: cover;
+}
+
+select {
+    width: 50dvw;
+    overflow: auto;
+    height: 10rem;
+}
+
+span.icono-editar {
+    cursor: pointer;
+    width: 10px;
+}
+
+span.badge {
+    font-size: 0.6em;
+    font-weight: 100;
+    width: 4rem;
+    height: 1.2rem;
+}
+
+tr {
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+tr:hover {
+    background-color: #f0e98f;
+}
+
+th,
+td {
+    font-size: 0.9em;
+    align-items: center;
+    text-align: center;
+}

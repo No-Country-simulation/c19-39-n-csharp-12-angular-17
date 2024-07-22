@@ -40,14 +40,14 @@
   <ul class="d-flex flex-row justify-content-around align-items-center">
     <li>
       <a [routerLink]="['/home_medico']" class="border">
-        <img src="../../../assets/img/home.svg" alt="" class="border m-0 p-0" />
+        <img src="../../../assets/img/home.svg" alt="icono-home-medico" class="border m-0 p-0" />
       </a>
     </li>
     <li>
       <a [routerLink]="['/buscar']" class="border">
         <img
           src="../../../assets/img/list-solid.svg"
-          alt="icono-buscar-usuarios"
+          alt="icono-buscar-usuarios-medico"
           class="border m-0 p-0"
         />
       </a>
@@ -56,7 +56,7 @@
       <a [routerLink]="['/inbox']" class="border">
         <img
           src="../../../assets/img/inbox.svg"
-          alt="icono_inbox-de-mensajes-internos"
+          alt="icono_inbox-de-mensajes-internos-medico"
           class="border m-0 p-0"
         />
       </a>
@@ -71,37 +71,37 @@
       </a>
     </li>     
   </ul>
-  } @else if(section === 'admin' || section === 'buscar' || section ===
-  'inbox'){
+  } @else if(section === 'admin' || section === 'buscar_usuarios' || section ===
+  'inbox_admin' || section === 'configuraciones'){
   <ul class="d-flex flex-row justify-content-around align-items-center">
     <li>
       <a [routerLink]="['/admin']" class="border">
-        <img src="../../../assets/img/home.svg" alt="" class="border m-0 p-0" />
+        <img src="../../../assets/img/home.svg" alt="icono-home-admin" class="border m-0 p-0" />
       </a>
     </li>
     <li>
-      <a [routerLink]="['/buscar']" class="border">
+      <a [routerLink]="['/buscar_usuarios']" class="border">
         <img
           src="../../../assets/img/search-folder.svg"
-          alt=""
+          alt="icono-buscar-usuarios"
           class="border m-0 p-0"
         />
       </a>
     </li>
     <li>
-      <a [routerLink]="['/inbox']" class="border">
+      <a [routerLink]="['/inbox_admin']" class="border">
         <img
           src="../../../assets/img/inbox.svg"
-          alt=""
+          alt="icono_inbox-de-mensajes-internos"
           class="border m-0 p-0"
         />
       </a>
     </li>
     <li>
-      <a [routerLink]="['/']" class="border">
+      <a [routerLink]="['/configuraciones']" class="border">
         <img
-          src="../../../assets/img/logout.svg"
-          alt="icono_salir"
+          src="../../../assets/img/specialties.svg"
+          alt="icono_configuraciones"
           title="Salir"
         />
       </a>
