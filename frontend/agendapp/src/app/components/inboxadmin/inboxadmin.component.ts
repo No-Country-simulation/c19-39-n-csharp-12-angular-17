@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ApiProviderService } from '../../services/api-provider.service';
 import { Mensaje } from '../../interfaces/mensaje';
+import { SweetAlertService } from '../../services/alerts/sweet-alert.service';
 
 @Component({
   selector: 'app-inboxadmin',
@@ -26,10 +27,12 @@ export class InboxadminComponent implements OnInit {
 
   route = inject(ActivatedRoute);
   apiServicr = inject(ApiProviderService);
+  sweetService = inject(SweetAlertService);
 
   ngOnInit(): void {
     this.section = this.route.snapshot.routeConfig?.path || '';
     this.obtenerMensajes();
+    this.notifyExistingMessages();
   }
 
   //Obetener mensajes JasonServer
@@ -47,5 +50,13 @@ export class InboxadminComponent implements OnInit {
     const date = parseISO(datetime);
     console.log(date);
     return format(date, 'HH:mm:ss');
+  }
+
+  notifyExistingMessages(){
+    if(this.mensajes.length > 0 ){
+      this.sweetService.Toast.fire({
+        title: "Existen mensajes nuevos."
+      })
+    }
   }
 }

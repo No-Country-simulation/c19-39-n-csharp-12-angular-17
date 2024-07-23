@@ -8,6 +8,7 @@ import { Categoria, Horario } from '../../interfaces/api';
 import { MedicoRegister, UsuarioRegister } from '../../interfaces/auth';
 import { ApiService } from '../../services/api.service';
 import { HorariosService } from '../../services/horarios.service';
+import { SweetAlertService } from '../../services/alerts/sweet-alert.service';
 
 @Component({
   selector: 'app-registro',
@@ -48,11 +49,13 @@ export class RegistroComponent implements OnInit {
   router = inject(Router);
   registroService = inject(RegistroService);
   horarioService = inject(HorariosService);
+  sweetAlertService = inject(SweetAlertService);
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.section = this.route.snapshot.routeConfig?.path || '';
     console.log(this.section);
     this.getEspecialidades();
     this.getHorarios();
@@ -69,7 +72,7 @@ export class RegistroComponent implements OnInit {
   //servicio de horarios DB
   getHorarios() {
     this.horarioService.getHorarios().subscribe((data: any) => {
-      this.horarios = data.data;     
+      this.horarios = data.data;
       console.log(this.horarios);
     });
   }
@@ -88,13 +91,14 @@ export class RegistroComponent implements OnInit {
       this.registroService
         .registrarUsuario(usuario)
         .subscribe((data: UsuarioRegister) => {
+          this.sweetAlertService.success(`Usuario creado con éxito.`)
           console.log(data);
         });
       localStorage.setItem('usuario', JSON.stringify(usuario));
       this.router.navigate(['/login_usuarios']);
       form.reset();
     } else {
-      alert('Por favor, completa todos los campos.');
+      this.sweetAlertService.alert('Por favor, completa todos los campos.');
     }
   }
 
@@ -113,13 +117,14 @@ export class RegistroComponent implements OnInit {
       this.registroService
         .registrarMedico(medico)
         .subscribe((data: MedicoRegister) => {
+          this.sweetAlertService.success(`Medico creado con éxito.`)
           console.log(data);
         });
       localStorage.setItem('medico', JSON.stringify(medico));
       this.router.navigate(['/login_medicos']);
       form.reset();
     } else {
-      alert('Por favor, completa todos los campos.');
+      this.sweetAlertService.alert('Por favor, completa todos los campos.');
     }
   }
 }

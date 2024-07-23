@@ -10,6 +10,7 @@ import { Usuario } from '../../interfaces/usuario';
 import { Cita } from '../../interfaces/cita';
 import { HorariosService } from '../../services/horarios.service';
 import { ApiService } from '../../services/api.service';
+import { SweetAlertService } from '../../services/alerts/sweet-alert.service';
 
 @Component({
   selector: 'app-turno',
@@ -54,7 +55,8 @@ export class TurnoComponent implements OnInit {
     private apiService: ApiService,
     private horarioService: HorariosService,
     private router: Router,
-    private localServicr: LocalStorageService
+    private localServicr: LocalStorageService,
+    private sweetService: SweetAlertService,
   ) {
     this.section = this.route.snapshot.routeConfig?.path || '';
     this.medID = localStorage.getItem('medicoId');
@@ -115,8 +117,10 @@ export class TurnoComponent implements OnInit {
       //guardar en localStorage en una lista de turnos creados
       this.localServicr.guardarTurno(obj);
       this.router.navigate(['/turno/' + obj.idCita]);
+      this.sweetService.success("Turno creado")
     } else {
-      alert('Por favor complete todos los campos');
+      this.sweetService.alert('Por favor complete todos los campos')
+      // alert('Por favor complete todos los campos');
     }
   }
 
