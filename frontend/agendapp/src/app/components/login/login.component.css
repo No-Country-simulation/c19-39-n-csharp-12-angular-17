@@ -23,3 +23,7 @@ span{
     font-weight: bold;
     text-decoration: underline;
 }
+
+form{
+    margin-top: 3rem;
+}

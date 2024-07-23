@@ -25,21 +25,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.route.url.subscribe((url) => {
       this.section = this.route.snapshot.routeConfig?.path || '';
-      this.vistaHeader = ['login_usuarios', 'login_medicos'].includes(
-        this.section
-      );
     });
   }
 
-  submit(form: NgForm) {
-    if (this.section === 'login_usuarios') {
-      this.loginUsuario(form);
-    } else if (this.section === 'login_medicos') {
-      this.loginMedicos(form);
-    }
-  }
 
-  loginUsuario(form: NgForm) {
+  login(form: NgForm) {
     const datos = form.value;
     if (form.valid) {
       this.loginService.loginUsuario(datos).subscribe(
@@ -74,40 +64,40 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  loginMedicos(form: NgForm) {
-    const datos = form.value;
-    if (form.valid) {
-      this.loginService.loginUsuario(datos).subscribe(
-        (data: any) => {
-          if (data.status === 200) {
-            this.router.navigate(['/home_medico']);
-            this.sweetService.Toast.fire({
-              icon: "success",
-              title: "Login exitoso.",
-              timer:2000,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              }
-            });
-          } else {
-            this.sweetService.error('Credenciales incorrectas');
-            // alert('Credenciales incorrectas');
-          }
-          if (data.data) {
-            localStorage.setItem('medico', JSON.stringify(data.data));
-          } else {
-            console.log('No se pudo guardar el medico en el Local Storage');
-          }
-        },
-        (error) => {
-          this.sweetService.alert('Error en el servicio de login')
-          // alert('Error en el servicio de login');
-          console.error(error);
-        }
-      );
-    }else{
-      this.sweetService.alert("Completa los campos.")
-    }
-  }
+  // loginMedicos(form: NgForm) {
+  //   const datos = form.value;
+  //   if (form.valid) {
+  //     this.loginService.loginUsuario(datos).subscribe(
+  //       (data: any) => {
+  //         if (data.status === 200) {
+  //           this.router.navigate(['/home_medico']);
+  //           this.sweetService.Toast.fire({
+  //             icon: "success",
+  //             title: "Login exitoso.",
+  //             timer:2000,
+  //             didOpen: (toast) => {
+  //               toast.onmouseenter = Swal.stopTimer;
+  //               toast.onmouseleave = Swal.resumeTimer;
+  //             }
+  //           });
+  //         } else {
+  //           this.sweetService.error('Credenciales incorrectas');
+  //           // alert('Credenciales incorrectas');
+  //         }
+  //         if (data.data) {
+  //           localStorage.setItem('medico', JSON.stringify(data.data));
+  //         } else {
+  //           console.log('No se pudo guardar el medico en el Local Storage');
+  //         }
+  //       },
+  //       (error) => {
+  //         this.sweetService.alert('Error en el servicio de login')
+  //         // alert('Error en el servicio de login');
+  //         console.error(error);
+  //       }
+  //     );
+  //   }else{
+  //     this.sweetService.alert("Completa los campos.")
+  //   }
+  // }
 }

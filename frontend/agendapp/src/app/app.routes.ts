@@ -12,22 +12,13 @@ export const routes: Routes = [
   },
   //Login de usuarios
   {
-    path: 'login_usuarios',
-    title: 'Login Usuarios',
+    path: 'login',
+    title: 'Login',
     loadComponent: () =>
       import('./components/login/login.component').then(
         (m) => m.LoginComponent
       ),
-  },
-  //Login de medicos
-  {
-    path: 'login_medicos',
-    title: 'Login Médico',
-    loadComponent: () =>
-      import('./components/login/login.component').then(
-        (m) => m.LoginComponent
-      ),
-  },
+  },  
   //Registro para medicos
   {
     path: 'registro_medicos',
