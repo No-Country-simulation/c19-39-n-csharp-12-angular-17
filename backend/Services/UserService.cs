@@ -61,12 +61,25 @@ namespace AgendApp.Services
                     };
                 }
 
+                Medico? medico = await _Db.Medicos.FirstOrDefaultAsync(m => m.IdUsuario == usuario.IdUsuario);
+
+                if(medico == null)
+                {
+                    return new
+                    {
+                        status = 200,
+                        success = true,
+                        usuario
+                    };
+                }
+
                 return new
                 {
                     status = 200,
                     success = true,
-                    data = usuario
+                    data = medico
                 };
+
             }
             catch (Exception ex)
             {
