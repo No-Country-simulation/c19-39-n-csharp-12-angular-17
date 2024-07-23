@@ -49,7 +49,7 @@ namespace AgendApp.Services
         {
             try
             {
-                Usuario? usuario = await _Db.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == id && u.IdRol == 1);
+                Usuario? usuario = await _Db.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == id);
 
                 if (usuario == null)
                 {
