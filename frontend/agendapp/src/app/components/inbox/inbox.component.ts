@@ -5,6 +5,8 @@ import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologuea
 import { CommonModule } from '@angular/common';
 import { ApiProviderService } from '../../services/api-provider.service';
 import { FormsModule } from '@angular/forms';
+import { SweetAlertService } from '../../services/alerts/sweet-alert.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inbox',
@@ -19,10 +21,12 @@ export class InboxComponent implements OnInit {
 
   route = inject(ActivatedRoute);
   apiServicr = inject(ApiProviderService);
+  sweetService = inject(SweetAlertService);
 
   ngOnInit(): void {
     this.section = this.route.snapshot.routeConfig?.path || '';
     this.obtenerMensajes();
+    this.notifyMessages();
   }
 
   //Obetener mensajes JasonServer
@@ -31,5 +35,17 @@ export class InboxComponent implements OnInit {
       this.mensajes = data;
       console.log(this.mensajes);
     });
-  }  
+  }
+
+  notifyMessages():void{
+    if(this.mensajes.length > 0 ){
+      this.sweetService.Toast.fire({
+        title:"Tienes nuevos mensajes.",
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      })
+    }
+  }
 }

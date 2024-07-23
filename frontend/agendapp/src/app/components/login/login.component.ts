@@ -3,6 +3,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
+import { SweetAlertService } from '../../services/alerts/sweet-alert.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +20,7 @@ export class LoginComponent implements OnInit {
   route = inject(ActivatedRoute);
   router = inject(Router);
   loginService = inject(LoginService);
+  sweetService = inject(SweetAlertService);
 
   ngOnInit(): void {
     this.route.url.subscribe((url) => {
@@ -42,9 +45,18 @@ export class LoginComponent implements OnInit {
       this.loginService.loginUsuario(datos).subscribe(
         (data: any) => {
           if (data.status === 200) {
+            this.sweetService.Toast.fire({
+              icon: "success",
+              title: "Login exitoso.",
+              timer:2000,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              }
+            });
             this.router.navigate(['/home_usuario']);
           } else {
-            alert('Credenciales incorrectas');
+            this.sweetService.alert("Credenciales incorrectas");
           }
           if(data.data){
             localStorage.setItem('usuario', JSON.stringify(data.data));
@@ -53,10 +65,12 @@ export class LoginComponent implements OnInit {
           }
         },
         (error) => {
-          alert('Error en el servicio de login');
+          this.sweetService.error("Error en el servicio de login.")
           console.error(error);
         }
       );
+    }else{
+      this.sweetService.alert("Completa los campos.")
     }
   }
 
@@ -67,8 +81,18 @@ export class LoginComponent implements OnInit {
         (data: any) => {
           if (data.status === 200) {
             this.router.navigate(['/home_medico']);
+            this.sweetService.Toast.fire({
+              icon: "success",
+              title: "Login exitoso.",
+              timer:2000,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              }
+            });
           } else {
-            alert('Credenciales incorrectas');
+            this.sweetService.error('Credenciales incorrectas');
+            // alert('Credenciales incorrectas');
           }
           if (data.data) {
             localStorage.setItem('medico', JSON.stringify(data.data));
@@ -77,10 +101,13 @@ export class LoginComponent implements OnInit {
           }
         },
         (error) => {
-          alert('Error en el servicio de login');
+          this.sweetService.alert('Error en el servicio de login')
+          // alert('Error en el servicio de login');
           console.error(error);
         }
       );
+    }else{
+      this.sweetService.alert("Completa los campos.")
     }
   }
 }
