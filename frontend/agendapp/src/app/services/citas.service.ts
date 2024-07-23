@@ -28,4 +28,32 @@ export class CitasService {
       })
     );
   }
+
+  //!! Funciones sin implementar
+
+  getCitaById(id: number): Observable<GenerarCita> {
+    return this.http.get<GenerarCita>(`${this.apiUrl}App/cita/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return new Observable<GenerarCita>();
+      })
+    );
+  }
+
+  //Editar cita
+  putCita(cita: GenerarCita): Observable<GenerarCita> {
+    return this.http.put<GenerarCita>(`${this.apiUrl}App/cita`, cita).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return new Observable<GenerarCita>();
+      })
+    );
+  }
+
+  //Eliminar cita
+  deleteCita(id: number): Observable<GenerarCita> {
+    return this.http.delete<GenerarCita>(`${this.apiUrl}App/cita/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return new Observable<GenerarCita>();
+      })
+    );
+  }
 }
