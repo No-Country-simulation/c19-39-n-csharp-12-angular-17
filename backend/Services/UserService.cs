@@ -69,7 +69,7 @@ namespace AgendApp.Services
                     {
                         status = 200,
                         success = true,
-                        usuario
+                        data = usuario
                     };
                 }
 
