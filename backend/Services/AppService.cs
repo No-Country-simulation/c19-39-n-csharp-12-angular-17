@@ -21,10 +21,7 @@ namespace AgendApp.Services
         {
             try
             {
-                List<Cita> citas = await _db.Citas
-                    .Include(i => i.IdPacienteNavigation.IdUsuarioNavigation)
-                    .Include(i => i.IdMedicoNavigation.IdUsuarioNavigation)
-                    .ToListAsync();
+                List<Cita> citas = await _db.Citas.ToListAsync();
 
                 return new
                 {
