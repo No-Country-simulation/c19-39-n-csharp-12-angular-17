@@ -95,7 +95,7 @@ export class RegistroComponent implements OnInit {
           console.log(data);
         });
       localStorage.setItem('usuario', JSON.stringify(usuario));
-      this.router.navigate(['/login_usuarios']);
+      this.router.navigate(['/login']);
       form.reset();
     } else {
       this.sweetAlertService.alert('Por favor, completa todos los campos.');
@@ -121,7 +121,7 @@ export class RegistroComponent implements OnInit {
           console.log(data);
         });
       localStorage.setItem('medico', JSON.stringify(medico));
-      this.router.navigate(['/login_medicos']);
+      this.router.navigate(['/login']);
       form.reset();
     } else {
       this.sweetAlertService.alert('Por favor, completa todos los campos.');
