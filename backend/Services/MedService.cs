@@ -12,6 +12,7 @@ namespace AgendApp.Services
         Task<Object> getSchedules();
         Task<Object> getSchedule(int id);
         Task<Object> getMedicos();
+        Task<Object> getMedico(int id);
 
     }
     public class MedService : IMedService
@@ -127,6 +128,41 @@ namespace AgendApp.Services
                 };
             }
             catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
+
+        public async Task<Object> getMedico(int id)
+        {
+            try
+            {
+                Medico? medico = await _db.Medicos.Include(i => i.IdUsuarioNavigation)
+                    .FirstOrDefaultAsync(m => m.IdUsuario == id || m.IdMedico == id);
+                
+                if(medico == null)
+                {
+                    return new
+                    {
+                        status = 400,
+                        success = false,
+                        message = "Medico no existe"
+                    };
+                }
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = medico
+                };
+
+            }catch(Exception ex)
             {
                 return new
                 {

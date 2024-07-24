@@ -68,6 +68,16 @@ namespace AgendApp.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("medico/{id}")]
+        public async Task<IActionResult> GetMedico(int id)
+        {
+            var result = await _medService.getMedico(id);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
         [Route("medicos")]
         public async Task<IActionResult> GetMedicos()
         {
