@@ -8,6 +8,8 @@ namespace AgendApp.Services
     {
         Task<Object> getCategorie(int id);
         Task<Object> getCategories();
+
+        Object editSchedule(int id, ScheduleEditRequest request);
         Task<Object> setSchedule(ScheduleRequest request);
         Task<Object> getSchedules();
         Task<Object> getSchedule(int id);
@@ -103,6 +105,44 @@ namespace AgendApp.Services
                     data = schedule.Entity
                 };
                 
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
+
+        public Object editSchedule(int id, ScheduleEditRequest request) {
+            try
+            {
+                Horario? horario = _db.Horarios.FirstOrDefault(h => h.IdHorario == id);
+
+                if (horario == null)
+                {
+                    return new
+                    {
+                        status = 400,
+                        success = false,
+                        message = "horario no existe"
+                    };
+                }
+
+                horario.Rango = request.rango;
+
+                Horario? updatedSchedule = _db.Horarios.Update(horario).Entity;
+                _db.SaveChanges();
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = horario
+                };
             }
             catch (Exception ex)
             {
