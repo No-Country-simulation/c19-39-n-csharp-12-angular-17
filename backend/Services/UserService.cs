@@ -9,8 +9,8 @@ namespace AgendApp.Services
         Task<Object> getUsers();
         Task<Object> getUser(int id);
         Task<Object> getRoles();
-
         Task<Object> setCita(CitaRequest request);
+        Task<Object> getCitas(int userId);
     }
     public class UserService : IUserService
     {
@@ -113,6 +113,43 @@ namespace AgendApp.Services
                     status = 500,
                     success = false,
                     messaeg = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
+
+        public async Task<Object> getCitas(int userId)
+        {
+            try
+            {
+                Paciente? paciente = await _Db.Pacientes.FirstOrDefaultAsync(p => p.IdUsuario == userId);
+
+                if (paciente == null)
+                {
+                    return new
+                    {
+                        status = 400,
+                        success = false,
+                        message = "El usuario no posee citas"
+                    };
+                }
+
+                List<Cita> citas = await _Db.Citas.Where(c => c.IdPaciente == paciente.IdPaciente).ToListAsync();
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = citas
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
                 };
             }
         }
