@@ -12,6 +12,7 @@ import { HorariosService } from '../../services/horarios.service';
 import { ModalHorarioComponent } from '../../shared/modal-horario/modal-horario.component';
 import * as bootstrap from 'bootstrap';
 import { ModalCategoriaComponent } from '../../shared/modal-categoria/modal-categoria.component';
+import { ModalEditarcitaComponent } from '../../shared/modal-editarcita/modal-editarcita.component';
 
 @Component({
   selector: 'app-settings',
@@ -22,20 +23,27 @@ import { ModalCategoriaComponent } from '../../shared/modal-categoria/modal-cate
     FooterComponent,
     CommonModule,
     ModalHorarioComponent,
-    ModalCategoriaComponent
+    ModalCategoriaComponent,
+    ModalEditarcitaComponent
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
 })
 export class SettingsComponent implements OnInit {
   horarios: Horario[] = [];
+  horario_ = {} as Horario;
   especialidades: Categoria[] = [];
+  especialidad_ = {} as Categoria;
   citas: Cita[] = [];
   isEditable: boolean = false;
 
-//Elementos para acceder al ID del modal y con el que 'abrimos' el modal en el componente padre
-  @ViewChild(ModalHorarioComponent) modalhorarios: ModalHorarioComponent = new ModalHorarioComponent();
-  @ViewChild(ModalCategoriaComponent) modalcategorias: ModalCategoriaComponent = new ModalCategoriaComponent();
+  //Elementos para acceder al ID del modal y con el que 'abrimos' el modal en el componente padre
+  @ViewChild(ModalHorarioComponent) modalhorarios: ModalHorarioComponent =
+    new ModalHorarioComponent();
+  @ViewChild(ModalCategoriaComponent) modalcategorias: ModalCategoriaComponent =
+    new ModalCategoriaComponent();
+  @ViewChild(ModalEditarcitaComponent) modaleditarcita: ModalEditarcitaComponent =
+    new ModalEditarcitaComponent();
 
   horario: Horario = {
     idHorario: 0,
@@ -124,9 +132,29 @@ export class SettingsComponent implements OnInit {
     console.log('Eliminar: ' + id);
   }
 
-  verPorSuId(dataId: any) {
+  verDataIdHora(dataId: Horario) {
     console.log('Item seleccionado: ' + dataId);
+    this.horarioService.getHorarioByID(dataId.idHorario).subscribe((data: any) => {
+      this.horario_ = data.data;
+      console.log(this.horario_);
+    });
   }
+
+  verDataIdCategoria(dataId: Categoria) {
+    console.log('Item seleccionado: ' + dataId);
+    this.categoriaService.getEspecialidadByID(dataId.idCategoria).subscribe((data: any) => {
+      this.especialidad_ = data.data;
+      console.log(this.especialidad);
+    });
+  }
+
+  verDataIdCita(dataId: Cita){
+    console.log('Item seleccionado: ' + dataId);
+    this.citaService.getCitaById(dataId.idCita).subscribe((data: any) => {
+      this.cita = data.data;
+      console.log(this.cita);
+    });
+  };
 
   //Acciones sobre los modales
   abrirModalHorario() {
@@ -137,13 +165,20 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-
   abrirModalCategoria() {
     const modal = document.getElementById('modalcategorias');
     if (modal) {
       const instanciaModal = new bootstrap.Modal(modal);
       instanciaModal.show();
-    }  
+    }
+  }
+
+  abrirModalEditarCita() {
+    const modal = document.getElementById('modaleditarcita');
+    if (modal) {
+      const instanciaModal = new bootstrap.Modal(modal);
+      instanciaModal.show();
+    }
   }
 
   horarioAgregadoHandler(event: Horario) {
@@ -154,5 +189,10 @@ export class SettingsComponent implements OnInit {
   categoriaAgregadaHandler(event: Categoria) {
     console.log('Categoria agregada' + event);
     this.getEspecialidades();
+  }
+
+  citaEditadaHandler(event: Cita) {
+    console.log('Cita editada' + event);
+    this.getCitas();
   }
 }
