@@ -1,4 +1,5 @@
-﻿using AgendApp.Requests;
+﻿using AgendApp.Models;
+using AgendApp.Requests;
 using AgendApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -66,6 +67,16 @@ namespace AgendApp.Controllers
             var resp = await _userService.setCita(request);
 
             return Ok(resp);
+        }
+
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("user/{id}")]
+        public async Task<IActionResult> editUser(int id, UserEditRequest request)
+        {
+            var result = _userService.editUser(id, request);
+
+            return Ok(result);
         }
 
     }

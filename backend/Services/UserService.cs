@@ -11,6 +11,7 @@ namespace AgendApp.Services
         Task<Object> getRoles();
         Task<Object> setCita(CitaRequest request);
         Task<Object> getCitas(int userId);
+        Object editUser(int id, UserEditRequest request);
     }
     public class UserService : IUserService
     {
@@ -199,6 +200,61 @@ namespace AgendApp.Services
                         cita.Hora,
                         cita.Fecha,
                         cita.MotivoConsulta
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
+
+        public Object editUser(int id, UserEditRequest request)
+        {
+            try
+            {
+                Usuario? usuario = _Db.Usuarios.FirstOrDefault(u => u.IdUsuario == id);
+
+                if(usuario == null)
+                {
+                    return new
+                    {
+                        status = 400,
+                        success = false,
+                        message = "Usuario no existe"
+                    };
+                }
+
+                usuario.Dni = request.dni;
+                usuario.Nombre = request.nombre;
+                usuario.Apellido = request.apellido;
+                usuario.Email = request.email;
+                usuario.Telefono = request.telefono;
+                usuario.Contrasenia = request.contrasenia;
+                usuario.IdRol = request.idRol;
+                
+                Usuario? updatedUser = _Db.Usuarios.Update(usuario).Entity;
+                _Db.SaveChanges();
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = new
+                    {
+                        updatedUser.IdUsuario,
+                        updatedUser.Dni,
+                        updatedUser.Nombre,
+                        updatedUser.Apellido,
+                        updatedUser.Email,
+                        updatedUser.Telefono,
+                        updatedUser.Contrasenia,
+                        updatedUser.IdRol
                     }
                 };
             }
