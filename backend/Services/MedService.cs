@@ -6,6 +6,7 @@ namespace AgendApp.Services
 {
     public interface IMedService
     {
+        Task<Object> postCategorie(CategorieRequest request);
         Task<Object> getCategorie(int id);
         Task<Object> getCategories();
 
@@ -27,6 +28,36 @@ namespace AgendApp.Services
             this._db = context;
         }
 
+        public async Task<Object> postCategorie(CategorieRequest request)
+        {
+            try
+            {
+                Categoriasmedica newCategorie = new Categoriasmedica
+                {
+                    Nombre = request.nombre
+                };
+
+                var addedCategorie = await _db.Categoriasmedicas.AddAsync(newCategorie);
+                await _db.SaveChangesAsync();
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = addedCategorie.Entity
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
         public async Task<Object> getCategorie(int id)
         {
             try
