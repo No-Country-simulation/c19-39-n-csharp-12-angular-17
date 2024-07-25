@@ -1,4 +1,5 @@
-﻿using AgendApp.Services;
+﻿using AgendApp.Requests;
+using AgendApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,16 @@ namespace AgendApp.Controllers
         public async Task<IActionResult> GetAppointment(int id)
         {
             var result = await _appService.getAppointment(id);
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("cita/{id}")]
+        public async Task<IActionResult> EditAppointment(int id, CitaRequest request)
+        {
+            var result = _appService.editAppointment(id, request);
 
             return Ok(result);
         }
