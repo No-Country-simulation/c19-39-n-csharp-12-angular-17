@@ -50,8 +50,9 @@ namespace AgendApp.Services
             try
             {
                 Usuario? usuario = await _Db.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == id && u.IdRol == 1);
+                Paciente? paciente = await _Db.Pacientes.FirstOrDefaultAsync(p => p.IdPaciente == id);
 
-                if (usuario == null)
+                if (usuario == null && paciente == null)
                 {
                     return new
                     {
@@ -61,23 +62,24 @@ namespace AgendApp.Services
                     };
                 }
 
-                //Medico? medico = await _Db.Medicos.FirstOrDefaultAsync(m => m.IdUsuario == usuario.IdUsuario);
+                if(usuario != null)
+                {
+                    return new
+                    {
+                        status = 200,
+                        success = true,
+                        data = usuario
+                    };
+                }
 
-                //if(medico == null)
-                //{
-                //    return new
-                //    {
-                //        status = 200,
-                //        success = true,
-                //        data = usuario
-                //    };
-                //}
+      
+                Usuario? user = await _Db.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == paciente.IdUsuario);
 
                 return new
                 {
                     status = 200,
                     success = true,
-                    data = usuario
+                    data = user
                 };
 
             }
