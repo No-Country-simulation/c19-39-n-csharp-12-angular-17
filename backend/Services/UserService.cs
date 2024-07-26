@@ -7,6 +7,7 @@ namespace AgendApp.Services
     public interface IUserService
     {
         Task<Object> getUsers();
+        Task<Object> getUser(int id);
         Task<Object> getRoles();
 
         Task<Object> setCita(CitaRequest request);
@@ -42,6 +43,40 @@ namespace AgendApp.Services
                 };
             }
 
+        }
+
+        public async Task<Object> getUser(int id)
+        {
+            try
+            {
+                Usuario? usuario = await _Db.Usuarios.FirstOrDefaultAsync(u => u.IdUsuario == id && u.IdRol == 1);
+
+                if (usuario == null)
+                {
+                    return new
+                    {
+                        status = 400,
+                        success = false,
+                        message = "Usuario no existe"
+                    };
+                }
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = usuario
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
         }
 
         public async Task<Object> getRoles()
