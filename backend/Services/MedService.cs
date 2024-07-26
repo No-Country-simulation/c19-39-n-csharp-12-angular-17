@@ -255,7 +255,7 @@ namespace AgendApp.Services
             try
             {
                 Medico? medico = await _db.Medicos.Include(i => i.IdUsuarioNavigation)
-                    .FirstOrDefaultAsync(m => m.IdUsuario == id || m.IdMedico == id);
+                    .FirstOrDefaultAsync(m => m.IdMedico == id);
                 
                 if(medico == null)
                 {
