@@ -19,6 +19,8 @@ public partial class Cita
     public string? MotivoConsulta { get; set; }
     [JsonIgnore]
     public virtual ICollection<Consulta> Consulta { get; set; } = new List<Consulta>();
+    [JsonIgnore]
     public virtual Medico? IdMedicoNavigation { get; set; }
+    [JsonIgnore]
     public virtual Paciente? IdPacienteNavigation { get; set; }
 }
