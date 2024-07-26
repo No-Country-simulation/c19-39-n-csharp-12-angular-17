@@ -85,5 +85,15 @@ namespace AgendApp.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("citas/{idMed}")]
+        public async Task<IActionResult> GetCitas(int idMed)
+        {
+            var result = await _medService.getCitas(idMed);
+
+            return Ok(result);
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace AgendApp.Services
         Task<Object> getSchedules();
         Task<Object> getSchedule(int id);
         Task<Object> getMedicos();
+        Task<Object> getCitas(int idMed);
         Task<Object> getMedico(int id);
 
     }
@@ -199,6 +200,29 @@ namespace AgendApp.Services
             }
         }
 
+        public async Task<Object> getCitas(int idMed)
+        {
+            try
+            {
+                List<Cita> citas = await _db.Citas.Where(c => c.IdMedico == idMed).ToListAsync();
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = citas
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
+        }
         public async Task<Object> getSchedule(int id)
         {
             try
