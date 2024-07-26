@@ -95,5 +95,14 @@ namespace AgendApp.Controllers
 
             return Ok(result);
         }
+
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("horario/{id}")]
+        public async Task<IActionResult> editSchedule(int id, ScheduleEditRequest request)
+        {
+            var result = _medService.editSchedule(id, request);
+            return Ok(result);
+        }
     }
 }
