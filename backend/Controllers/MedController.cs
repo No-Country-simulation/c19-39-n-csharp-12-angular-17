@@ -17,6 +17,16 @@ namespace AgendApp.Controllers
             this._medService = medService;
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("categoria")]
+        public async Task<IActionResult> PostCategorie(CategorieRequest request)
+        {
+            var result = await _medService.postCategorie(request);
+
+            return Ok(result);
+        }
+
         [HttpGet]
         [AllowAnonymous]
         [Route("categoria/{id}")]
