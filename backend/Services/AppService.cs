@@ -6,6 +6,8 @@ namespace AgendApp.Services
     public interface IAppService
     {
         Task<Object> getAppointments();
+
+        Task<Object> getAppointment(int id);
     }
     public class AppService : IAppService
     {
@@ -41,6 +43,41 @@ namespace AgendApp.Services
                 };
             }
 
+        }
+
+        public async Task<Object> getAppointment(int id)
+        {
+            try
+            {
+                Cita? cita = await _db.Citas.FirstOrDefaultAsync(c => c.IdCita == id);
+
+                if(cita == null)
+                {
+                    return new
+                    {
+                        status = 400,
+                        success = false,
+                        message = "Cita no existe"
+                    };
+                }
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = cita
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
         }
     }
 }

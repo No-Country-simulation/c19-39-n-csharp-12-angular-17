@@ -19,11 +19,21 @@ namespace AgendApp.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("citas")]
-        public async Task<IActionResult> getAppointments()
+        public async Task<IActionResult> GetAppointments()
         {
             var resp = await _appService.getAppointments();
 
             return Ok(resp);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("cita/{id}")]
+        public async Task<IActionResult> GetAppointment(int id)
+        {
+            var result = await _appService.getAppointment(id);
+
+            return Ok(result);
         }
     }
 }
