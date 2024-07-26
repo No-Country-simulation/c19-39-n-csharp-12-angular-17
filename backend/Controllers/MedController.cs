@@ -18,6 +18,15 @@ namespace AgendApp.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("categoria/{id}")]
+        public async Task<IActionResult> GetCategorie(int id)
+        {
+            var result = await _medService.getCategorie(id);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
         [Route("categorias")]
         public async Task<IActionResult> getCategories()
         {

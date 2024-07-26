@@ -5,6 +5,7 @@ namespace AgendApp.Services
 {
     public interface IMedService
     {
+        Task<Object> getCategorie(int id);
         Task<Object> getCategories();
         Task<Object> getSchedules();
         Task<Object> getSchedule(int id);
@@ -16,6 +17,40 @@ namespace AgendApp.Services
         public MedService(AgendappDbContext context)
         {
             this._db = context;
+        }
+
+        public async Task<Object> getCategorie(int id)
+        {
+            try
+            {
+                Categoriasmedica? categorie = await _db.Categoriasmedicas.FirstOrDefaultAsync(c => c.IdCategoria == id);
+
+                if (categorie == null)
+                {
+                    return new
+                    {
+                        status = 400,
+                        success = false,
+                        message = "Categoria medica no existe"
+                    };
+                }
+
+                return new
+                {
+                    status = 200,
+                    success = true,
+                    data = categorie
+                };
+            }
+            catch (Exception ex)
+            {
+                return new
+                {
+                    status = 500,
+                    success = false,
+                    message = ex.InnerException?.Message ?? ex.Message
+                };
+            }
         }
 
         public async Task<Object> getCategories()
