@@ -21,15 +21,6 @@ export class ApiService {
     );
   }
 
-  //editarUsuario  (no implementado)
-  putUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.put<Usuario>(`${this.apiUrl}User/usuario`, usuario).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return new Observable<Usuario>();
-      })
-    );
-  }
-
   //Obtener usuario por id
   getUsuarioByID(id: number): Observable<Usuario> {
     return this.http.get<Usuario>(`${this.apiUrl}User/usuario/${id}`).pipe(
@@ -38,6 +29,17 @@ export class ApiService {
       })
     );
   }
+
+  //editarUsuario  (no implementado)
+  putUsuario(usuario: Usuario): Observable<Usuario> {
+    const id = usuario.idUsuario;
+    return this.http.put<Usuario>(`${this.apiUrl}User/user/${id}`, usuario).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return new Observable<Usuario>();
+      })
+    );
+  }
+
 
 
   //Obtener todos los roles

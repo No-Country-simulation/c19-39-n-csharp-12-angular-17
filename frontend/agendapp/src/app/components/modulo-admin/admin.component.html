@@ -2,25 +2,31 @@
   <!-- Header de usuario -->
   <app-navbarusuariologueado></app-navbarusuariologueado>
 </section>
-<div class="d-flex flex-row justify-content-start align-items-center py-3 ps-2">
-  <h3>Hola {{ usuario.nombre }}!</h3>
-</div>
 
-<div class="main border">
-  <div class="container-fluid">
-    <div class="d-grid gap-2 col-6 mx-auto">
-      <a [routerLink]="['/inbox_admin']" class="btn btn-primary" type="button"
+
+<div class="main">
+   <section id="fraseBienvenida">
+    <div class="container fraseBienvenida">
+      @if(usuario){
+      <h2>Hola, {{ usuario.nombre }}!</h2>
+      }
+    </div>
+  </section>
+  
+  <div class="container-fluid btn-container">
+    <div class="d-flex flex-column justify-content-center align-items-center btn-container-group">
+      <a [routerLink]="['/inbox_admin']" class="btn btn-secondary btn-lg" type="button"
         >Ver Mensajes</a
       >
       <a
         [routerLink]="['/configuraciones']"
-        class="btn btn-primary"
+        class="btn btn-secondary btn-lg"
         type="button"
         >Configurar Servicios</a
       >
       <a
         [routerLink]="['/buscar_usuarios']"
-        class="btn btn-primary"
+        class="btn btn-secondary btn-lg"
         type="button"
         >Buscar Usuarios</a
       >

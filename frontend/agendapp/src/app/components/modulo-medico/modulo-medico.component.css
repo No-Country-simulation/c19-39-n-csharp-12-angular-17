@@ -79,12 +79,6 @@ img {
   padding: 0.5rem;
 }
 
-img.down-arrow {
-  border: none;
-  background-color: transparent;
-  width: 2rem;
-  height: auto;
-}
 
 .filtro-input {
   width: 23rem;
@@ -107,13 +101,16 @@ span.icono-videocall {
   width: 50px;
 }
 
+span.icono-idCita{
+  position: absolute;
+  left: 0;
+  width: 50px;
+  padding: 6px;
+}
+
 span.active {
   border-color: #198754;
   background-color: #198754;
   color: white !important;
   font-weight: bold;
 }
-
-/* .collapse-container{
-  overflow: hidden;
-} */

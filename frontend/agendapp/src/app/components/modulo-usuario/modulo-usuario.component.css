@@ -5,14 +5,19 @@
   height: 2rem 0px;
 }
 
+a.routerlink{
+  color: #000;
+  font-weight: 500;
+}
+
 a.cta {
   width: 13rem;
   height: 6rem;
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
   padding: 0.6rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.7px;
   text-shadow: 1px 1px 20px #333;
   border-radius: 20px;
@@ -41,8 +46,12 @@ img {
   margin-top: 1rem;
 }
 
-.titulos > h2 {
+.titulos {
   font-weight: 900;
+}
+
+.container-cards{
+  width: 90dvw;
 }
 
 .container-button-group {

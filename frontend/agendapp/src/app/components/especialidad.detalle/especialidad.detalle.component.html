@@ -1,27 +1,34 @@
 <section id="nav_usuario">
   <!-- Header de usuario -->
   <app-navbarusuariologueado></app-navbarusuariologueado>
-  <div class="container-fluid d-flex flex-row">
-    <a [routerLink]="['/especialidades']">
-      <img
-        class="ms-4 caret"
-        src="../../../assets/img/caret_back.png"
-        alt="icono_regresar"
-      />
-    </a>
-    <h3 class="ms-5 pb-1">Agendá Tu Turno</h3>
-  </div>
-  @if (especialidad){
-  <div class="container fraseBienvenida">
-      <p>{{especialidad.nombre}}</p>
-    </div>
-    }
 </section>
+<div class="container-fluid d-flex flex-row">
+  <a [routerLink]="['/especialidades']">
+    <img
+      class="ms-4 caret"
+      src="../../../assets/img/caret_back.png"
+      alt="icono_regresar"
+    />
+  </a>
+  <h3 class="ms-5 pb-1">Agendá Tu Turno</h3>
+</div>
+<div class="container fraseBienvenida">
+  <p>{{ especialidad.nombre }}</p>
+</div>
 
 <div class="main">
   <div class="container card-container">
-    @if(especialidad){ @for(med of medicosFiltrados; track med.idUsuario){
-    <div class="card mb-3"  (click)="guardarIdMedico(med.idUsuario)">
+    @switch (medicosFiltrados.length === 0) {@case (true) {
+    <div class="card mb-3 card-vacia">
+      <div
+        class="card-body py-4 m-0 d-flex flex-column justify-content-center align-items-center"
+      >
+        <span>No hay medicos disponibles para esta categoria</span>
+        <small>Disculpe las molestias.</small>
+      </div>
+    </div>
+    }@default{ @for(med of medicosFiltrados; track med.idMedico){
+    <div class="card mb-3" (click)="guardarIdMedico(med.idMedico)">
       <div class="row g-0">
         <div class="col-2 d-flex justify-content-end align-items-center">
           <img
@@ -36,13 +43,19 @@
           >
             <!-- Nombre completo y especialidad -->
             <h5 class="d-block text-nowrap">
-              Dr. {{ med.nombre }}&ensp;{{ med.apellido }}
+              Dr. {{ med.idUsuarioNavigation.nombre }}&ensp;{{
+                med.idUsuarioNavigation.apellido
+              }}
             </h5>
-            <h6 class="card-title">{{ especialidad.nombre }}</h6>
+            <h6 class="card-title">{{ especialidad?.nombre }}</h6>
             <!-- fecha, hora y consulta -->
+            @if(horario){
             <small class="pill">
-              {{'Rango horario'}}
+              {{ horario.rango }}
             </small>
+            }@else {
+            <small class="pill">No disponible</small>
+            }
           </div>
         </div>
         <div class="badge">
@@ -51,7 +64,7 @@
         </div>
       </div>
     </div>
-    } }
+    } }}
   </div>
 </div>
 

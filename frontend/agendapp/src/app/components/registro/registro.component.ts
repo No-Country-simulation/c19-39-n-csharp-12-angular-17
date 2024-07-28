@@ -1,14 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { ApiProviderService } from '../../services/api-provider.service';
+
+import { HorariosService } from '../../services/horarios.service';
+import { CategoriasService } from '../../services/categorias.service';
 import { RegistroService } from '../../services/registro.service';
+import { SweetAlertService } from '../../services/alerts/sweet-alert.service';
+
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Categoria, Horario } from '../../interfaces/api';
 import { MedicoRegister, UsuarioRegister } from '../../interfaces/auth';
-import { ApiService } from '../../services/api.service';
-import { HorariosService } from '../../services/horarios.service';
-import { SweetAlertService } from '../../services/alerts/sweet-alert.service';
 
 @Component({
   selector: 'app-registro',
@@ -22,6 +23,8 @@ export class RegistroComponent implements OnInit {
   section: string = '';
   especialidades: Categoria[] = [];
   horarios: Horario[] = [];
+  password: string = '';
+  isPasswordVisible: boolean = false;
 
   user: UsuarioRegister = {
     dni: '',
@@ -43,16 +46,14 @@ export class RegistroComponent implements OnInit {
     idHorario: 0,
   };
 
-  apiService = inject(ApiService);
-  route = inject(ActivatedRoute);
-  apiServiceProvider = inject(ApiProviderService);
-  router = inject(Router);
-  registroService = inject(RegistroService);
-  horarioService = inject(HorariosService);
+  private categoriaService = inject(CategoriasService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private registroService = inject(RegistroService);
+  private horarioService = inject(HorariosService);
   sweetAlertService = inject(SweetAlertService);
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.section = this.route.snapshot.routeConfig?.path || '';
@@ -63,9 +64,9 @@ export class RegistroComponent implements OnInit {
 
   //servicio de especialidades JS
   getEspecialidades() {
-    this.apiServiceProvider.getEspecialidades().subscribe((data: any) => {
-      this.especialidades = data;
-      console.log(this.especialidades);
+    this.categoriaService.getEspecialidades().subscribe((data: any) => {
+      this.especialidades = data.data;
+      // console.log(this.especialidades);
     });
   }
 
@@ -73,7 +74,7 @@ export class RegistroComponent implements OnInit {
   getHorarios() {
     this.horarioService.getHorarios().subscribe((data: any) => {
       this.horarios = data.data;
-      console.log(this.horarios);
+      // console.log(this.horarios);
     });
   }
 
@@ -91,7 +92,7 @@ export class RegistroComponent implements OnInit {
       this.registroService
         .registrarUsuario(usuario)
         .subscribe((data: UsuarioRegister) => {
-          this.sweetAlertService.success(`Usuario creado con éxito.`)
+          this.sweetAlertService.success(`Usuario creado con éxito.`);
           console.log(data);
         });
       localStorage.setItem('usuario', JSON.stringify(usuario));
@@ -117,7 +118,7 @@ export class RegistroComponent implements OnInit {
       this.registroService
         .registrarMedico(medico)
         .subscribe((data: MedicoRegister) => {
-          this.sweetAlertService.success(`Medico creado con éxito.`)
+          this.sweetAlertService.success(`Medico creado con éxito.`);
           console.log(data);
         });
       localStorage.setItem('medico', JSON.stringify(medico));
@@ -126,5 +127,9 @@ export class RegistroComponent implements OnInit {
     } else {
       this.sweetAlertService.alert('Por favor, completa todos los campos.');
     }
+  }
+
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
   }
 }

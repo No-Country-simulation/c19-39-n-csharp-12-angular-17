@@ -1,14 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
-import { ApiProviderService } from '../../services/api-provider.service';
-import { Categoria, Horario } from '../../interfaces/api';
-import { Usuario } from '../../interfaces/usuario';
-import { ApiService } from '../../services/api.service';
+
 import { CategoriasService } from '../../services/categorias.service';
 import { HorariosService } from '../../services/horarios.service';
-import { Medico } from '../../interfaces/medico';
 import { MedicosService } from '../../services/medicos.service';
+import { AuthService } from '../../services/auth.service';
+
+import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
+import { Usuario } from '../../interfaces/usuario';
 
 @Component({
   selector: 'app-especialidad.detalle',
@@ -18,100 +17,79 @@ import { MedicosService } from '../../services/medicos.service';
   styleUrl: './especialidad.detalle.component.css',
 })
 export class EspecialidadDetalleComponent implements OnInit {
-  section: string = ''; //registro_medicos o registro_pacientes
   idCategoriaAFiltrar: number = 0;
-  idHorarioAFiltrar: number = 0;
-  horarios: Horario[] = [];
-  especialidades: Categoria[] = [];
+  horario: any;
   especialidad: any;
   medicos: any[] = [];
   medicosFiltrados: any[] = [];
-  medicosFiltradosPorHorario: any[] = [];
-  medicosFiltradosPorCategoria: any[] = [];
+  usuario: Usuario = {} as Usuario;
 
-  private apiService = inject(ApiService);
   private medicoService = inject(MedicosService);
   private categoriaService = inject(CategoriasService);
   private horarioService = inject(HorariosService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   constructor() {
-    this.section = this.route.snapshot.routeConfig?.path || '';
-    this.idCategoriaAFiltrar = this.route.snapshot.params['id'];
+    this.idCategoriaAFiltrar = this.route.snapshot.paramMap.get('id')
+      ? parseInt(this.route.snapshot.paramMap.get('id') || '0')
+      : 0;
   }
 
   ngOnInit(): void {
-    this.getEspecialidades();
     this.getEspecialidadById(this.idCategoriaAFiltrar);
-    this.getHorarios();
-    this.getMedicosData();
+    this.getMedicos();
+    this.getUsuario();
   }
 
-  //!!eliminar
+  //Obtener el usuario (payload del login)
+  getUsuario(): void {
+    this.authService.usuario$.subscribe((usuario) => {
+      if (usuario) {
+        this.usuario = usuario;
+      } else {
+        console.log('No hay usuario logueado');
+      }
+    });
+  }
+
   guardarIdMedico(id: any) {
     this.router.navigate(['/turno']);
-    localStorage.setItem('medicoId', id.toString());
-  }
-
-
-  //obtener especialidades
-  getEspecialidades() {
-    this.categoriaService.getEspecialidades().subscribe((data: any) => {
-      this.especialidades = data.data;
-      console.log(this.especialidades);
-    });
+    localStorage.setItem('medicoId', id);
   }
 
   //Obtener especialidades
   getEspecialidadById(id: number) {
     this.categoriaService.getEspecialidadByID(id).subscribe((data: any) => {
       this.especialidad = data.data;
-      console.log(this.especialidad);
-    });
-  }
-
-  //Obtener horarios
-  getHorarios() {
-    this.horarioService.getHorarios().subscribe((data: any) => {
-      this.horarios = data.data;
-      console.log(this.horarios);
+      // console.log(this.especialidad);
     });
   }
 
   //Obtener medicos
-  getMedicosData() {
-    this.medicoService.getMedicosDataUsuario().subscribe((data: any) => {
+  getMedicos() {
+    this.medicoService.getMedicos().subscribe((data: any) => {
       this.medicos = data;
-      console.log(this.medicos);
-      this.idCategoriaAFiltrar = this.medicos[0].idCategoria;
-      this.idHorarioAFiltrar = this.medicos[0].idHorario;
-      this.filtrarMedicosPorCategoria(this.idCategoriaAFiltrar);
-      this.filtrarMedicosPorHorario(this.idHorarioAFiltrar);
+      // console.log(this.medicos);
+      this.medicosFiltrados = this.medicos.filter((medico: any) => {
+        return medico.idCategoria === this.idCategoriaAFiltrar;
+      });
+
+      this.medicosFiltrados.forEach((medico: any) => {
+        if (medico.idMedico && medico.idHorario) {
+          this.filtrarHorariosId(medico.idHorario);
+        }
+      });
+
+      // console.log(this.medicosFiltrados);
     });
   }
 
-  //obtener medicos por horario
-  private filtrarMedicosPorHorario(id: number) {
-    console.log('Medicos:', this.medicos);
-
-    this.medicosFiltradosPorHorario = this.medicosFiltrados.filter((medico) => {
-      return medico.idHorario === id;
+  filtrarHorariosId(id: number) {
+    this.horarioService.getHorarioByID(id).subscribe((data: any) => {
+      this.horario = data.data;
+      // console.log(this.horario);
     });
-    console.log(
-      'Medicos filtrados por Horario ' + this.medicosFiltradosPorHorario
-    );
-  }
-
-  //obtener medicos por categoria
-  private filtrarMedicosPorCategoria(id: number) {
-    console.log('Medicos:', this.medicos);
-
-    this.medicosFiltradosPorCategoria = this.medicos.filter((medico) => {
-      return medico.idCategoria === id;
-    });
-    console.log(
-      'Medicos filtrados por Categoria ' + this.medicosFiltradosPorCategoria
-    );
   }
 }

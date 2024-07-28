@@ -1,11 +1,9 @@
-@if(section){
 <nav class="navbar d-flex flex-row justify-content-around py-3">
-  @if(section === 'home_usuario' || section === 'mis_turnos' || section ===
-  'especialidades' || section === 'turno' ){
+  @if(usuario && usuario.idRol == 1){
   <ul class="d-flex flex-row justify-content-around align-items-center">
     <li>
       <a [routerLink]="['/home_usuario']" class="border">
-        <img src="../../../assets/img/home.svg" alt="" class="border m-0 p-0" />
+        <img src="../../../assets/img/home.svg" alt="" class="border m-0 p-0" title="Home_usuario" />
       </a>
     </li>
     <li>
@@ -14,6 +12,7 @@
           src="../../../assets/img/calendar.svg"
           alt="icono-listado-de-turnos"
           class="border m-0 p-0"
+          title="Mis turnos"
         />
       </a>
     </li>
@@ -23,11 +22,12 @@
           src="../../../assets/img/specialties.svg"
           alt="icono-especialidades"
           class="border m-0 p-0"
+          title="Especialidades"
         />
       </a>
     </li>
     <li>
-      <a [routerLink]="['/']" class="border">
+      <a (click)="logout()" class="border">
         <img
           src="../../../assets/img/logout.svg"
           alt="icono_salir"
@@ -36,11 +36,11 @@
       </a>
     </li>
   </ul>
-  } @else if(section === 'home_medico' || section === 'buscar' || section === 'inbox'){
+  } @else if(usuario && usuario.idRol == 2){
   <ul class="d-flex flex-row justify-content-around align-items-center">
     <li>
       <a [routerLink]="['/home_medico']" class="border">
-        <img src="../../../assets/img/home.svg" alt="icono-home-medico" class="border m-0 p-0" />
+        <img src="../../../assets/img/home.svg" alt="icono-home-medico" class="border m-0 p-0" title="Home medico"/>
       </a>
     </li>
     <li>
@@ -49,6 +49,7 @@
           src="../../../assets/img/list-solid.svg"
           alt="icono-buscar-usuarios-medico"
           class="border m-0 p-0"
+          title="Buscar"
         />
       </a>
     </li>
@@ -58,6 +59,7 @@
           src="../../../assets/img/inbox.svg"
           alt="icono_inbox-de-mensajes-internos-medico"
           class="border m-0 p-0"
+          title="Inbox"
         />
       </a>
     </li>
@@ -71,12 +73,11 @@
       </a>
     </li>     
   </ul>
-  } @else if(section === 'admin' || section === 'buscar_usuarios' || section ===
-  'inbox_admin' || section === 'configuraciones'){
+  } @else if(usuario && usuario.idRol == 3){
   <ul class="d-flex flex-row justify-content-around align-items-center">
     <li>
       <a [routerLink]="['/admin']" class="border">
-        <img src="../../../assets/img/home.svg" alt="icono-home-admin" class="border m-0 p-0" />
+        <img src="../../../assets/img/home.svg" alt="icono-home-admin" class="border m-0 p-0" title="Home administrador"/>
       </a>
     </li>
     <li>
@@ -85,6 +86,7 @@
           src="../../../assets/img/search-folder.svg"
           alt="icono-buscar-usuarios"
           class="border m-0 p-0"
+          title="Buscar usuarios"
         />
       </a>
     </li>
@@ -94,6 +96,7 @@
           src="../../../assets/img/inbox.svg"
           alt="icono_inbox-de-mensajes-internos"
           class="border m-0 p-0"
+          title="Inbox admin"
         />
       </a>
     </li>
@@ -102,11 +105,11 @@
         <img
           src="../../../assets/img/specialties.svg"
           alt="icono_configuraciones"
-          title="Salir"
+          title="Configuraciones"
         />
       </a>
     </li>
   </ul>
   }
 </nav>
-}
+

@@ -33,6 +33,11 @@ select {
     height: 10rem;
 }
 
+select#idMedico {
+    width: 6rem;
+    height: 2rem;
+}
+
 span.icono-editar {
     cursor: pointer;
     width: 10px;

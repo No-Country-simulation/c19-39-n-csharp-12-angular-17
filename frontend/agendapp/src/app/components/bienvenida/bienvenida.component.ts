@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,4 +8,5 @@ import { RouterLink } from '@angular/router';
   templateUrl: './bienvenida.component.html',
   styleUrl: './bienvenida.component.css',
 })
-export class BienvenidaComponent {}
+export class BienvenidaComponent {
+}

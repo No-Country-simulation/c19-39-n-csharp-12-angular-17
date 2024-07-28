@@ -1,3 +1,8 @@
+<!-- Modal ver datos del usuario -->
+<app-modal-verdetalleusuario
+  [datoEntrada]="datos"
+></app-modal-verdetalleusuario>
+
 <section id="nav_medico">
   <!-- Header de usuario -->
   <app-navbarusuariologueado></app-navbarusuariologueado>
@@ -6,12 +11,9 @@
 <!-- Main -->
 <div class="main">
   <section id="fraseBienvenida">
-    @if (section === 'buscar') {
     <div class="container fraseBienvenida">
-      <!-- TODO: modificar por el objeto usuario id -->
       <h2>Buscar Usuarios</h2>
     </div>
-    }
   </section>
 
   <!-- Busqueda / Filtro -->
@@ -31,20 +33,23 @@
 
   <hr class="bg-transparent" />
 
-  <table class="table table-sm mx-auto">
+  <table class="table table-hover table-sm mx-auto">
     <thead>
       <tr class="col">
-        <th style="width: 6rem;">ID</th>
-        <th  style="width: 15rem;">Nombre y Apellido</th>
-        <th style="width: 9rem;">DNI</th>
-        <th style="width: 10rem;">Email</th>
+        <th style="width: 6rem">ID</th>
+        <th style="width: 15rem">Nombre y Apellido</th>
+        <th style="width: 9rem">DNI</th>
+        <th style="width: 10rem">Email</th>
       </tr>
     </thead>
     <tbody>
       @for(user of usuarios | filter: query; track user.idUsuario){
-      <tr class="align-self-center" (click)="verTurnoDetalle(user.idUsuario)">
+      <tr
+        class="align-self-center"
+        (click)="abrirModalEditarUsuario(); verTurnoDetalle(user.idUsuario)"
+      >
         <td>{{ user.idUsuario }}</td>
-        <td>{{ user.nombre }}&ensp;{{user.apellido}}</td>
+        <td>{{ user.nombre }}&ensp;{{ user.apellido }}</td>
         <td>{{ user.dni }}</td>
         <td>{{ user.email }}</td>
       </tr>

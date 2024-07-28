@@ -1,18 +1,22 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FooterComponent } from '../../shared/footer/footer.component';
-import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { FormsModule, NgForm } from '@angular/forms';
-import { Categoria, Horario } from '../../interfaces/api';
-import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { CitasService } from '../../services/citas.service';
-import { Cita } from '../../interfaces/cita';
 import { CategoriasService } from '../../services/categorias.service';
 import { HorariosService } from '../../services/horarios.service';
+import { AuthService } from '../../services/auth.service';
+
+import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { ModalHorarioComponent } from '../../shared/modal-horario/modal-horario.component';
-import * as bootstrap from 'bootstrap';
 import { ModalCategoriaComponent } from '../../shared/modal-categoria/modal-categoria.component';
-import { ModalEditarcitaComponent } from '../../shared/modal-editarcita/modal-editarcita.component';
+
+import { Categoria, Horario } from '../../interfaces/api';
+import { Cita } from '../../interfaces/cita';
+import { Usuario } from '../../interfaces/usuario';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-settings',
@@ -24,26 +28,22 @@ import { ModalEditarcitaComponent } from '../../shared/modal-editarcita/modal-ed
     CommonModule,
     ModalHorarioComponent,
     ModalCategoriaComponent,
-    ModalEditarcitaComponent
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
 })
 export class SettingsComponent implements OnInit {
   horarios: Horario[] = [];
-  horario_ = {} as Horario;
   especialidades: Categoria[] = [];
-  especialidad_ = {} as Categoria;
   citas: Cita[] = [];
   isEditable: boolean = false;
+  usuario: Usuario = {} as Usuario;
 
   //Elementos para acceder al ID del modal y con el que 'abrimos' el modal en el componente padre
   @ViewChild(ModalHorarioComponent) modalhorarios: ModalHorarioComponent =
     new ModalHorarioComponent();
   @ViewChild(ModalCategoriaComponent) modalcategorias: ModalCategoriaComponent =
     new ModalCategoriaComponent();
-  @ViewChild(ModalEditarcitaComponent) modaleditarcita: ModalEditarcitaComponent =
-    new ModalEditarcitaComponent();
 
   horario: Horario = {
     idHorario: 0,
@@ -53,35 +53,38 @@ export class SettingsComponent implements OnInit {
   especialidad: Categoria = {
     idCategoria: 0,
     nombre: '',
-    imgSrc: '',
   };
 
-  cita: Cita = {
-    idCita: 0,
-    fecha: '',
-    hora: '',
-    idPaciente: 0,
-    idMedico: 0,
-    motivoConsulta: '',
-    horaCita: 0,
-  };
+  private citaService = inject(CitasService);
+  private categoriaService = inject(CategoriasService);
+  private horarioService = inject(HorariosService);
+  private authService = inject(AuthService);
 
-  apiService = inject(ApiService);
-  citaService = inject(CitasService);
-  categoriaService = inject(CategoriasService);
-  horarioService = inject(HorariosService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.getEspecialidades();
     this.getHorarios();
     this.getCitas();
+      this.getUsuario();
+  }
+
+  //Obtener el usuario (payload del login)
+  getUsuario(): void {
+    this.authService.getUserData().subscribe((usuario) => {
+      if (usuario) {
+        this.usuario = usuario;
+      } else {
+        console.log('No hay usuario logueado');
+      }
+    });
   }
 
   //servicio de especialidades DB
   getEspecialidades() {
     this.categoriaService.getEspecialidades().subscribe((data: any) => {
       this.especialidades = data.data;
-      console.log(this.especialidades);
+      // console.log(this.especialidades);
     });
   }
 
@@ -89,7 +92,7 @@ export class SettingsComponent implements OnInit {
   getHorarios() {
     this.horarioService.getHorarios().subscribe((data: any) => {
       this.horarios = data.data;
-      console.log(this.horarios);
+      // console.log(this.horarios);
     });
   }
 
@@ -101,60 +104,50 @@ export class SettingsComponent implements OnInit {
           ...cita,
         };
       });
-      console.log(this.citas);
+      // console.log(this.citas);
     });
   }
 
   //Funciones de acciones para todos los grupos
-  editar(id: number, item: any) {
+  editarHorario(id: number, item: any) {
     item.isEditable = true;
-    console.log('Editar: ' + id);
+    // console.log('Editar: ' + id);
+  }
+
+  editarCategoria(id: number, item: any) {
+    item.isEditable = true;
+    // console.log('Editar: ' + id);
   }
 
   //guardar Horario
-  guardarHorario(horario: Horario) {
+  guardarHorario(id: number, horario: Horario) {
     horario.isEditable = false;
-    //falta el PUT
+    const obj = {
+      idHorario: id,
+      rango: horario.rango,
+    };
+    this.horarioService.putHorario(obj).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 
   //guardar Categoria
-  guardarCategoria(categoria: Categoria) {
+  guardarCategoria(id: number, categoria: Categoria) {
     categoria.isEditable = false;
-    //falta el PUT
+    const obj = {
+      idCategoria: id,
+      nombre: categoria.nombre,
+      imgSrc: '',
+    };
+    this.categoriaService.putCategoria(obj).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 
   cancelar(item: any) {
     item.isEditable = false;
-    console.log('Cancelar: ');
   }
 
-  eliminar(id: number) {
-    console.log('Eliminar: ' + id);
-  }
-
-  verDataIdHora(dataId: Horario) {
-    console.log('Item seleccionado: ' + dataId);
-    this.horarioService.getHorarioByID(dataId.idHorario).subscribe((data: any) => {
-      this.horario_ = data.data;
-      console.log(this.horario_);
-    });
-  }
-
-  verDataIdCategoria(dataId: Categoria) {
-    console.log('Item seleccionado: ' + dataId);
-    this.categoriaService.getEspecialidadByID(dataId.idCategoria).subscribe((data: any) => {
-      this.especialidad_ = data.data;
-      console.log(this.especialidad);
-    });
-  }
-
-  verDataIdCita(dataId: Cita){
-    console.log('Item seleccionado: ' + dataId);
-    this.citaService.getCitaById(dataId.idCita).subscribe((data: any) => {
-      this.cita = data.data;
-      console.log(this.cita);
-    });
-  };
 
   //Acciones sobre los modales
   abrirModalHorario() {
@@ -173,14 +166,6 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  abrirModalEditarCita() {
-    const modal = document.getElementById('modaleditarcita');
-    if (modal) {
-      const instanciaModal = new bootstrap.Modal(modal);
-      instanciaModal.show();
-    }
-  }
-
   horarioAgregadoHandler(event: Horario) {
     console.log('Horario agregado' + event);
     this.getHorarios();
@@ -191,8 +176,9 @@ export class SettingsComponent implements OnInit {
     this.getEspecialidades();
   }
 
-  citaEditadaHandler(event: Cita) {
-    console.log('Cita editada' + event);
-    this.getCitas();
+  //verCitaDetalle
+  verCitaDetalle(id: number) {
+    console.log('Ver cita: ' + id);
+    this.router.navigate(['/ficha_paciente/', id]);
   }
 }

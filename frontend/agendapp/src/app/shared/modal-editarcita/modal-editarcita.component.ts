@@ -1,8 +1,17 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Cita } from '../../interfaces/cita';
 import { CitasService } from '../../services/citas.service';
-import { FormsModule, NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { HorariosService } from '../../services/horarios.service';
+import { Horario } from '../../interfaces/api';
 
 @Component({
   selector: 'app-modal-editarcita',
@@ -11,8 +20,10 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './modal-editarcita.component.html',
   styleUrl: './modal-editarcita.component.css',
 })
-export class ModalEditarcitaComponent {
+export class ModalEditarcitaComponent implements AfterViewInit {
   @Output() citaEditada = new EventEmitter<Cita>();
+  @Input() datoEntrada: any;
+  horarios: Horario[] = [];
 
   cita: Cita = {
     idCita: 0,
@@ -21,24 +32,41 @@ export class ModalEditarcitaComponent {
     idPaciente: 0,
     idMedico: 0,
     motivoConsulta: '',
-    horaCita: 0,
   };
 
   private citaService = inject(CitasService);
-  private route = inject(ActivatedRoute); //capturar el id del param
+  private horarioService = inject(HorariosService);
 
-  constructor() {}
+  constructor() {
+    if (this.datoEntrada) {
+      this.cita = { ...this.datoEntrada };
+    }
+  }
 
-  //!!Edita una cita en la base de datos
+  ngAfterViewInit() {
+    this.obtenerHorarios();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['datoEntrada'] && this.datoEntrada) {
+      this.cita = { ...this.datoEntrada };
+    }
+  }
+
   editarCita(form: NgForm) {
     const datos = form.value;
-    console.log(datos);
     if (form.valid) {
-      this.citaService.putCita(datos).subscribe((data: any) => {
-        console.log(data);
+      this.citaService.putCita(this.cita).subscribe((data: Cita) => {
         this.citaEditada.emit(data);
         form.resetForm();
       });
     }
+  }
+
+  //Obtener horarios de la DB
+  obtenerHorarios() {
+    this.horarioService.getHorarios().subscribe((data: any) => {
+      this.horarios = data.data;
+    });
   }
 }

@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
-import { LocalStorageService } from '../../services/local-storage.service';
+
+import { CitasService } from '../../services/citas.service';
+import { AuthService } from '../../services/auth.service';
+import { MedicosService } from '../../services/medicos.service';
+
 import { Usuario } from '../../interfaces/usuario';
-import { ApiProviderService } from '../../services/api-provider.service';
-import { CommonModule } from '@angular/common';
 import { Cita } from '../../interfaces/cita';
 
 
@@ -22,77 +26,51 @@ import { Cita } from '../../interfaces/cita';
   styleUrl: './turnodetalle.component.css',
 })
 export class TurnodetalleComponent implements OnInit {
-  section: string = '';
-  turno = {} as Cita; //turno con idHorario y idMedico
-  usuario = {} as Usuario; //usuario logueado
-  usuarioMedico: any; //medico con idMedico
-  horario: any; //horario
-  rangoHoraId: string = ''; //segun idHorario sus rangos en numeros
-  horaCita: number | null = null; //hora de la cita
-  idParam: any; //id del turno a buscar en LS
+  turno = {} as Cita; 
+  usuario = {} as Usuario; 
+  usuarioMedico: any; 
+  idParam: any;
 
-  constructor(
-    private route: ActivatedRoute,
-    private localServicr: LocalStorageService,
-    private apiServiceProvider: ApiProviderService
-  ) {
-    this.section = this.route.snapshot.routeConfig?.path || '';
+  private citaService = inject(CitasService);
+  private medicoService = inject(MedicosService);
+  private authService = inject(AuthService);
+  private route = inject(ActivatedRoute);
+
+  constructor() {
     this.idParam = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-    console.log(this.idParam);
     this.getUsuario();
-    this.getTurnoDeLista(parseInt(this.idParam));
+    this.getCitaById(this.idParam);
   }
 
-  //Obtener usuario logueado del LS
-  getUsuario() {
-    let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-    this.usuario = usuario;
-  }
-
-  //Turno por {id} del LS
-  async getTurnoDeLista(id: number) {
-    const lista = localStorage.getItem('ListaTurnos');
-    const idBuscado = id;
-    if (lista) {
-      const listaTurnos = await JSON.parse(lista);
-      console.log('Lista de turnos: ', listaTurnos);
-      const turno = listaTurnos.find(
-        (turno: Cita) => turno.idCita === idBuscado
-      );
-      this.turno = turno;
-      console.log('Turno:', this.turno);
-      this.usuarioMedico = this.turno.idMedico;
-      this.rangoHoraId = this.turno.hora;
-      this.horario = this.turno.horaCita; //horario tal cual tiene el turno creado ej: 17:00
-
-      if (this.usuarioMedico) {
-        this.getMedicoPorId(this.usuarioMedico);
+  //Obtener el usuario (payload del login)
+  getUsuario(): void {
+    this.authService.usuario$.subscribe((usuario) => {
+      if (usuario) {
+        this.usuario = usuario;
+      } else {
+        console.log('No hay usuario logueado');
       }
-
-      if (this.rangoHoraId) {
-        this.getHorarioPorId(this.rangoHoraId);
-      }
-    } else {
-      console.log('No hay turnos en la lista del LS');
-    }
-  }
-
-  //Obtener medico por id
-  getMedicoPorId(id: number) {
-    this.apiServiceProvider.getUsuarioById(id).subscribe((data: any) => {
-      this.usuarioMedico = data[0];
-      console.log('Medico:', this.usuarioMedico);
     });
   }
 
-  //obtener horarios por id
-  getHorarioPorId(id: any) {
-    this.apiServiceProvider.getHorarioById(id).subscribe((data: any) => {
-      this.rangoHoraId = data[0].rango;
-      console.log('Horario:', this.rangoHoraId);
-    });    
+  //Obtener cita por id
+  getCitaById(id: number) {
+    this.citaService.getCitaByID(id).subscribe((data: any) => {
+      this.turno = data.data;
+      // console.log(this.turno);
+      this.filterMedicoById(this.turno.idMedico);
+    });
   }
+
+  //Obtener medico por id del usuario
+  private filterMedicoById(id: number) {
+    this.medicoService.getMedicoById(id).subscribe((data: any) => {
+      this.usuarioMedico = data.data.idUsuarioNavigation;
+      // console.log(this.usuarioMedico);
+    });
+  }
+
 }

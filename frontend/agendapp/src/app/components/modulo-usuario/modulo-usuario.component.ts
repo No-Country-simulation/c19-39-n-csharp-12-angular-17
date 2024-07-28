@@ -1,14 +1,20 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { FooterComponent } from '../../shared/footer/footer.component';
-import { ApiProviderService } from '../../services/api-provider.service';
-import { Categoria } from '../../interfaces/api';
-import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
-import { LocalStorageService } from '../../services/local-storage.service';
-import { Usuario } from '../../interfaces/usuario';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../services/api.service';
+
+import { HorariosService } from '../../services/horarios.service';
+import { CategoriasService } from '../../services/categorias.service';
+import { CitasService } from '../../services/citas.service';
+import { MedicosService } from '../../services/medicos.service';
+import { AuthService } from '../../services/auth.service';
+
+import { FooterComponent } from '../../shared/footer/footer.component';
+import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
+
+import { Usuario } from '../../interfaces/usuario';
+import { Categoria } from '../../interfaces/api';
 import { Cita } from '../../interfaces/cita';
+import { CategoriaNombrePipe } from '../../services/categoria-nombre.pipe';
 
 @Component({
   selector: 'app-modulo-usuario',
@@ -17,129 +23,114 @@ import { Cita } from '../../interfaces/cita';
     RouterLink,
     FooterComponent,
     NavbarusuariologueadoComponent,
-    CommonModule
+    CommonModule,
+    CategoriaNombrePipe,
   ],
   templateUrl: './modulo-usuario.component.html',
   styleUrl: './modulo-usuario.component.css',
 })
 export class ModuloUsuarioComponent implements OnInit {
-  vistaHeader = true;
-  section: string = '';
   citas: Cita[] = [];
-  cita = {} as Cita;
   especialidades: Categoria[] = [];
-  especialidad = {} as Categoria;
-  usuarioMedico: any; //medico con idMedico
-  horario: any; //horario
-  horarioRango: any; //rango de horario
-  //!!temporal
   usuario = {} as Usuario;
+  private medicosMap: { [id: number]: any } = {};
 
-    route = inject(ActivatedRoute);
-    apiProviderService = inject(ApiProviderService);
-    apiService = inject(ApiService);
-    localServicr = inject(LocalStorageService);
-    router = inject(Router);
+  authService = inject(AuthService);
+  horarioService = inject(HorariosService);
+  categoriaService = inject(CategoriasService);
+  medicoService = inject(MedicosService);
+  citaService = inject(CitasService);
+  router = inject(Router);
 
   ngOnInit(): void {
-    this.section = this.route.snapshot.routeConfig?.path || '';
-    this.getUsuario();
-    this.obtenerListaCitas();
     this.getEspecialidades();
+    this.getUsuario();
+    this.obtenerCitasByUsuario(this.usuario.idUsuario);
   }
 
-  //Obtener usuario del LS  //!!temporalmente
+  //Obtener el usuario (payload del login)
   getUsuario(): void {
-    const usuario = localStorage.getItem('usuario');
-    if (usuario) {
-      this.usuario = JSON.parse(usuario);
-      console.log(this.usuario);
-    }
-  }
-
-  // servicio de cita de la JsonServer
-  // getCitas(): void {
-  //   this.apiProviderService.getCitas().subscribe((data: any) => {
-  //     data.forEach((cita: Cita) => {
-  //       this.citas.push(cita);
-  //       this.cita = cita;
-  //       console.log(this.cita);
-  //     });
-  //   });
-  // }
-
-  //funcion auxiliar para obtener el turno seleccionado por id del LS
-  //Obtener citas LS
-  obtenerListaCitas() {
-    this.citas = this.localServicr.obtenerListaTurnos();
-    console.log(this.citas);
-    this.citas.map((cita) => {
-      this.getCitaDetalles(cita.idCita);
-    });
-  }
-
-  //Obtener citas ID
-  getCitaDetalles(id: number) {
-    this.citas.forEach((cita) => {
-      if (cita.idCita === id) {
-        this.getMedicoPorId(cita.idMedico);
-        this.getHorarioPorId(cita.hora);
+    this.authService.usuario$.subscribe((usuario) => {
+      if (usuario) {
+        this.usuario = usuario;
+      } else {
+        console.log('No hay usuario logueado');
       }
     });
   }
 
-  //Obtener medico por id
-  getMedicoPorId(id: number) {
-    this.apiProviderService.getUsuarioById(id).subscribe((data: any) => {
-      this.usuarioMedico = data[0];
-      console.log('Medico:', this.usuarioMedico);
+  obtenerCitasByUsuario(id: number) {
+    this.citaService.getCitasByUsuario(id).subscribe((data: any) => {
+      this.citas = data.data;
+      // console.log(this.citas);
+      this.citas.forEach((cita, index) => {
+        this.filterMedicoById(cita.idMedico, index);
+      });
     });
   }
 
-  //obtener horarios por id
-  getHorarioPorId(id: any) {
-    this.apiProviderService.getHorarioById(id).subscribe((data: any) => {
-      this.horario = data[0];
-      console.log('Horario:', this.horario);
-    });
+  // Obtener médico por id y agregar los datos al objeto de la cita
+  private filterMedicoById(id: number, citaIndex: number) {
+    if (!this.medicosMap[id]) {
+      this.medicoService.getMedicoById(id).subscribe((data: any) => {
+        if (data.status === 400) {
+          //console.log(data.message);
+        } else {
+          const medicoData = data.data.idUsuarioNavigation;
+          const categoria = data.data.idCategoria;
+          this.medicosMap[id] = medicoData;
+          this.medicosMap[id].categoria = categoria;
+          this.citas[citaIndex] = {
+            ...this.citas[citaIndex],
+            medico: medicoData,
+            categoria: categoria,
+          };
+        }
+      });
+    } else {
+      this.citas[citaIndex] = {
+        ...this.citas[citaIndex],
+        medico: this.medicosMap[id],
+        categoria: this.medicosMap[id].categoria,
+      };
+    }
   }
 
   //Obtener especialidades de la DB
-  getEspecialidades(): void {
-    this.apiProviderService.getEspecialidades().subscribe((data: any) => {
-      console.log(data);
-      this.especialidades = data.map((especialidad: Categoria) => {
-        let imgSrc = '';
-        switch (especialidad.idCategoria) {
-          case 1:
-            imgSrc = '../../../assets/img/cardiology.svg';
-            break;
-          case 2:
-            imgSrc = '../../../assets/img/dermatology.svg';
-            break;
-          case 3:
-            imgSrc = '../../../assets/img/ginecology.svg';
-            break;
-          case 4:
-            imgSrc = '../../../assets/img/neurology.svg';
-            break;
-        }
-        const obj = {
+  getEspecialidades() {
+    const categoryImageMap: { [key: string]: string } = {
+      Cardiología: '../../../assets/img/cardiology.svg',
+      Dermatología: '../../../assets/img/dermatology.svg',
+      Endocrinología: '../../../assets/img/endocrinology.png',
+      Obstetricia: '../../../assets/img/obstetritian.svg',
+      Geriatría: '../../../assets/img/geriatrics.png',
+      Neurología: '../../../assets/img/neurology.svg',
+      Ginecologia: '../../../assets/img/ginecology.svg',
+      Radiología: '../../../assets/img/biohazard.png',
+    };
+
+    this.categoriaService.getEspecialidades().subscribe((data: any) => {
+      this.especialidades = data.data.map((especialidad: Categoria) => {
+        const imgSrc =
+          categoryImageMap[especialidad.nombre] ||
+          '../../../assets/img/logo.png';
+
+        return {
           idCategoria: especialidad.idCategoria,
           nombre: especialidad.nombre,
           imgSrc: imgSrc,
-          medicos: [],
+          isEditable: false, //para editar en otro momento
         };
-        this.especialidades.push(obj);
-        return obj;
       });
-
-      console.log(this.especialidades);
     });
   }
 
   limitEspecialidades(): Categoria[] {
     return this.especialidades.slice(0, 4);
+  }
+
+  limitCitasVistas(): Cita[] {
+    return this.citas.slice(0, 2);
   }
 
   verTurnoDetalle(id: number): void {

@@ -7,11 +7,6 @@
   (categoriaAgregada)="categoriaAgregadaHandler($event)"
 ></app-modal-categoria>
 
-<!-- Modal Editar Cita -->
-<app-modal-editarcita
-  (citaEditada)="citaEditadaHandler($event)"
-></app-modal-editarcita>
-
 <section id="nav_medico">
   <!-- Header de usuario -->
   <app-navbarusuariologueado></app-navbarusuariologueado>
@@ -29,7 +24,7 @@
     class="container-fluid d-flex flex-column justify-content-center align-items-center mt-2 p-4"
   >
     <!-- ABM Horarios -->
-    <div class="d-flex flex-row justify-content-around w-100">
+    <div class="d-flex flex-row justify-content-around w-100 py-3">
       <h4>Horarios</h4>
       <span
         type="button"
@@ -42,14 +37,14 @@
     <table class="table table-sm table-hover">
       <thead>
         <tr class="col">
-          <th>ID</th>
+          <th>ID Horario</th>
           <th>Rango</th>
           <th style="width: 9rem">Acciones</th>
         </tr>
       </thead>
       <tbody>
         @for(hora of horarios; track hora.idHorario){
-        <tr (click)="verDataIdHora(hora)">
+        <tr>
           <td>{{ hora.idHorario }}</td>
           @if(!hora.isEditable){
           <td>{{ hora.rango }}</td>
@@ -67,23 +62,22 @@
           }
 
           <td>
-            <span class="icono-editar" (click)="editar(hora.idHorario, hora)">
+            <span
+              class="icono-editar"
+              (click)="editarHorario(hora.idHorario, hora)"
+            >
               <img src="../../../assets/img/edit.svg" alt="icono-editar" />
             </span>
-            <span class="icono-guardar" (click)="guardarHorario(hora)">
+            <span
+              class="icono-guardar"
+              (click)="guardarHorario(hora.idHorario, hora)"
+            >
               <img src="../../../assets/img/save.svg" alt="icono-guardar" />
             </span>
             <span class="icono-cancelar" (click)="cancelar(hora)">
               <img src="../../../assets/img/cancel.svg" alt="icono-cancelar" />
             </span>
-            <span class="icono-eliminar">
-              <img
-                src="../../../assets/img/trash.svg"
-                alt="icono-eliminar"
-                (click)="eliminar(hora.idHorario)"
-              />
-            </span>
-          </td>
+           </td>
         </tr>
         }
       </tbody>
@@ -92,7 +86,7 @@
     <hr />
 
     <!-- ABM Especialidades -->
-    <div class="d-flex flex-row justify-content-around w-100">
+    <div class="d-flex flex-row justify-content-around w-100 py-3">
       <h4>Especialidades</h4>
       <span
         type="button"
@@ -102,18 +96,18 @@
         >Agregar +</span
       >
     </div>
-    <table class="table table-sm table-hover">
+    <table class="table table-hover table-sm">
       <thead>
         <tr class="col">
-          <th>ID</th>
+          <th>ID Categoria</th>
           <th>Nombre</th>
           <th>Logo</th>
-          <th>Acciones</th>
+          <th style="width: 9rem;">Acciones</th>
         </tr>
       </thead>
       <tbody>
         @for(esp of especialidades; track esp.idCategoria){
-        <tr (click)="verDataIdCategoria(esp)">
+        <tr>
           <td>{{ esp.idCategoria }}</td>
           @if(!esp.isEditable){
           <td>{{ esp.nombre }}</td>
@@ -134,21 +128,20 @@
           <td>Sin logo</td>
           }
           <td>
-            <span class="icono-editar" (click)="editar(esp.idCategoria, esp)">
+            <span
+              class="icono-editar"
+              (click)="editarCategoria(esp.idCategoria, esp)"
+            >
               <img src="../../../assets/img/edit.svg" alt="icono-editar" />
             </span>
-            <span class="icono-guardar" (click)="guardarCategoria(esp)">
+            <span
+              class="icono-guardar"
+              (click)="guardarCategoria(esp.idCategoria, esp)"
+            >
               <img src="../../../assets/img/save.svg" alt="icono-guardar" />
             </span>
             <span class="icono-cancelar" (click)="cancelar(esp)">
               <img src="../../../assets/img/cancel.svg" alt="icono-cancelar" />
-            </span>
-            <span class="icono-eliminar">
-              <img
-                src="../../../assets/img/trash.svg"
-                alt="icono-eliminar"
-                (click)="eliminar(esp.idCategoria)"
-              />
             </span>
           </td>
         </tr>
@@ -159,20 +152,13 @@
     <hr />
 
     <!-- ABM Citas -->
-    <div class="d-flex flex-row justify-content-around w-100">
-      <h4>Citas</h4>
-      <span
-        type="button"
-        (click)="abrirModalEditarCita()"
-        class="badge rounded-pill text-bg-success"
-        title="Agregar +"
-        >Agregar +</span
-      >
+    <div class="d-flex flex-row justify-content-evenly w-100 py-3">     
+      <h4>Citas</h4>   
     </div>
     <table class="table table-sm table-hover">
       <thead>
         <tr class="col">
-          <th>ID</th>
+          <th>ID Cita</th>
           <th>Fecha</th>
           <th>Hora</th>
           <th>ID Paciente</th>
@@ -183,7 +169,7 @@
       </thead>
       <tbody>
         @for(cita of citas; track cita.idCita){
-        <tr (click)="verDataIdCita(cita)">
+        <tr>
           <td>{{ cita.idCita }}</td>
           <td>{{ cita.fecha | date : "dd/MM/yy" }}</td>
           <td>{{ cita.hora }}</td>
@@ -194,15 +180,8 @@
             <span class="icono-editar">
               <img
                 src="../../../assets/img/eye-password-show.svg"
-                alt="icono-editar"
-                (click)="abrirModalEditarCita()"
-              />
-            </span>
-            <span class="icono-eliminar">
-              <img
-                src="../../../assets/img/trash.svg"
-                alt="icono-eliminar"
-                (click)="eliminar(cita.idCita)"
+                alt="icono-ver"
+                (click)="verCitaDetalle(cita.idCita)"
               />
             </span>
           </td>

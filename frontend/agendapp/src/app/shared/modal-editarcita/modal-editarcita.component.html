@@ -9,7 +9,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modaleditarcita">Editar Usuario</h1>
+        <h1 class="modal-title fs-5" id="modaleditarcita">Editar Cita</h1>
         <button
           type="button"
           class="btn-close"
@@ -21,43 +21,68 @@
         <form #form="ngForm" (ngSubmit)="editarCita(form)">
           <div class="card bg-transparent border-0">
             <div class="card-body m-0 p-0">
+              <input type="hidden" name="idCita" [(ngModel)]="cita.idCita" />
               <div class="wrapper mb-2">
-          <input
-            class="form-control"
-            type="text"
-            name="nombre"
-            placeholder="Nombre"
-            [(ngModel)]="cita.fecha"
-          />
-        </div>
-        <div class="wrapper mb-2">
-          <input
-            class="form-control"
-            type="text"
-            name="apellido"
-            placeholder="Apellido"
-            [(ngModel)]="cita.hora"
-          />
-        </div>
-        <div class="wrapper mb-2">
-          <input
-            class="form-control"
-            type="email"
-            name="email"
-            placeholder="Email"
-            [(ngModel)]="cita.idPaciente"
-          />
-        </div>
-         <div class="wrapper mb-2">
-          <input
-            class="form-control"
-            type="email"
-            name="email"
-            placeholder="Email"
-            [(ngModel)]="cita.idMedico"
-          />
-        </div>      
-        
+                <input
+                  class="form-control"
+                  type="date"
+                  name="fecha"
+                  placeholder="Fecha"
+                  [(ngModel)]="cita.fecha"
+                />
+              </div>
+              <div class="wrapper mb-2">
+                <select
+                  class="form-select"
+                  aria-label="Seleccione un rango de horario"
+                  name="rango"
+                  [(ngModel)]="cita.hora"
+                >
+                  @for(hora of horarios; track hora.idHorario){
+                  <option
+                    class="option-menu"
+                    [id]="hora.idHorario"
+                    [value]="hora.rango"
+                  >
+                    {{ hora.rango }}
+                  </option>
+                  }@empty {
+                  <option class="option-menu">
+                    No hay horarios disponibles
+                  </option>
+                  }
+                </select>
+              </div>
+              <div class="wrapper mb-2">
+                <label for="idPaciente"> ID del paciente </label>
+                <input
+                  class="form-control"
+                  type="number"
+                  name="idPaciente"
+                  id="idPaciente"
+                  [(ngModel)]="cita.idPaciente"
+                />
+              </div>
+              <div class="wrapper mb-2">
+                <label for="idMedico"> ID del medico </label>
+                <input
+                  class="form-control"
+                  type="number"
+                  name="idMedico"
+                  id="idMedico"
+                  [(ngModel)]="cita.idMedico"
+                />
+              </div>
+              <div class="wrapper mb-2">
+                <textarea
+                  class="form-control"
+                  type="text"
+                  name="motivoConsulta"
+                  placeholder="Motivo Consulta"
+                  [(ngModel)]="cita.motivoConsulta"
+                >
+                </textarea>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -68,7 +93,12 @@
             >
               Cancelar
             </button>
-            <input type="submit" value="Editar" class="btn btn-primary btn-sm" data-bs-dismiss="modal" />
+            <input
+              type="submit"
+              value="Editar"
+              class="btn btn-primary btn-sm"
+              data-bs-dismiss="modal"
+            />
           </div>
         </form>
       </div>

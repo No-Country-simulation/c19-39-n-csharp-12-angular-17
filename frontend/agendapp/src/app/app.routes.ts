@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { adminGuard } from './guards/admin.guard';
+import { medicoGuard } from './guards/medico.guard';
+import { pacienteGuard } from './guards/paciente.guard';
 
 export const routes: Routes = [
   //Bienvenida
@@ -18,7 +21,7 @@ export const routes: Routes = [
       import('./components/login/login.component').then(
         (m) => m.LoginComponent
       ),
-  },  
+  },
   //Registro para medicos
   {
     path: 'registro_medicos',
@@ -45,6 +48,7 @@ export const routes: Routes = [
       import('./components/modulo-usuario/modulo-usuario.component').then(
         (m) => m.ModuloUsuarioComponent
       ),
+    canActivate: [pacienteGuard],
   },
   {
     path: 'mis_turnos',
@@ -53,6 +57,7 @@ export const routes: Routes = [
       import('./components/listaturnos/listaturnos.component').then(
         (m) => m.ListaturnosComponent
       ),
+    canActivate: [pacienteGuard],
   },
   {
     path: 'turno',
@@ -61,6 +66,7 @@ export const routes: Routes = [
       import('./components/turno/turno.component').then(
         (m) => m.TurnoComponent
       ),
+    canActivate: [pacienteGuard],
   },
   {
     path: 'turno/:id',
@@ -69,6 +75,7 @@ export const routes: Routes = [
       import('./components/turnodetalle/turnodetalle.component').then(
         (m) => m.TurnodetalleComponent
       ),
+    canActivate: [pacienteGuard],
   },
   {
     path: 'especialidades',
@@ -77,6 +84,7 @@ export const routes: Routes = [
       import('./components/especialidades/especialidades.component').then(
         (m) => m.EspecialidadesComponent
       ),
+    canActivate: [pacienteGuard],
   },
   {
     path: 'especialidad/:id',
@@ -85,6 +93,7 @@ export const routes: Routes = [
       import(
         './components/especialidad.detalle/especialidad.detalle.component'
       ).then((m) => m.EspecialidadDetalleComponent),
+    canActivate: [pacienteGuard],
   },
   //Home Medico
   {
@@ -94,6 +103,7 @@ export const routes: Routes = [
       import('./components/modulo-medico/modulo-medico.component').then(
         (m) => m.ModuloMedicoComponent
       ),
+    canActivate: [medicoGuard],
   },
   {
     path: 'buscar',
@@ -102,14 +112,7 @@ export const routes: Routes = [
       import('./components/buscar/buscar.component').then(
         (m) => m.BuscarComponent
       ),
-  },
-  {
-    path: 'ficha_paciente/:id',
-    title: 'Ficha del Paciente',
-    loadComponent: () =>
-      import('./components/ficha-paciente/ficha-paciente.component').then(
-        (m) => m.FichaPacienteComponent
-      ),
+    canActivate: [medicoGuard],
   },
   {
     path: 'inbox',
@@ -118,6 +121,7 @@ export const routes: Routes = [
       import('./components/inbox/inbox.component').then(
         (m) => m.InboxComponent
       ),
+    canActivate: [medicoGuard],
   },
   {
     path: 'videollamada',
@@ -126,6 +130,7 @@ export const routes: Routes = [
       import('./components/videollamada/videollamada.component').then(
         (m) => m.VideollamadaComponent
       ),
+    canActivate: [medicoGuard],
   },
   // Home Admin
   {
@@ -135,6 +140,7 @@ export const routes: Routes = [
       import('./components/modulo-admin/admin.component').then(
         (m) => m.AdminComponent
       ),
+    canActivate: [adminGuard],
   },
   {
     path: 'buscar_usuarios',
@@ -143,6 +149,7 @@ export const routes: Routes = [
       import('./components/buscar-usuarios/buscar-usuarios.component').then(
         (m) => m.BuscarUsuariosComponent
       ),
+    canActivate: [adminGuard],
   },
   {
     path: 'inbox_admin',
@@ -151,6 +158,7 @@ export const routes: Routes = [
       import('./components/inboxadmin/inboxadmin.component').then(
         (m) => m.InboxadminComponent
       ),
+    canActivate: [adminGuard],
   },
   {
     path: 'configuraciones',
@@ -159,11 +167,28 @@ export const routes: Routes = [
       import('./components/configuraciones/settings.component').then(
         (m) => m.SettingsComponent
       ),
+    canActivate: [adminGuard],
   },
-  //   {
-  //     path: '**',
-  //     // redirectTo: 'auth/login',  /*Cuando esté el login, interceptors, guards*/
-  //     redirectTo: '',
-  //     pathMatch: 'full',
-  //   },
+  {
+    path: 'ficha_paciente/:id',
+    title: 'Ficha del Paciente',
+    loadComponent: () =>
+      import('./components/ficha-paciente/ficha-paciente.component').then(
+        (m) => m.FichaPacienteComponent
+      ),
+    canActivate: [adminGuard],    
+  },
+  {
+    path: 'error',
+    title: 'Error 404',
+    loadComponent: () =>
+      import('./components/error/error.component').then(
+        (m) => m.ErrorComponent
+      ),
+  },
+  {
+    path: '**',
+    redirectTo: 'error',
+    pathMatch: 'full',
+  },
 ];

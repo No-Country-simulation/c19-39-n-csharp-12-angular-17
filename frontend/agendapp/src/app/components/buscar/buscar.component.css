@@ -44,9 +44,6 @@ tr {
   cursor: pointer;
 }
 
-tr:hover {
-  background-color: #f0e98f;
-}
 
 th,
 td {
@@ -54,6 +51,7 @@ td {
   align-items: center;
   text-align: center;
 }
+
 
 li {
   text-decoration: none;

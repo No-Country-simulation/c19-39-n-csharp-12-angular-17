@@ -1,0 +1,29 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 2rem 0px;
+}
+div.btn-container {
+    /* height: 20rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.btn-container-group {
+    height: 20rem;
+    row-gap: 1rem;
+}
+
+.fraseBienvenida>h2 {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+a[type="button"]{
+    width: 100%;
+}
