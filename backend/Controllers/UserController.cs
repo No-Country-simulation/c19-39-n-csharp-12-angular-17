@@ -1,4 +1,5 @@
-﻿using AgendApp.Requests;
+﻿using AgendApp.Models;
+using AgendApp.Requests;
 using AgendApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -30,10 +31,30 @@ namespace AgendApp.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Route("usuario/{id}")]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            var result = await _userService.getUser(id);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
         [Route("roles")]
-        public async Task<IActionResult> getRoles()
+        public async Task<IActionResult> GetRoles()
         {
             var result = await _userService.getRoles();
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("citas/{idUser}")]
+        public async Task<IActionResult> GetCitas(int idUser)
+        {
+            var result = await _userService.getCitas(idUser);
 
             return Ok(result);
         }
@@ -41,11 +62,21 @@ namespace AgendApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("cita")]
-        public async Task<IActionResult> setCita(CitaRequest request)
+        public async Task<IActionResult> SetCita(CitaRequest request)
         {
             var resp = await _userService.setCita(request);
 
             return Ok(resp);
+        }
+
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("user/{id}")]
+        public async Task<IActionResult> editUser(int id, UserEditRequest request)
+        {
+            var result = _userService.editUser(id, request);
+
+            return Ok(result);
         }
 
     }

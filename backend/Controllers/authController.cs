@@ -25,15 +25,15 @@ namespace AgendApp.Controllers
             return Ok(resp);
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [Route("medico")]
-        public async Task<IActionResult> AuthMedico([FromBody] AuthRequest request)
-        {
-            var resp = await _authService.AuthMedico(request);
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[Route("medico")]
+        //public async Task<IActionResult> AuthMedico([FromBody] AuthRequest request)
+        //{
+        //    var resp = await _authService.AuthMedico(request);
 
-            return Ok(resp);
-        }
+        //    return Ok(resp);
+        //}
 
     }
 }

@@ -1,5 +1,9 @@
 *.csproj.user
-.obj/
+
+
+# Build directories
+bin/
+obj/
 
 # Compiled source files
 *.dll

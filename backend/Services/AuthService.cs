@@ -7,7 +7,7 @@ namespace AgendApp.Services
     public interface IAuthService
     {
         Task<Object> AuthUser(AuthRequest request);
-        Task<Object> AuthMedico(AuthRequest request);
+        //Task<Object> AuthMedico(AuthRequest request);
     }
     public class AuthService : IAuthService
     {
@@ -24,7 +24,7 @@ namespace AgendApp.Services
             {
 
                 var user = await _db.Usuarios.Where(usuario => usuario.Email == request.email &&
-                usuario.Contrasenia == request.password && usuario.IdRol == 1).FirstOrDefaultAsync();
+                usuario.Contrasenia == request.password).FirstOrDefaultAsync();
 
                 if(user == null)
                 {
@@ -54,40 +54,40 @@ namespace AgendApp.Services
             }
         }
 
-        public async Task<Object> AuthMedico(AuthRequest request)
-        {
-            try
-            {
-                var med = await _db.Usuarios.Where(usuario => usuario.Email == request.email &&
-                usuario.Contrasenia == request.password && usuario.IdRol == 2).FirstOrDefaultAsync();
+        //public async Task<Object> AuthMedico(AuthRequest request)
+        //{
+        //    try
+        //    {
+        //        var med = await _db.Usuarios.Where(usuario => usuario.Email == request.email &&
+        //        usuario.Contrasenia == request.password && usuario.IdRol == 2).FirstOrDefaultAsync();
 
-                if(med == null)
-                {
-                    return new
-                    {
-                        status = 400,
-                        success = false,
-                        message = "Datos invalidos, revise la informacion suministrada"
-                    };
-                }
+        //        if(med == null)
+        //        {
+        //            return new
+        //            {
+        //                status = 400,
+        //                success = false,
+        //                message = "Datos invalidos, revise la informacion suministrada"
+        //            };
+        //        }
 
-                return new
-                {
-                    status = 200,
-                    success = true,
-                    data = med
-                };
+        //        return new
+        //        {
+        //            status = 200,
+        //            success = true,
+        //            data = med
+        //        };
 
-            }
-            catch (Exception ex)
-            {
-                return new
-                {
-                    status = 500,
-                    success = false,
-                    message = ex.InnerException?.Message ?? ex.Message
-                };
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new
+        //        {
+        //            status = 500,
+        //            success = false,
+        //            message = ex.InnerException?.Message ?? ex.Message
+        //        };
+        //    }
+        //}
     }
 }
