@@ -1,8 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FooterComponent } from '../../shared/footer/footer.component';
-import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
+import { RouterLink } from '@angular/router';
+
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+
+import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
 import { Usuario } from '../../interfaces/usuario';
 
 @Component({
@@ -13,26 +15,24 @@ import { Usuario } from '../../interfaces/usuario';
   styleUrl: './admin.component.css',
 })
 export class AdminComponent implements OnInit {
-  section: string = '';
   usuario = {} as Usuario;
 
-  authService = inject(AuthService);
-  route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
 
   constructor() {}
 
   ngOnInit(): void {
-    this.section = this.route.snapshot.routeConfig?.path || '';
     this.getUsuario();
   }
-  
-  
+
   //Obtener el usuario
   getUsuario(): void {
-  this.authService.getUserData().subscribe((usuario) => {
-    this.usuario = usuario;
-  });
-}
-
-
+    this.authService.usuario$.subscribe((usuario) => {
+      if (usuario) {
+        this.usuario = usuario;
+      } else {
+        console.log('No hay usuario logueado');
+      }
+    });
+  }
 }

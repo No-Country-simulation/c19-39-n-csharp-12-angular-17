@@ -18,10 +18,8 @@
         title="Volver a la página principal"
       />
     </a>
-    @if(section === 'registro_usuarios'){
-    <h2 class="mx-auto">Nueva Cuenta</h2>
-    } @else if(section === 'registro_medicos'){
-    <h2 class="mx-auto">Nueva Cuenta</h2>
+    @if(section === 'registro_usuarios' || section === 'registro_medicos'){
+    <h2 class="mx-auto">Nueva Cuenta</h2>    
     }@else if(section === 'login'){
     <h2 class="mx-auto">Inicio de Sesión</h2>
     }

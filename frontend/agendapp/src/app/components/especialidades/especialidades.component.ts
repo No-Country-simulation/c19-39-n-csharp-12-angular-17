@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
-import { ApiProviderService } from '../../services/api-provider.service';
-import { FooterComponent } from '../../shared/footer/footer.component';
-import { Categoria } from '../../interfaces/api';
-import { ApiService } from '../../services/api.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
 import { CategoriasService } from '../../services/categorias.service';
-import { MedicosService } from '../../services/medicos.service';
+import { AuthService } from '../../services/auth.service';
+
+import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
+
+import { Categoria } from '../../interfaces/api';
+import { Usuario } from '../../interfaces/usuario';
 
 @Component({
   selector: 'app-especialidades',
@@ -16,24 +18,28 @@ import { MedicosService } from '../../services/medicos.service';
   styleUrl: './especialidades.component.css',
 })
 export class EspecialidadesComponent implements OnInit {
-  section: string = ''; //registro_medicos o registro_pacientes
   especialidades: Categoria[] = [];
+  usuario: Usuario = {} as Usuario;
 
-  constructor(
-    private route: ActivatedRoute,
-    private categoriaService: CategoriasService,
-    private router: Router
-  ) {
-    this.section = this.route.snapshot.routeConfig?.path || '';
-  }
+  private authService = inject(AuthService);
+  private categoriaService = inject(CategoriasService);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.getEspecialidades();
+    this.getUsuario();
   }
 
-  verEspecialidadDetalle(id: number) {
-    console.log(id);
-    this.router.navigate(['/especialidad/', id]);
+  //Obtener el usuario (payload del login)
+  getUsuario(): void {
+    this.authService.usuario$.subscribe((usuario) => {
+      if (usuario) {
+        this.usuario = usuario;
+      } else {
+        console.log('No hay usuario logueado');
+      }
+    });
   }
 
 
@@ -42,8 +48,11 @@ export class EspecialidadesComponent implements OnInit {
       Cardiología: '../../../assets/img/cardiology.svg',
       Dermatología: '../../../assets/img/dermatology.svg',
       Endocrinología: '../../../assets/img/endocrinology.png',
-      Gastroenterología: '../../../assets/img/gastroenterology.png',
+      Obstetricia: '../../../assets/img/obstetritian.svg',
       Geriatría: '../../../assets/img/geriatrics.png',
+      Neurología: '../../../assets/img/neurology.svg',
+      Ginecologia: '../../../assets/img/ginecology.svg',
+      Radiología: '../../../assets/img/biohazard.png',
     };
 
     this.categoriaService.getEspecialidades().subscribe((data: any) => {

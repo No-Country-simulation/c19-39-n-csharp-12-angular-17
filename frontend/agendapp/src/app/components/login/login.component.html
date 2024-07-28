@@ -4,7 +4,7 @@
 <div
   class="container d-flex flex-column justify-content-center align-items-center mt-4"
 >
-<h1 class="mt-4">Bienvenido de vuelta !</h1>
+  <h1 class="mt-4">Bienvenido de vuelta !</h1>
   <form #form="ngForm" (ngSubmit)="login(form)">
     <div class="card bg-transparent border-0">
       <div class="card-body m-0 p-0">
@@ -20,17 +20,31 @@
             ngModel
           />
         </div>
-        <div class="wrapper mb-2">
+        <div class="wrapper mb-2 d-flex flex-row">
           <input
-            class="form-control"
-            type="password"
+            class="form-control input"
+            [type]="isPasswordVisible ? 'text' : 'password'"
             name="password"
             placeholder="Contraseña"
             maxlength="100"
-            minlength="5"
+            minlength="4"
             required
             ngModel
           />
+          <span (click)="togglePasswordVisibility()" class="span">
+            <span class="pe-1">
+              <img
+                [hidden]="isPasswordVisible"
+                src="../../../assets/img/eye-password-show.svg"
+                alt="icono-mostrar-password"
+              />
+              <img
+                [hidden]="!isPasswordVisible"
+                src="../../../assets/img/eye-password-hide.svg"
+                alt="icono-ocultar-password"
+              />
+            </span>
+          </span>
         </div>
         <!-- Checkbox para validar sesion -->
         <div
@@ -52,7 +66,7 @@
         <div
           class="container d-flex flex-column justify-content-center align-items-center"
         >
-        <div
+          <div
             class="d-flex flex-column justify-content-center align-items-center mt-3"
           >
             <input

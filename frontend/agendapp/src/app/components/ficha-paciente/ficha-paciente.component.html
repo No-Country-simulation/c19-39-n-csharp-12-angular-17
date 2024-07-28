@@ -1,20 +1,26 @@
+<!-- Modal Editar Usuario -->
+<app-modal-editarcita
+  (citaEditada)="citaEditadaHandler($event)"
+  [datoEntrada]="datos"
+></app-modal-editarcita>
+
 <section id="nav_medico">
   <!-- Header de usuario -->
   <app-navbarusuariologueado></app-navbarusuariologueado>
-  <div class="container-fluid d-flex flex-row">
-    <a [routerLink]="['/buscar']">
-      <img
-        class="ms-4 caret"
-        src="../../../assets/img/caret_back.png"
-        alt="icono_regresar"
-      />
-    </a>
-    <h3 class="ms-5 pb-1">Ficha Paciente</h3>
-  </div>
 </section>
 
 <!-- Main -->
 <div class="main">
+  <div class="container d-flex flex-row justify-content-around my-3">
+    <h3 class="pb-1">Ficha Paciente</h3>
+    <div class="icono-editar">
+      <img
+        src="../../../assets/img/edit.svg"
+        alt="icono-editar"
+        (click)="abrirModalEditarCita()"
+      />
+    </div>
+  </div>
   <section>
     <div
       class="container d-flex flex-column justify-content-center align-items-center"
@@ -24,14 +30,17 @@
         <div class="card-body">
           <!-- Detalles del turno -->
           <div class="wrapper">
-            @if(usuario){
+            @if(usuarioFicha){
             <p class="me-2 fw-bold">Paciente</p>
+            @if(!usuarioFicha.nombre && !usuarioFicha.apellido){
+            <p>No se pudo obtener el nombre del paciente.</p>
+            }@else {
             <p>
-              {{ usuario.nombre | titlecase }}&#8194;{{
-                usuario.apellido | titlecase
+              {{ usuarioFicha.nombre | titlecase }}&ensp;{{
+                usuarioFicha.apellido | titlecase
               }}
             </p>
-            }
+            } }
           </div>
           <div class="wrapper">
             <p class="card-text fw-bold me-2">ID Cita:</p>
@@ -51,11 +60,7 @@
           </div>
           <div class="wrapper">
             <p class="card-text fw-bold me-2">Rango de Horario:</p>
-            <p>{{ rangoHoraId }}</p>
-          </div>
-          <div class="wrapper">
-            <p class="card-text fw-bold me-2">Hora Seleccionada:</p>
-            <p>{{ turno.horaCita }}:00</p>
+            <p>{{ turno.hora }}</p>
           </div>
           <div
             class="d-flex flex-row text-wrap justify-content-start align-items-start"
@@ -72,44 +77,5 @@
 
 <!-- Footer generico -->
 <section id="nav-footer">
-  <nav class="navbar d-flex flex-row justify-content-around py-3 fixed-bottom">
-    <ul class="d-flex flex-row justify-content-around align-items-center">
-      <li>
-        <a [routerLink]="['/home_medico']" class="border">
-          <img
-            src="../../../assets/img/home.svg"
-            alt=""
-            class="border m-0 p-0"
-          />
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/buscar']" class="border">
-          <img
-            src="../../../assets/img/list-solid.svg"
-            alt=""
-            class="border m-0 p-0"
-          />
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/inbox']" class="border">
-          <img
-            src="../../../assets/img/inbox.svg"
-            alt=""
-            class="border m-0 p-0"
-          />
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/']" class="border">
-          <img
-            src="../../../assets/img/logout.svg"
-            alt="icono_salir"
-            title="Salir"
-          />
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <app-footer class="fixed-bottom"></app-footer>
 </section>

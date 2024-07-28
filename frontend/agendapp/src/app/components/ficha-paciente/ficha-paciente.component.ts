@@ -1,12 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ApiProviderService } from '../../services/api-provider.service';
-import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
-import { FooterComponent } from '../../shared/footer/footer.component';
 import { CommonModule } from '@angular/common';
-import { LocalStorageService } from '../../services/local-storage.service';
+
+import { CitasService } from '../../services/citas.service';
+import { MedicosService } from '../../services/medicos.service';
+import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
+
+import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
+import { ModalEditarcitaComponent } from '../../shared/modal-editarcita/modal-editarcita.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
+
 import { Usuario } from '../../interfaces/usuario';
 import { Cita } from '../../interfaces/cita';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-ficha-paciente',
@@ -16,82 +23,89 @@ import { Cita } from '../../interfaces/cita';
     NavbarusuariologueadoComponent,
     FooterComponent,
     CommonModule,
+    ModalEditarcitaComponent,
   ],
   templateUrl: './ficha-paciente.component.html',
   styleUrl: './ficha-paciente.component.css',
 })
 export class FichaPacienteComponent implements OnInit {
-  section: string = '';
-  turno = {} as Cita; //turno con idHorario y idMedico
-  usuario = {} as Usuario; //usuario logueado
-  usuarioMedico: any; //medico con idMedico
-  horario: any; //horario
-  rangoHoraId: string = ''; //segun idHorario sus rangos en numeros
-  horaCita: number | null = null; //hora de la cita
-  idParam: any; //id del turno a buscar en LS
+  turno = {} as Cita;
+  usuario = {} as Usuario;
+  usuarioFicha: Usuario = {} as Usuario;
+  usuarioMedico: any;
+  idParam: any;
+  datos: any = {};
 
-  constructor(
-    private route: ActivatedRoute,
-    private localServicr: LocalStorageService,
-    private apiServiceProvider: ApiProviderService
-  ) {
-    this.section = this.route.snapshot.routeConfig?.path || '';
+  //Elementos para acceder al ID del modal y con el que 'abrimos' el modal en el componente padre
+  @ViewChild(ModalEditarcitaComponent)
+  modaleditarcita: ModalEditarcitaComponent = new ModalEditarcitaComponent();
+
+  private authService = inject(AuthService);
+  private apiService = inject(ApiService);
+  private citaService = inject(CitasService);
+  private medicoService = inject(MedicosService);
+  private route = inject(ActivatedRoute);
+
+  constructor() {
     this.idParam = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-    console.log(this.idParam);
     this.getUsuario();
-    this.getTurnoDeLista(parseInt(this.idParam));
+    this.getCitaById(parseInt(this.idParam));
   }
 
-  //Obtener usuario logueado del LS
-  getUsuario() {
-    let usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-    this.usuario = usuario;
+  //Obtener el usuario (payload del login)
+  getUsuario(): void {
+    this.authService.getUserData().subscribe((usuario) => {
+      if (usuario) {
+        this.usuario = usuario;
+      } else {
+        console.log('No hay usuario logueado');
+      }
+    });
   }
 
-  //Turno por {id} del LS
-  async getTurnoDeLista(id: number) {
-    const lista = localStorage.getItem('ListaTurnos');
-    const idBuscado = id;
-    if (lista) {
-      const listaTurnos = await JSON.parse(lista);
-      console.log('Lista de turnos: ', listaTurnos);
-      const turno = listaTurnos.find(
-        (turno: Cita) => turno.idCita === idBuscado
-      );
-      this.turno = turno;
-      console.log('Turno:', this.turno);
-      this.usuarioMedico = this.turno.idMedico;
-      this.rangoHoraId = this.turno.hora;
-      this.horario = this.turno.horaCita; //horario tal cual tiene el turno creado ej: 17:00
-
-      if (this.usuarioMedico) {
-        this.getMedicoPorId(this.usuarioMedico);
-      }
-
-      if (this.rangoHoraId) {
-        this.getHorarioPorId(this.rangoHoraId);
-      }
-    } else {
-      console.log('No hay turnos en la lista del LS');
-    }
+  //Obtener cita por idParam
+  getCitaById(id: number) {
+    this.citaService.getCitaByID(id).subscribe((data: any) => {
+      this.turno = data.data;
+      //Datos para el modal de edicion (rol admin unicamente)
+      this.datos = data.data;
+      this.filtrarMedicoById(this.turno.idMedico);
+      this.filtrarUsuarioByIdPaciente(this.turno.idPaciente);
+    });
   }
 
   //Obtener medico por id
-  getMedicoPorId(id: number) {
-    this.apiServiceProvider.getUsuarioById(id).subscribe((data: any) => {
-      this.usuarioMedico = data[0];
-      console.log('Medico:', this.usuarioMedico);
+  private filtrarMedicoById(id: number) {
+    this.medicoService.getMedicoById(id).subscribe((data: any) => {
+      if (data.status === 400) {
+        console.log('Error al obtener medico:', data.message);
+      } else {
+        this.usuarioMedico = data.data.idUsuarioNavigation;
+      }
     });
   }
 
-  //obtener horarios por id
-  getHorarioPorId(id: any) {
-    this.apiServiceProvider.getHorarioById(id).subscribe((data: any) => {
-      this.rangoHoraId = data[0].rango;
-      console.log('Horario:', this.rangoHoraId);
+  private filtrarUsuarioByIdPaciente(id: number) {
+    this.apiService.getUsuarioByID(id).subscribe((data: any) => {
+      this.usuarioFicha = data.data;
+      // console.log('Usuario ficha:', this.usuarioFicha);
     });
+  }
+
+  //Acciones sobre los modales
+  abrirModalEditarCita() {
+    const modal = document.getElementById('modaleditarcita');
+    if (modal) {
+      const instanciaModal = new bootstrap.Modal(modal);
+      instanciaModal.show();
+    }
+  }
+
+  citaEditadaHandler(event: Cita) {
+    console.log('Cita editada ' + JSON.stringify(event));
+    this.getCitaById(parseInt(this.idParam));
   }
 }

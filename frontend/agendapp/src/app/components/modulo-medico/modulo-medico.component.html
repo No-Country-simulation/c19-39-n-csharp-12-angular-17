@@ -6,14 +6,11 @@
 <!-- Main -->
 <div class="main">
   <section id="fraseBienvenida">
-    @if (section === 'home_medico') {
     <div class="container fraseBienvenida">
-      <!-- TODO: modificar por el objeto usuario id -->
       @if(usuario){
       <h2>Hola, {{ usuario.nombre }}!</h2>
       }
     </div>
-    }
   </section>
 
   <!-- Botones estado de turnos 'proximos', 'cancelados' y 'completados' -->
@@ -79,44 +76,32 @@
               alt="icono-videocall"
             />
           </span>
+          <span
+            class="icono-idCita"
+          >
+            <small><span>#</span>&ensp;{{cita.idCita}}</small>
+          </span>
           <div class="col-12">
             <div
               class="card-body p-2 m-0 d-flex flex-column justify-content-start align-items-center"
             >
               <small>
-                {{ cita.fecha | date : "dd/MM/yyyy" }} - {{ cita.horaCita }}
+                {{ cita.fecha | date : "dd/MM/yyyy" }} - {{ cita.hora }}
               </small>
-              @if(paciente){
-              <span>{{ "Paciente" }}</span>
+              @if(!cita.paciente?.nombre || !cita.paciente?.apellido){ 
+                <span>No se pudo obtener el nombre del paciente.</span>
+              } @else{
+              <h6 class="mt-1">
+                {{ cita.paciente?.nombre }} {{ cita.paciente?.apellido }}
+              </h6>
               }
             </div>
-            <!-- menu colapsable con motivo de consulta -->
             <div
-              class="d-flex flex-row justify-content-center collapse-container"
+              class="card d-flex flex-column justify-content-center border-0 m-0 p-0"
             >
-              <button
-                class="border-0 bg-transparent"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseExample"
-                aria-expanded="true"
-                aria-controls="collapseExample"
-              >
-                <img
-                  src="../../../assets/img/down-arrow.svg"
-                  alt="ver_mas_icono"
-                  class="down-arrow"
-                />
-              </button>
-            </div>
-            <div class="collapse" id="collapseExample">
-              <div
-                class="card d-flex flex-column justify-content-center border-0 m-0 p-0"
-              >
-                <p class="text-start px-4 text-break">
-                  {{ cita.motivoConsulta }}
-                </p>
-              </div>
+              <p class="text-center px-4 text-break">
+                {{ cita.motivoConsulta }}
+              </p>
             </div>
           </div>
         </div>

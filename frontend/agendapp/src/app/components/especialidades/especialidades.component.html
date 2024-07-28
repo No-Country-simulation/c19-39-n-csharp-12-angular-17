@@ -1,19 +1,17 @@
 <section id="nav_usuario">
   <!-- Header de usuario -->
   <app-navbarusuariologueado></app-navbarusuariologueado>
-  <div class="container-fluid d-flex flex-row">
-    <a [routerLink]="['/home_usuario']">
-      <img
-        class="ms-4 caret"
-        src="../../../assets/img/caret_back.png"
-        alt="icono_regresar"
-      />
-    </a>
-    @if(section === 'especialidades'){
-    <h3 class="ms-5 pb-1">Agendá Tu Turno</h3>
-    }
-  </div>
 </section>
+<div class="container-fluid d-flex flex-row">
+  <a [routerLink]="['/home_usuario']">
+    <img
+      class="ms-4 caret"
+      src="../../../assets/img/caret_back.png"
+      alt="icono_regresar"
+    />
+  </a>
+  <h3 class="ms-5 pb-1">Agendá Tu Turno</h3>
+</div>
 
 <div class="main">
   <p>Selecciona una especialidad para continuar</p>
@@ -40,79 +38,6 @@
           </a>
         </div>
         }
-        <!-- <a type="button" class="btn" [routerLink]="['/especialidad/' + 1]">
-          <img
-            src="../../../assets/img/doctor.png"
-            alt="icono_clinico"
-            class="icono_especialidad"
-            title="Clinico General"
-          />
-        </a>
-        <a type="button" class="btn" [routerLink]="['/especialidad/' + 2]">
-          <img
-            src="../../../assets/img/cardiology.svg"
-            alt="icono_cardiologia"
-            class="icono_especialidad"
-            title="Cardiologia"
-          />
-        </a>
-        <a type="button" class="btn" [routerLink]="['/especialidad/' + 3]">
-          <img
-            src="../../../assets/img/obstetritian.svg"
-            alt="icono_obstericia"
-            class="icono_especialidad"
-            title="Obstetricia"
-          />
-        </a>
-        <a type="button" class="btn" [routerLink]="['/especialidad/' + 4]">
-          <img
-            src="../../../assets/img/dermatology.svg"
-            alt="icono_dermatologia"
-            class="icono_especialidad"
-            title="Dermatologia"
-          />
-        </a>
-
-        <a type="button" class="btn" [routerLink]="['/especialidad/' + 5]">
-          <img
-            src="../../../assets/img/dentist.svg"
-            alt="icono_dentista"
-            class="icono_especialidad"
-            title="Odontologia"
-          />
-        </a>
-        <a type="button" class="btn" [routerLink]="['/especialidad/' + 6]">
-          <img
-            src="../../../assets/img/ginecology.svg"
-            alt="icono_ginecologia"
-            class="icono_especialidad"
-            title="Ginecologia"
-          />
-        </a>
-        <a type="button" class="btn" [routerLink]="['/especialidad/' + 7]">
-          <img
-            src="../../../assets/img/biohazard.png"
-            alt="icono_rayos_x"
-            class="icono_especialidad"
-            title="Radiologia"
-          />
-        </a>
-        <a type="button" class="btn" [routerLink]="['/especialidad/' + 8]">
-          <img
-            src="../../../assets/img/neurology.svg"
-            alt="icono_neurologia"
-            class="icono_especialidad"
-            title="Neurologia"
-          />
-        </a>
-        <a type="button" class="btn" [routerLink]="['/especialidad/' + 9]">
-          <img
-            src="../../../assets/img/neumonology.svg"
-            alt="icono_neumonologia"
-            class="icono_especialidad"
-            title="Neumonologia"
-          />
-        </a> -->
       </div>
       }
     </div>

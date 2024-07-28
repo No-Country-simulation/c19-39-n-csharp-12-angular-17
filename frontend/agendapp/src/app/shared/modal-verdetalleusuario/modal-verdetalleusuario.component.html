@@ -1,0 +1,53 @@
+<!-- Ajustar el id para que la funcion lo pueda llamar -->
+<div
+  class="modal fade"
+  id="modaldetalleusuario"
+  tabindex="-1"
+  aria-labelledby="modaldetalleusuario"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h1 class="modal-title fs-5" id="modaldetalleusuario">
+          Detalle del Usuario ID: {{ user.idUsuario }}
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="card bg-transparent border-0">
+          <div
+            class="card-body m-0 p-0 d-flex flex-column align-items-start border-0"
+          >
+            <div class="wrapper mb-2">
+              <span>Nombre:</span><span>{{user.nombre}}</span>
+            </div>
+            <div class="wrapper mb-2">
+              <span>Apellido:</span><span>{{user.apellido}}</span>
+            </div>
+            <div class="wrapper mb-2">
+              <span>Email: </span><span>{{user.email}}</span>
+            </div>
+            <div class="wrapper mb-2">
+              <span>Telefono:</span><span>{{user.telefono}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            data-bs-dismiss="modal"
+          >
+            Volver
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,6 +21,7 @@
         <form #form="ngForm" (ngSubmit)="editarUsuario(form)">
           <div class="card bg-transparent border-0">
             <div class="card-body m-0 p-0">
+                 <input type="hidden" name="idUsuario" [(ngModel)]="user.idUsuario">
               <div class="wrapper mb-2">
           <input
             class="form-control"

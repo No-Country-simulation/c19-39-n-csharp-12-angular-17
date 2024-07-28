@@ -10,7 +10,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
-  section: string = ''; //registro_medicos o registro_pacientes
+  section: string = '';
 
   constructor(private route: ActivatedRoute) {}
 

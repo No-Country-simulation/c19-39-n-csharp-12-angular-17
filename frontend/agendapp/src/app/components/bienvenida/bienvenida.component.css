@@ -19,11 +19,9 @@
   align-items: center;
 }
 
-/* img{
-    width: inherit;
-    position: absolute;
-    z-index: -100;
-} */
+.bt-register{
+  border-color: #0d5dd3;
+}
 
 .boton-container {
   position: absolute;

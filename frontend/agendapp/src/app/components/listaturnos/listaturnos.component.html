@@ -1,26 +1,24 @@
 <section id="nav_usuario">
   <!-- Header de usuario -->
   <app-navbarusuariologueado></app-navbarusuariologueado>
-  <div class="container-fluid d-flex flex-row">
-    <a [routerLink]="['/home_usuario']">
-      <img
-        class="ms-4 caret"
-        src="../../../assets/img/caret_back.png"
-        alt="icono_regresar"
-      />
-    </a>
-    @if(section === 'mis_turnos'){
-    <h3 class="ms-5 pb-1">Mis Turnos</h3>
-    }
-  </div>
 </section>
+<div class="container-fluid d-flex flex-row">
+  <a [routerLink]="['/home_usuario']">
+    <img
+      class="ms-4 caret"
+      src="../../../assets/img/caret_back.png"
+      alt="icono_regresar"
+    />
+  </a>
+  <h3 class="ms-5 pb-1">Mis Turnos</h3>
+</div>
 
 <!-- Botones estado de turnos 'proximos' y 'cancelados' -->
 <div class="main">
-    <div
-      class="container-fluid bg-transparent border-pill gap-2 d-flex justify-content-end align-items-end btn-container"
-    >
-      <span
+  <div
+    class="container-fluid bg-transparent border-pill gap-2 d-flex justify-content-end align-items-end btn-container"
+  >
+    <span
       class="btn btn-outline-dark rounded-pill btn-sm"
       [ngClass]="{ active: botonActivo === 'cancelados' }"
       (click)="setActivo('cancelados')"
@@ -32,7 +30,7 @@
       (click)="setActivo('proximos')"
       >Próximos</span
     >
-    </div>
+  </div>
 
   <!-- Card de cada turno -->
   <section id="card-turnos">
@@ -46,39 +44,34 @@
         </div>
       </div>
       } @default{ @for(cita of citas; track cita.idCita){
-      <div class="card mb-3">
+      <div class="card mb-3" [routerLink]="['/turno/', cita.idCita]">
         <div class="row g-0">
-          <div class="col-3 d-flex justify-content-center align-items-center">
+          <div class="col-2 d-flex justify-content-center align-items-center">
             <img
               src="../../../assets/img/logo.png"
               class="img-fluid rounded-start doctor"
               alt="imagen_doctor"
             />
           </div>
-          <div class="col-8">
+          <div class="col-9">
             <div
               class="card-body p-2 m-0 d-flex flex-column justify-content-center align-items-center"
             >
               <!-- Nombre completo y especialidad -->
-              <h6 class="card-title">{{ "Especialidad" }}</h6>
-              <h5>Dr. {{ "Nombre" }}{{ "Apellido" }}</h5>
+              <h6 class="card-title">
+                {{  cita.medico?.categoria | categoriaNombre }}
+              </h6>
+              <h5>
+                Dr.{{ cita.medico?.nombre }}&ensp;
+                {{ cita.medico?.apellido }}
+              </h5>
               <small>
-                {{ cita.fecha | date : "dd/MM/yy" }} - {{ citaHora }}&ensp;Hs.
+                {{ cita.fecha | date : "dd/MM/yy" }} - {{ cita.hora }}&ensp;Hs.
               </small>
               <small>
                 {{ cita.motivoConsulta }}
               </small>
             </div>
-          </div>
-          <div class="col-1 d-flex align-items-center pe-2">
-            <button
-              type="button"
-              title="Ver turno"
-              class="btn btn-outline-terciary btn-lg p-0 m-0"
-              (click)="verTurnoDetalle(cita.idCita)"
-            >
-              <img class="ver-detalle-icon" src="../../../assets/img/eye-password-show.svg" alt="ver-turno-detalle">
-            </button>
           </div>
         </div>
       </div>

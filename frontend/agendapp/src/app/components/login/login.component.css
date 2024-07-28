@@ -7,8 +7,20 @@
     padding: 0.5rem 1rem;
 }
 
-input.form-control{
+
+input.input {
     padding: 9px;
+    margin-right: -35px;
+}
+
+.span {
+    z-index: 999;
+}
+
+img[alt="icono-ocultar-password"],[alt="icono-mostrar-password"]{
+    cursor: pointer;
+    width: 24px;
+    padding-top: 0.5rem;
 }
 
 input::placeholder{

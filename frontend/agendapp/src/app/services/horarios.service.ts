@@ -36,4 +36,14 @@ export class HorariosService {
       })
     );
   }
+
+  //Actualizar horario
+  putHorario(horario: Horario): Observable<Horario> {
+    const id = horario.idHorario;
+    return this.http.put<Horario>(`${this.apiUrl}Med/horario/${id}`, horario).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return new Observable<Horario>();
+      })
+    );
+  }
 }

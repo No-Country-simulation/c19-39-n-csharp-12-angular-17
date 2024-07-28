@@ -19,4 +19,5 @@ img {
   font-size: 1em;
   font-weight: 600;
   padding-top: 1.2rem;
+  cursor: pointer;
 }

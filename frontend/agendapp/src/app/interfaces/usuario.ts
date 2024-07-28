@@ -1,5 +1,3 @@
-import { Rol } from './api';
-
 export interface Usuario {
   idUsuario: number;
   dni: string;

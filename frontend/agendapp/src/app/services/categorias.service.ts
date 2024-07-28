@@ -29,6 +29,16 @@ export class CategoriasService {
     );
   }
 
+  //Actualizar especialidad
+  putCategoria(categoria: Categoria): Observable<Categoria> {
+    const id = categoria.idCategoria;
+    return this.http.put<Categoria>(`${this.apiUrl}Med/categoria/${id}`, categoria).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return new Observable<Categoria>();
+      })
+    );
+  }
+
   //crear especialidad  (falta hacerla)
   postCategoria(categoria: Categoria): Observable<Categoria> {
     return this.http.post<Categoria>(`${this.apiUrl}Med/categoria`, categoria).pipe(

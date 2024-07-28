@@ -45,6 +45,7 @@
   align-items: center;
   overflow: hidden;
 }
+
 /*contenedor de video source*/
 video {
   width: 100%;
@@ -63,6 +64,7 @@ video {
   width: 25%;
   height: auto;
 }
+
 
 @media screen and (max-width: 768px) {
   .video2 {
