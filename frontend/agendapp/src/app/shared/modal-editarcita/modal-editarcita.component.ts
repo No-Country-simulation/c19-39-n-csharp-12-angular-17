@@ -54,7 +54,6 @@ export class ModalEditarcitaComponent implements AfterViewInit {
   }
 
   editarCita(form: NgForm) {
-    const datos = form.value;
     if (form.valid) {
       this.citaService.putCita(this.cita).subscribe((data: Cita) => {
         this.citaEditada.emit(data);

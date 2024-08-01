@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
+import { Location } from '@angular/common';
+
 
 import { HorariosService } from '../../services/horarios.service';
 import { SweetAlertService } from '../../services/alerts/sweet-alert.service';
@@ -33,9 +35,9 @@ export class TurnoComponent implements OnInit {
   fecha: string = new Date().toISOString().slice(0, 10); //2024-07-10
   fechaTope: string = '2024-12-31';
   usuario = {} as Usuario;
-  medID: any; 
-  medico = {} as Medico; 
-  horario: any; 
+  medID: any;
+  medico = {} as Medico;
+  horario: any;
   horarios: Horario[] = [];
 
   turno: GenerarCita = {
@@ -52,6 +54,7 @@ export class TurnoComponent implements OnInit {
   private horarioService = inject(HorariosService);
   private router = inject(Router);
   private sweetService = inject(SweetAlertService);
+  private location = inject(Location);
 
   constructor() {
     this.medID = localStorage.getItem('medicoId');
@@ -84,7 +87,6 @@ export class TurnoComponent implements OnInit {
     });
   }
 
-
   //Obtener horarios de la DB
   obtenerHorarios() {
     this.horarioService.getHorarios().subscribe((data: any) => {
@@ -100,11 +102,11 @@ export class TurnoComponent implements OnInit {
         hora: form.value.rango,
         idUsuario: this.usuario.idUsuario,
         idMedico: parseInt(this.medID),
-        motivoConsulta: form.value.motivo
+        motivoConsulta: form.value.motivo,
       };
       this.citaService.postCita(obj).subscribe((data: any) => {
         // console.log(data);
-      });      
+      });
       localStorage.setItem('turno', JSON.stringify(obj));
       this.sweetService.success('Turno creado');
       setTimeout(() => {
@@ -113,5 +115,9 @@ export class TurnoComponent implements OnInit {
     } else {
       this.sweetService.alert('Por favor complete todos los campos');
     }
+  }
+
+  Volver(): void {
+    this.location.back();
   }
 }

@@ -8,11 +8,13 @@ import { AuthService } from '../../services/auth.service';
 
 import { NavbarusuariologueadoComponent } from '../../shared/navbarusuariologueado/navbarusuariologueado.component';
 import { Usuario } from '../../interfaces/usuario';
+import { FooterComponent } from '../../shared/footer/footer.component';
+import { HorarioPipe } from '../../services/horario.pipe';
 
 @Component({
   selector: 'app-especialidad.detalle',
   standalone: true,
-  imports: [RouterLink, NavbarusuariologueadoComponent],
+  imports: [RouterLink, NavbarusuariologueadoComponent, FooterComponent, HorarioPipe],
   templateUrl: './especialidad.detalle.component.html',
   styleUrl: './especialidad.detalle.component.css',
 })
@@ -82,14 +84,14 @@ export class EspecialidadDetalleComponent implements OnInit {
         }
       });
 
-      // console.log(this.medicosFiltrados);
+      console.log(this.medicosFiltrados);
     });
   }
 
   filtrarHorariosId(id: number) {
     this.horarioService.getHorarioByID(id).subscribe((data: any) => {
       this.horario = data.data;
-      // console.log(this.horario);
+      console.log(this.horario);
     });
   }
 }

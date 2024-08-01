@@ -41,7 +41,7 @@
   <div class="card bg-transparent border-0 mx-auto filtro-input">
     <div class="card-body m-0 p-0">
       <div class="wrapper mb-2">
-        <label for="query">Filtrar cualquier dato de la tabla</label>
+        <label for="query">Filtrar por fecha u horario</label>
         <input
           class="form-control"
           type="text"
@@ -89,7 +89,7 @@
                 {{ cita.fecha | date : "dd/MM/yyyy" }} - {{ cita.hora }}
               </small>
               @if(!cita.paciente?.nombre || !cita.paciente?.apellido){ 
-                <span>No se pudo obtener el nombre del paciente.</span>
+                <p>No se pudo obtener el nombre del paciente.</p>
               } @else{
               <h6 class="mt-1">
                 {{ cita.paciente?.nombre }} {{ cita.paciente?.apellido }}

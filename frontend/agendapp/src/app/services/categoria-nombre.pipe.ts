@@ -12,7 +12,9 @@ export class CategoriaNombrePipe implements PipeTransform {
     3: 'Endocrinología',
     4: 'Obstetricia',
     5: 'Geriatría',
-    6: 'Neurologia'  
+    6: 'Neurologia',
+    7: 'Ginecologia',
+    8: 'Radiologia'  
   }
 
   transform(value: number): string {

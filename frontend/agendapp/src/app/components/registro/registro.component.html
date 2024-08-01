@@ -77,13 +77,13 @@
           />
           <span (click)="togglePasswordVisibility()" class="span">
             <span class="pe-1">
-              <img
-                [hidden]="isPasswordVisible"
+              <img                
+                [hidden]="!isPasswordVisible"
                 src="../../../assets/img/eye-password-show.svg"
                 alt="icono-mostrar-password"
               />
               <img
-                [hidden]="!isPasswordVisible"
+                [hidden]="isPasswordVisible"
                 src="../../../assets/img/eye-password-hide.svg"
                 alt="icono-ocultar-password"
               />
@@ -191,13 +191,13 @@
           />
           <span (click)="togglePasswordVisibility()" class="span">
             <span class="pe-1">
-              <img
-                [hidden]="isPasswordVisible"
+               <img                
+                [hidden]="!isPasswordVisible"
                 src="../../../assets/img/eye-password-show.svg"
                 alt="icono-mostrar-password"
               />
               <img
-                [hidden]="!isPasswordVisible"
+                [hidden]="isPasswordVisible"
                 src="../../../assets/img/eye-password-hide.svg"
                 alt="icono-ocultar-password"
               />

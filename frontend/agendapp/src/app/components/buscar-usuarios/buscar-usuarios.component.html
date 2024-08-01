@@ -62,7 +62,6 @@
       <tr class="col">
         <th style="width: 2rem; padding-left: 1rem">Roles</th>
         <th style="width: 6rem">ID usuario</th>
-        <th style="width: 6rem">ID medico</th>
         <th style="width: 15rem">Nombre y Apellido</th>
         <th style="width: 9rem">DNI</th>
         <th style="width: 10rem">Email</th>
@@ -73,12 +72,7 @@
       @for(user of usuariosFiltrados | filter: query; track user.idUsuario){
       <tr class="align-self-center">
         <td>{{ user.idRol }}</td>
-        <td>{{ user.idUsuario }}</td>
-        @if(medico?.idMedico) {
-        <td>{{medico.idMedico}}</td>
-        }@else {
-        <td> - </td>
-        }
+        <td>{{ user.idUsuario }}</td>      
         <td>{{ user.nombre }}&ensp;{{ user.apellido }}</td>
         <td>{{ user.dni }}</td>
         <td>{{ user.email }}</td>

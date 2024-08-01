@@ -12,7 +12,7 @@
 <!-- Main -->
 <div class="main">
   <div class="container d-flex flex-row justify-content-around my-3">
-    <h3 class="pb-1">Ficha Paciente</h3>
+    <h3 class="pb-1">Editar cita</h3>
     <div class="icono-editar">
       <img
         src="../../../assets/img/edit.svg"
@@ -31,16 +31,13 @@
           <!-- Detalles del turno -->
           <div class="wrapper">
             @if(usuarioFicha){
-            <p class="me-2 fw-bold">Paciente</p>
-            @if(!usuarioFicha.nombre && !usuarioFicha.apellido){
-            <p>No se pudo obtener el nombre del paciente.</p>
-            }@else {
+            <p class="me-2 fw-bold">Paciente</p>           
             <p>
               {{ usuarioFicha.nombre | titlecase }}&ensp;{{
                 usuarioFicha.apellido | titlecase
               }}
             </p>
-            } }
+            }
           </div>
           <div class="wrapper">
             <p class="card-text fw-bold me-2">ID Cita:</p>
