@@ -90,7 +90,7 @@ export class EspecialidadDetalleComponent implements OnInit {
 
   filtrarHorariosId(id: number) {
     this.horarioService.getHorarioByID(id).subscribe((data: any) => {
-      this.horario = data.data;
+      this.horario = data.data.idHorario;
       console.log(this.horario);
     });
   }

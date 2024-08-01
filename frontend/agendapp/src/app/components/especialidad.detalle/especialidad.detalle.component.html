@@ -49,13 +49,7 @@
             </h5>
             <h6 class="card-title">{{ especialidad?.nombre }}</h6>
             <!-- fecha, hora y consulta -->
-            @if(horario){
-            <small class="pill">
-              {{ med.idHorario | horarioFilter }}
-            </small>
-            }@else {
-            <small class="pill">No disponible</small>
-            }
+             <small class="pill">{{med.idHorario | horarioFilter}}</small>           
           </div>
         </div>       
       </div>
