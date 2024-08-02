@@ -57,7 +57,7 @@ export class FichaPacienteComponent implements OnInit {
 
   //Obtener el usuario (payload del login)
   getUsuario(): void {
-    this.authService.getUserData().subscribe((usuario) => {
+    this.authService.usuario$.subscribe((usuario) => {
       if (usuario) {
         this.usuario = usuario;
       } else {
@@ -90,8 +90,8 @@ export class FichaPacienteComponent implements OnInit {
 
   private filtrarUsuarioByIdPaciente(id: number) {
     this.apiService.getUsuarioByID(id).subscribe((data: any) => {
-      this.usuarioFicha = data.data;
-      // console.log('Usuario ficha:', this.usuarioFicha);
+      this.usuarioFicha = data;
+      console.log('Usuario ficha:', this.usuarioFicha);
     });
   }
 

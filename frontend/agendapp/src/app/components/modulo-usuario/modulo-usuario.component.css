@@ -11,7 +11,7 @@ a.routerlink{
 }
 
 a.cta {
-  width: 13rem;
+  width: 11rem;
   height: 6rem;
   display: flex;
   align-items: center;
@@ -48,10 +48,6 @@ img {
 
 .titulos {
   font-weight: 900;
-}
-
-.container-cards{
-  width: 90dvw;
 }
 
 .container-button-group {
